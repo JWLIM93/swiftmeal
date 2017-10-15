@@ -1,0 +1,21 @@
+:root {
+    --mdc-theme-primary: #0e4ead;
+  }
+
+body, html {
+    height: 100%;
+    margin: 0px;
+}
+
+#map { 
+  /* Full width */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::before,
+.mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::after {
+  background-color: rgba(255, 255, 255, .2);
+}
