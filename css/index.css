@@ -35,7 +35,7 @@
   margin-left: 20.0em;
 }
 
-#title-description > h1 {
+h1 {
   color: white;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
@@ -45,7 +45,7 @@
   margin-bottom: 0px;
 }
 
-#title-description > h2 {
+h2 {
   color: white;
   font-family: 'Quicksand', sans-serif;
   font-weight: normal;
@@ -53,6 +53,14 @@
   font-size: 30px;
   text-align: left;
   margin-top: 0px;
+}
+
+h3 {
+  color: var(--mdc-theme-secondary);
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  margin-bottom: 0px;
+  font-size: 25px;
 }
 
 #buttons-container {

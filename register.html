@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>SWIFTMEAL - Your Next Meal, Simplified</title>
+    <title>Register - SWIFTMEAL</title>
 
     <!-- MAPBOX CDN -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
@@ -22,7 +22,7 @@
     <!-- LOCAL CSS -->
     <link
       rel="stylesheet"
-      href="css/index.css">
+      href="css/register.css">
 
     <!-- GLOBAL CSS -->
     <link
@@ -36,14 +36,29 @@
           <div class="mdc-layout-grid__inner">
             <!-- Left -->
             <div id="title-description" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--align-middle">
-              <h1>SWIFTMEAL</h1>
-              <h2>Your next meal, simplified.</h2>
+              <h1>HUNGRY?</h1>
+              <h2>Let us decide for you.</h2>
             </div>
             <!-- Right -->
             <div id="inputs-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
               <!-- Login Title -->
               <div id="login-title" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                <h3>Authenticate</h3>
+                <h3>Registration</h3>
+              </div>
+              <!-- Name Text Input -->
+              <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                  <div class="mdc-form-field">
+                    <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                      <input required maxlength=200 id="name-field" type="text" class="mdc-textfield__input">
+                      <label for="name-field" class="mdc-textfield__label">Name</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- Name Help Text -->
+                <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                  <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="name-validation-msg">
+                    <em>Alex Tan</em>
+                  </p>
               </div>
               <!-- Email Address Text Input -->
               <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
@@ -75,10 +90,25 @@
                   Minimum 8 characters are required for password
                 </p>
               </div>
+              <!-- Contact Text Input -->
+              <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                  <div class="mdc-form-field">
+                    <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                      <input required maxlength=200 id="contact-field" type="text" class="mdc-textfield__input">
+                      <label for="contact-field" class="mdc-textfield__label">Contact No.</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- Contact Help Text -->
+                <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                  <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="contact-validation-msg">
+                    <em>91234567</em>
+                  </p>
+              </div>
               <!-- Buttons -->
               <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                <a href="register.html" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Register</a>
-                <button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Login</button>
+                <a href="index.html" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Back</a>
+                <button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Register</button>
               </div>
             </div>
           </div>

@@ -1,0 +1,69 @@
+.mdc-layout-grid__inner {
+    height: 100%;
+  }
+  
+  .mdc-textfield {
+    min-width: 300px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  
+  .mdc-textfield-helptext {
+    font-family: 'Quicksand', sans-serif;
+  }
+  
+  .mdc-button {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+  }
+  
+  #map { 
+    /* Full width */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  #foreground-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  #title-description {
+    margin-left: 20.0em;
+  }
+  
+  h1 {
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5em;
+    font-size: 60px;
+    text-align: left;
+    margin-bottom: 0px;
+  }
+  
+  h2 {
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: left;
+    margin-top: 0px;
+  }
+  
+  h3 {
+    color: var(--mdc-theme-secondary);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    margin-bottom: 0px;
+    font-size: 25px;
+  }
+  
+  #buttons-container {
+    margin-top: 30px;
+    margin-left: 105px;
+  }

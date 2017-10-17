@@ -9,7 +9,8 @@ body, html {
 }
 
 .mdc-theme--dark {
-    --mdc-theme-primary: var(--mdc-theme-secondary, #E91E63);
+    --mdc-theme-primary: #2962FF;
+    --mdc-theme-secondary: #E91E63;
     background-color: #303030;
 }
 
