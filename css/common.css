@@ -1,6 +1,7 @@
 body, html {
     height: 100%;
     margin: 0px;
+    background: #212121;
 }
 
 :root {
@@ -11,7 +12,6 @@ body, html {
 .mdc-theme--dark {
     --mdc-theme-primary: #2962FF;
     --mdc-theme-secondary: #E91E63;
-    background-color: #303030;
 }
 
 .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::before,

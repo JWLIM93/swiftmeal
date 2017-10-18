@@ -1,0 +1,8 @@
+.mdc-toolbar {
+  background-color: #212121;
+}
+
+.mdc-toolbar__title {
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 0.5em;
+}
