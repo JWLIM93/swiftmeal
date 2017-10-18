@@ -1,8 +1,48 @@
 .mdc-toolbar {
-  background-color: #212121;
+  background-color: rgba(33,33,33,0.7);
 }
 
-.mdc-toolbar__title {
+.mdc-layout-grid__cell {
+  background-color: red;
+}
+
+.mdc-layout-grid__inner {
+  height: 100%;
+}
+
+#map { 
+  /* Full width */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#foreground-content {
+  position: absolute;
+  width: 100%;
+  height: 93%;
+  background-color: blue;
+}
+
+#product-name {
   font-family: 'Quicksand', sans-serif;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.4em;
+  font-weight: bold;
+}
+
+#customer-profile {
+  font-family: 'Quicksand', sans-serif;
+  text-transform: uppercase;
+  margin-right: 20px;
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  font-weight: normal;
+  color: white;
+}
+
+#customer-profile-menu > ul > li {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
 }
