@@ -1,71 +1,66 @@
 <!DOCTYPE html>
 <html class="mdc-typography">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>SWIFTMEAL - Your Next Meal, Simplified</title>
 
-    <!-- MAPBOX CDN -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SWIFTMEAL - Your Next Meal, Simplified</title>
 
-    <!-- MATERIAL DESIGN COMPONENTS CDN -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-    
-    <!-- GOOGLE FONT - QUICKSANDS -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Quicksand:400,700">
+  <!-- MAPBOX CDN -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
 
-    <!-- LOCAL CSS -->
-    <link
-      rel="stylesheet"
-      href="css/customer-home.css">
+  <!-- MATERIAL DESIGN COMPONENTS CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
 
-    <!-- GLOBAL CSS -->
-    <link
-    rel="stylesheet"
-    href="css/common.css">
-  </head>
-  <body>
-    <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-theme--dark">
-      <div class="mdc-toolbar__row">
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <span id="product-name" class="mdc-toolbar__title">SWIFTMEAL</span>
-        </section>
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-          <button id="customer-profile" class="mdc-button">Justin</button>
-          <div id="customer-profile-menu" class="mdc-simple-menu" tabindex="-1">
-              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-                <li class="mdc-list-item" role="menuitem" tabindex="0">Edit Profile</li>
-                <li class="mdc-list-item" role="menuitem" tabindex="0">Show History</li>
-                <li class="mdc-list-item" role="menuitem" tabindex="0">Change Password</li>
-                <li class="mdc-list-divider" role="separator"></li>
-                <li class="mdc-list-item" role="menuitem" tabindex="0">Logout</li>
-              </ul>
-            </div>
-        </section>
-      </div>
-    </header>
-    <main class="mdc-toolbar-fixed-adjust mdc-theme--dark">
-      <div id="map"></div>
-      <div id="foreground-content" class="mdc-layout-grid mdc-layout-grid--fixed-column-width">
-        <div id="area-selection-content" class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">Q</div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">Q</div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
+  <!-- GOOGLE FONT - QUICKSANDS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:400,700">
+
+  <!-- LOCAL CSS -->
+  <link rel="stylesheet" href="css/customer-home.css">
+
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+  <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-theme--dark">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+        <span id="product-name" class="mdc-toolbar__title">SWIFTMEAL</span>
+      </section>
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+        <button id="customer-profile" class="mdc-button">Justin</button>
+        <div id="customer-profile-menu" class="mdc-simple-menu" tabindex="-1">
+          <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+            <li class="mdc-list-item" role="menuitem" tabindex="0">Edit Profile</li>
+            <li class="mdc-list-item" role="menuitem" tabindex="0">Show History</li>
+            <li class="mdc-list-item" role="menuitem" tabindex="0">Change Password</li>
+            <li class="mdc-list-divider" role="separator"></li>
+            <li class="mdc-list-item" role="menuitem" tabindex="0">Logout</li>
+          </ul>
         </div>
+      </section>
+    </div>
+  </header>
+  <main class="mdc-toolbar-fixed-adjust mdc-theme--dark">
+    <div id="map"></div>
+    <div id="foreground-content" class="mdc-layout-grid mdc-layout-grid--fixed-column-width">
+      <div id="area-selection-content" class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">Q</div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">Q</div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
       </div>
-    </main>
-    
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <script>window.mdc.autoInit();</script>
-    <script src="js/map.js"></script>
-    <script src="js/customer-home.js"></script>
-  </body>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script>window.mdc.autoInit();</script>
+  <script src="js/map.js"></script>
+  <script src="js/customer-home.js"></script>
+</body>
+
 </html>
