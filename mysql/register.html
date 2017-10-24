@@ -99,6 +99,25 @@
               <em>91234567</em>
             </p>
           </div>
+          <!-- Role Selection -->
+          <div id="role-selector" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <div class="mdc-select" role="listbox" tabindex="0" data-mdc-auto-init="MDCSelect">
+              <span class="mdc-select__selected-text">Role</span>
+              <div class="mdc-simple-menu mdc-select__menu" data-mdc-auto-init="MDCRipple">
+                <ul class="mdc-list mdc-simple-menu__items">
+                  <li class="mdc-list-item" role="option" id="grains" aria-disabled="true">
+                    Select a role
+                  </li>
+                  <li class="mdc-list-item" role="option" id="grains" tabindex="0">
+                    Customer
+                  </li>
+                  <li class="mdc-list-item" role="option" id="vegetables" tabindex="1">
+                    Restaurant Owner
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <!-- Buttons -->
           <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
             <a href="index.html" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Back</a>
@@ -112,6 +131,7 @@
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   <script>window.mdc.autoInit();</script>
   <script src="js/map.js"></script>
+  <script src="js/register.js"></script>
 </body>
 
 </html>
