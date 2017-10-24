@@ -1,0 +1,19 @@
+body, html {
+    margin: 0px;
+    background: #212121;
+}
+
+:root {
+    --mdc-theme-primary: #E91E63;
+    --mdc-theme-secondary: #2962FF;
+}
+
+.mdc-theme--dark {
+    --mdc-theme-primary: #2962FF;
+    --mdc-theme-secondary: #E91E63;
+}
+
+.mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::before,
+.mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::after {
+    background-color: rgba(255, 255, 255, .2);
+}
