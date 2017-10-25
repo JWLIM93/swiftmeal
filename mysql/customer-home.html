@@ -16,6 +16,9 @@
   <!-- GOOGLE FONT - QUICKSANDS -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:400,700">
 
+  <!-- GOOGLE ICON FONT -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- LOCAL CSS -->
   <link rel="stylesheet" href="css/customer-home.css">
 
@@ -28,16 +31,20 @@
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
         <span id="product-name" class="mdc-toolbar__title">SWIFTMEAL</span>
+        <span id="page-name">Home</span>
       </section>
+      <!-- Navigation toolbar -->
       <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-        <button id="customer-profile" class="mdc-button">Justin</button>
-        <div id="customer-profile-menu" class="mdc-simple-menu" tabindex="-1">
+        <button id="notifications-nav" class="mdc-button">Notifications</button>
+        <button id="friends-list-nav" class="mdc-button">Friends</button>
+        <button id="customer-profile" class="mdc-button">Profile</button>
+        <div id="customer-profile-menu" class="mdc-simple-menu" tabindex="-1" data-mdc-auto-init="MDCSimpleMenu">
           <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-            <li class="mdc-list-item" role="menuitem" tabindex="0">Edit Profile</li>
-            <li class="mdc-list-item" role="menuitem" tabindex="0">Show History</li>
-            <li class="mdc-list-item" role="menuitem" tabindex="0">Change Password</li>
+            <li id="menu-edit-profile-button" class="mdc-list-item" role="menuitem" tabindex="0">Edit Profile</li>
+            <li id="menu-show-history-button" class="mdc-list-item" role="menuitem" tabindex="0">Show History</li>
+            <li id="menu-change-password-button" class="mdc-list-item" role="menuitem" tabindex="0">Change Password</li>
             <li class="mdc-list-divider" role="separator"></li>
-            <li class="mdc-list-item" role="menuitem" tabindex="0">Logout</li>
+            <li id="menu-logout-button" class="mdc-list-item" role="menuitem" tabindex="0">Logout</li>
           </ul>
         </div>
       </section>
@@ -47,9 +54,60 @@
     <div id="map"></div>
     <div id="foreground-content" class="mdc-layout-grid mdc-layout-grid--fixed-column-width">
       <div id="area-selection-content" class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">Q</div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
+        <div id="recommendations-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">
+          <div id="recommendations-header" class="mdc-elevation--z10">
+            <h3 id="welcome">Welcome, Justin!</h3>
+            <h3 id="welcome-sub-heading">Start your food exploration here ...</h3>
+          </div>
+          <div id="recommendations" class="mdc-layout-grid__inner mdc-elevation--z10">
+            <!-- Area Selection -->
+            <div id="area-selector" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+              <div class="mdc-select" role="listbox" tabindex="0" data-mdc-auto-init="MDCSelect">
+                <span class="mdc-select__selected-text">Select an area</span>
+                <div class="mdc-simple-menu mdc-select__menu" data-mdc-auto-init="MDCRipple">
+                  <ul class="mdc-list mdc-simple-menu__items">
+                    <li class="mdc-list-item" role="option" id="selection-header" aria-disabled="true">
+                      Please select an area
+                    </li>
+                    <li class="mdc-list-item" role="option" id="shenton-way" tabindex="0">
+                      Shenton Way
+                    </li>
+                    <li class="mdc-list-item" role="option" id="raffles-place" tabindex="0">
+                      Raffles Place
+                    </li>
+                    <li class="mdc-list-item" role="option" id="outram-park" tabindex="0">
+                      Outram Park
+                    </li>
+                    <li class="mdc-list-item" role="option" id="bedok" tabindex="0">
+                      Bedok
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Toggle Button -->
+            <div id="trending-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
+              <i class="mdc-icon-toggle material-icons" role="button" aria-pressed="false" aria-label="Recommend trending places" tabindex="0"
+                data-mdc-auto-init="MDCIconToggle" data-toggle-on='{"label": "Trending recommendations enabled", "content": "trending_up", "cssClass": "activated-accent"}'
+                data-toggle-off='{"label": "Trending recommendations disabled", "content": "trending_up"}'>
+                trending_up
+              </i>
+            </div>
+          </div>
+          <div id="recommendations-footer" class="mdc-layout-grid__inner">
+            <div id="active-friends" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-left">
+              <p>12 active friends</p>
+            </div>
+            <div id="request-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-right">
+              <button class="mdc-button mdc-button--raised">
+                Recommend
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">Q</div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
