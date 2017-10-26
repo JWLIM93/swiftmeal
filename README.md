@@ -55,7 +55,7 @@
 | MORE TO BE ADDED !!                                           |               |                                                                                   |
 
 #### Plan
-**New data and latest schema should be in both local and alicloud instance**
+**New data and latest schema should be in both local and alicloud instance before integration**
 
 Steps are PER SCREEN basis
 1. Merge UI and PHP functionality codes
@@ -65,7 +65,8 @@ Steps are PER SCREEN basis
 5. Test against alicloud instance for mySQL
 6. If all above passed, the specific screen will be marked with "Integration Done"
 
-Repeat for all screens.
+Repeat for all screens that are required for the above pre-requisites.
+If the pre-requisites did not list your part, it will fall into integration 2! Sorry :(
 
 Please do check that your PHP functions are all working to speed up the process and know where to change to alicloud instance db connection.
 
