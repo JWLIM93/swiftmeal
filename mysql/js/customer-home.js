@@ -16,6 +16,10 @@ document.querySelector('#menu-change-password-button').addEventListener('click',
     alert(`Change Password Clicked!`);
 })
 
+document.querySelector('#menu-back-home-button').addEventListener('click', () => {
+    window.location = "/mysql/customer-home.html";
+})
+
 document.querySelector('#menu-logout-button').addEventListener('click', () => {
     window.location = "/mysql/index.html";
 })
