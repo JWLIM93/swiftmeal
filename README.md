@@ -1,6 +1,6 @@
 # swiftmeal-web
 
-## Status
+## Design Status
 
 | Page                              | Status        | Comments                                              |
 | --------------------------------- | ------------- | ----------------------------------------------------- |
@@ -17,7 +17,7 @@
 | customer-notifications.html       | Not started   |                                                       |
 
 
-## Integration
+## Integration Status
 | Page                              | Status        | Comments                                              |
 | --------------------------------- | ------------- | ----------------------------------------------------- |
 | index.html                        | On-going      |                                                       |
