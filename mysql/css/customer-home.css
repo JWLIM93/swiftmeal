@@ -20,6 +20,10 @@
   color: var(--mdc-theme-secondary);
 }
 
+.mdc-list-item__start-detail {
+  margin-left: 15px;
+}
+
 #map { 
   /* Full width */
   position: absolute;
@@ -133,6 +137,11 @@
   margin-left: 4%;
 }
 
+#recommended-list {
+  background-color: rgba(33, 33, 33, 1.0);
+  max-width: 441px;
+}
+
 #recommendations-footer {
   padding-top: 10px;
   height: 100%;
@@ -147,7 +156,8 @@
 
 #active-friends > p {
   font-family: 'Quicksand', sans-serif;
-  color: greenyellow;
+  color: var(--mdc-theme-secondary);
+  font-weight: bold;
   margin-top: 10px;
   text-transform: uppercase;
   font-size: 13px;
@@ -164,4 +174,8 @@
   border-color: var(--mdc-theme-secondary);
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
+}
+
+#loading-progress {
+  display: none;
 }

@@ -33,3 +33,8 @@ document.querySelector('#customer-profile').addEventListener('click', () => menu
 
 // Toggle buttons
 mdc.iconToggle.MDCIconToggle.attachTo(document.querySelector('.mdc-icon-toggle'));
+
+// Recommendations list click listener
+// document.getElementById('recommended-list').addEventListener('click', () => {
+//     document.getElementById("loading-progress").style.display = 'inline';
+// })
