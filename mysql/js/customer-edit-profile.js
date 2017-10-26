@@ -30,11 +30,3 @@ document.querySelector('#friends-list-nav').addEventListener('click', () => {
 })
 
 document.querySelector('#customer-profile').addEventListener('click', () => menu.open = !menu.open);
-
-// Toggle buttons
-mdc.iconToggle.MDCIconToggle.attachTo(document.querySelector('.mdc-icon-toggle'));
-
-// Recommendations list click listener
-// document.getElementById('recommended-list').addEventListener('click', () => {
-//     document.getElementById("loading-progress").style.display = 'inline';
-// })
