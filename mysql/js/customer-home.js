@@ -30,7 +30,7 @@ document.querySelector('#notifications-nav').addEventListener('click', () => {
 })
 
 document.querySelector('#friends-list-nav').addEventListener('click', () => {
-
+    window.location = "/mysql/customer-friends.html";
 })
 
 document.querySelector('#customer-profile').addEventListener('click', () => menu.open = !menu.open);
