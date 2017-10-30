@@ -71,28 +71,15 @@
           <div id="recommendations" class="mdc-layout-grid__inner mdc-elevation--z10">
             <!-- Area Selection -->
             <div id="area-selector" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-              <div class="mdc-select" role="listbox" tabindex="0" data-mdc-auto-init="MDCSelect">
-                <span class="mdc-select__selected-text">Select an area</span>
-                <div class="mdc-simple-menu mdc-select__menu" data-mdc-auto-init="MDCRipple">
-                  <ul class="mdc-list mdc-simple-menu__items">
-                    <li class="mdc-list-item" role="option" id="selection-header" aria-disabled="true">
-                      Please select an area
-                    </li>
-                    <li class="mdc-list-item" role="option" id="shenton-way" tabindex="0">
-                      Shenton Way
-                    </li>
-                    <li class="mdc-list-item" role="option" id="raffles-place" tabindex="0">
-                      Raffles Place
-                    </li>
-                    <li class="mdc-list-item" role="option" id="outram-park" tabindex="0">
-                      Outram Park
-                    </li>
-                    <li class="mdc-list-item" role="option" id="bedok" tabindex="0">
-                      Bedok
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <select class="mdc-select" data-mdc-auto-init="MDCRipple">
+                <option value="" selected>Select an area</option>
+                <optgroup label="Areas">
+                  <option value="shenton-way">Shenton Way</option>
+                  <option value="raffles-place">Raffles Place</option>
+                  <option value="outram-park">Outram Park</option>
+                  <option value="bedok">Bedok</option>
+                </optgroup>
+              </select>
             </div>
             <!-- Toggle Button -->
             <div id="trending-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">

@@ -15,3 +15,21 @@ document.getElementById('recommended-list').addEventListener('click', () => {
             40 + (Math.random() - 0.5) * 10]
     });
 })
+
+function updateMapToNewLocation(lat, lng) {
+    var targetDestination = [lat, lng];
+
+    map.flyTo({
+        // These options control the ending camera position: centered at
+        // the target, at zoom level 9, and north up.
+        center: targetDestination,
+        zoom: 10,
+        bearing: 0,
+
+        // These options control the flight curve, making it move
+        // slowly and zoom out almost completely before starting
+        // to pan.
+        speed: 0.5, // make the flying slow
+        curve: 1, // change the speed at which it zooms out
+    });
+}

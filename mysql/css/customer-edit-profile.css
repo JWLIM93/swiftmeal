@@ -14,8 +14,8 @@
 
 @media(min-width: 1024px) {
    .app-fab--absolute {
-    bottom: 8rem;
-    right: 13rem;
+    bottom: 11.5rem;
+    right: 14rem;
   }
 }
 
@@ -35,14 +35,6 @@
   padding-left: 15px;
   padding-right: 15px;
   text-transform: uppercase;
-}
-
-#map { 
-  /* Full width */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
 }
 
 #foreground-content {
@@ -110,7 +102,7 @@
 }
 
 #edit-profile-container {
-  background-color: var(--mdc-theme-primary);
+  background-color: rgb(21, 50, 133);
   height: 800px;
 }
 
