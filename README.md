@@ -8,13 +8,14 @@
 | register.html                     | Done          |                                                       |
 | customer-home.html                | Done          | Requires tight integration. Please integrate with me. |
 | customer-edit-profile.html        | Done          |                                                       |
-| customer-change-password.html     | On-going      |                                                       |
+| customer-change-password.html     | Done          |                                                       |
 | customer-friends.html             | Done          |                                                       |
 | recommendation-hdetails.html      | Up-next       | For hawker.                                           |
 | recommendation-rdetails.html      | Up-next       | For restuarants.                                      |
 | recommendation-reservation.html   | Not started   | Only for restaurants.                                 |
 | recommendation-nav.html           | Not started   | Common for hawker and restaurant.                     |
 | customer-notifications.html       | Not started   |                                                       |
+| customer-history.html             | Not started   |                                                       |
 
 
 ## Integration Status

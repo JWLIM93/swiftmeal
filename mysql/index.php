@@ -71,8 +71,8 @@
           </div>
           <!-- Buttons -->
           <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <a href="register.html" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Register</a>
-            <a href="customer-home.html" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Login</a>
+            <a href="register.php" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Register</a>
+            <a href="customer-home.php" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Login</a>
           </div>
         </div>
       </div>

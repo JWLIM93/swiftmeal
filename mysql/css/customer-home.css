@@ -1,6 +1,7 @@
 .mdc-toolbar {
-  background-color: rgba(33,33,33,0.7);
+  background-color: rgba(33, 33, 33, 0.7);
 }
+
 
 /* .mdc-layout-grid__cell {
   background-color: red;
@@ -24,7 +25,7 @@
   margin-left: 15px;
 }
 
-#map { 
+#map {
   /* Full width */
   position: absolute;
   top: 0;
@@ -54,7 +55,7 @@
   color: white;
 }
 
-#customer-profile-menu > ul > li {
+#customer-profile-menu>ul>li {
   font-family: 'Quicksand', sans-serif;
   font-weight: normal;
   font-size: 15px;
@@ -111,7 +112,7 @@
   margin-left: 5%;
 }
 
-#area-selector > .mdc-select > .mdc-simple-menu {
+#area-selector>.mdc-select>.mdc-simple-menu {
   min-width: 19%;
 }
 
@@ -154,7 +155,7 @@
   padding-left: 6%;
 }
 
-#active-friends > p {
+#active-friends>p {
   font-family: 'Quicksand', sans-serif;
   color: var(--mdc-theme-secondary);
   font-weight: bold;
@@ -163,13 +164,13 @@
   font-size: 13px;
 }
 
-#request-recommendations > .mdc-button {
+#request-recommendations>.mdc-button {
   background-color: var(--mdc-theme-secondary);
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
 }
 
-#request-party > .mdc-button {
+#request-party>.mdc-button {
   color: var(--mdc-theme-secondary);
   border-color: var(--mdc-theme-secondary);
   font-family: 'Quicksand', sans-serif;

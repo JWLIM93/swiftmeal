@@ -120,7 +120,7 @@
           </div>
           <!-- Buttons -->
           <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <a href="index.html" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Back</a>
+            <a href="index.php" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Back</a>
             <button class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Register</button>
           </div>
         </div>
