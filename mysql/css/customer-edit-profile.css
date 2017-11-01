@@ -9,13 +9,13 @@
 
 .app-fab--absolute {
   position: fixed;
-  bottom: 11rem;
+  bottom: 15rem;
   right: 13.5rem;
 }
 
 @media(min-width: 1024px) {
   .app-fab--absolute {
-    bottom: 11rem;
+    bottom: 15rem;
     right: 13.5rem;
   }
 }

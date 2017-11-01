@@ -131,8 +131,10 @@
             </ul>
           </div>
           <div id="recommendations-footer" class="mdc-layout-grid__inner">
-            <div id="active-friends" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-left">
-              <p>12 active friends</p>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-left">
+              <button id="active-friends" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">
+                12 friends online
+              </button>
             </div>
             <div id="request-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-right">
               <button class="mdc-button mdc-button--raised">
@@ -141,18 +143,173 @@
             </div>
           </div>
         </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">
-        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
       </div>
+      <div id="dialog-underlay" class="mdc-elevation--z14">
+        ddd
+      </div>
     </div>
+    <!-- Popup dialog -->
+    <div id="active-friends-dialog" class="mdc-layout-grid mdc-elevation--z16 md-theme--dark">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-11 mdc-layout-grid__cell--align-middle">
+              <h1 id="dialog-header">12 Online Friends</h1>
+              <p id="dialog-description">List of friends that are currently online.</p>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-right">
+              <a id="dialog-close-button" href="#" class="material-icons" aria-label="Close dialog" title="Close dialog">
+                close
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+          <div id="active-friends-grid-list" class="mdc-grid-list mdc-grid-list--twoline-caption">
+            <ul class="mdc-grid-list__tiles">
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Jeremy Lim</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+              <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
+                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Invite dialog -->
+    <aside id="invite-dialog" class="mdc-dialog" role="invite-dialog" aria-labelledby="invite-dialog-label" aria-describedby="invite-dialog-description">
+      <div class="mdc-dialog__surface">
+        <header class="mdc-dialog__header">
+          <h2 id="invite-dialog-label" class="mdc-dialog__header__title">
+            Invite friends for this recommendation?
+          </h2>
+        </header>
+        <section id="invite-dialog-description" class="mdc-dialog__body">
+          You can invite friends that are online to join you for this selected recommendation, alternatively you can proceed without
+          any invitations.
+        </section>
+        <footer class="mdc-dialog__footer">
+          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">No, proceed</button>
+          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Yes, invite friends</button>
+        </footer>
+      </div>
+      <div class="mdc-dialog__backdrop"></div>
+    </aside>
   </main>
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  <script>window.mdc.autoInit();</script>
+  <script>
+    window.mdc.autoInit();
+  </script>
   <script src="js/map.js"></script>
   <script src="js/customer-home.js"></script>
 </body>

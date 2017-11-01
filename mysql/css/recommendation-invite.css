@@ -1,0 +1,138 @@
+.mdc-toolbar {
+    background-color: rgba(33, 33, 33, 0.7);
+}
+
+.app-fab--absolute {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+@media(min-width: 1024px) {
+    .app-fab--absolute {
+        bottom: 2rem;
+        right: 2rem;
+    }
+}
+
+.mdc-fab {
+    background-color: var(--mdc-theme-primary);
+}
+
+.mdc-simple-menu {
+    overflow: hidden !important;
+}
+
+.mdc-form-field>label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+}
+
+#name-validation-msg,
+#email-address-validation-msg,
+#mobile-validation-msg {
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+#foreground-content {
+    position: absolute;
+    width: 100%;
+    height: 93%;
+}
+
+#product-name {
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: 0.4em;
+    font-weight: bold;
+}
+
+#customer-profile {
+    font-family: 'Quicksand', sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#customer-profile-menu>ul>li {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+#friends-list-nav {
+    font-family: 'Quicksand', sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#notifications-nav {
+    font-family: 'Quicksand', sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#friends-list-nav:hover,
+#notifications-nav:hover,
+#customer-profile:hover {
+    font-weight: bold;
+    color: var(--mdc-theme-secondary);
+}
+
+#page-name {
+    margin-top: 17px;
+    margin-left: 10px;
+    border-left: 1px solid white;
+    padding-left: 17px;
+    text-transform: uppercase;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+}
+
+#friends-invite-container {
+    background-color: rgb(156, 20, 68);
+    overflow: auto;
+}
+
+#friends-invite-header {
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    padding-left: 18px;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+#friends-invite-description {
+    padding-left: 18px;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    padding-bottom: 15px;
+    padding-top: 0;
+}
+
+#friends-list-container {
+    margin-bottom: 50px;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+#buttons-container {
+    margin-bottom: 50px;
+}
+
+#loading-progress {
+    display: none;
+}
