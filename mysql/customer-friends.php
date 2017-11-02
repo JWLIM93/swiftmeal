@@ -131,7 +131,7 @@
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
                             <h1 id="friends-list-header">Your Friends</h1>
                             <div class="mdc-grid-list mdc-grid-list--twoline-caption">
-                                <ul class="mdc-grid-list__tiles">
+                                <ul id="friends-list" class="mdc-grid-list__tiles">
                                     <li class="mdc-grid-tile">
                                         <div class="mdc-grid-tile__primary">
                                             <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />

@@ -23,7 +23,7 @@ function updateMapToNewLocation(lat, lng) {
         // These options control the ending camera position: centered at
         // the target, at zoom level 9, and north up.
         center: targetDestination,
-        zoom: 10,
+        zoom: 14,
         bearing: 0,
 
         // These options control the flight curve, making it move

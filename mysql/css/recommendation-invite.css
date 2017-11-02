@@ -125,8 +125,8 @@
 
 #friends-list-container {
     margin-bottom: 50px;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
+    padding: 1.53em;
+    background-color: rgba(129, 129, 129, 0.30);
 }
 
 #buttons-container {
