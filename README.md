@@ -55,7 +55,7 @@
 | Delete friend                                                 | Jun Wei       | Do not delete records (set isValid flag)                                          |
 | MORE TO BE ADDED !!                                           |               |                                                                                   |
 
-#### Plan
+<!-- #### Plan
 **New data and latest schema should be in both local and alicloud instance before integration**
 
 Steps are PER SCREEN basis
@@ -71,8 +71,10 @@ If the pre-requisites did not list your part, it will fall into integration 2! S
 
 Please do check that your PHP functions are all working to speed up the process and know where to change to alicloud instance db connection.
 
-For MySQL use @Junwei instance.
+For MySQL use @Junwei instance. -->
 
+## Changes (3 Nov):
 
-## Integration 2
+Change-Password - Fab location changed, NEW DIALOG for update password failure, new current new and confirm new password fields, fixed fields ID from previously.
 
+Recommendation-Invite - Added new selector count header.

@@ -69,6 +69,8 @@
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
                             <h1 id="friends-invite-header">Select Friends</h1>
                             <p id="friends-invite-description">You can only invite friends that are currently online.</p>
+                            <!-- If no/1 friend use singular "friend", else use plural "friends" -->
+                            <div id="selection-count-header">No friend selected</div>
                             <div id="friends-list-container" class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                                     <div class="mdc-form-field">
@@ -82,7 +84,7 @@
                                             </div>
                                         </div>
 
-                                        <label for="friend-1-checkbox">Justin Fong</label>
+                                        <label for="friend-1-checkbox">justin fong</label>
                                     </div>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
@@ -97,7 +99,7 @@
                                             </div>
                                         </div>
 
-                                        <label for="friend-2-checkbox">Lim Jun Wei</label>
+                                        <label for="friend-2-checkbox">lim jun wei</label>
                                     </div>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">

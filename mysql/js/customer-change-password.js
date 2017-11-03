@@ -2,6 +2,7 @@ var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolb
 toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
 
 let menu = new mdc.menu.MDCSimpleMenu(document.querySelector('.mdc-simple-menu'));
+mdc.dialog.MDCDialog.attachTo(document.querySelector('#update-failure-dialog'));
 
 // Profile menu - Individual menu selection listenr
 document.querySelector('#menu-edit-profile-button').addEventListener('click', () => {
@@ -34,3 +35,18 @@ document.querySelector('#friends-list-nav').addEventListener('click', () => {
 })
 
 document.querySelector('#customer-profile').addEventListener('click', () => menu.open = !menu.open);
+
+// Listen for update failure dialog activator
+var updateFailureDialog = new mdc.dialog.MDCDialog(document.querySelector('#update-failure-dialog'));
+
+updateFailureDialog.listen('MDCDialog:accept', function () {
+    window.location = "/mysql/customer-home.php";
+})
+
+updateFailureDialog.listen('MDCDialog:cancel', function () {
+    window.location = "/mysql/customer-change-password.php";
+})
+
+document.getElementById('update-password-fab').addEventListener('click', () => {
+    updateFailureDialog.show();
+})
