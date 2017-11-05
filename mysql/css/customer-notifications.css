@@ -1,0 +1,216 @@
+.mdc-toolbar {
+	background-color: rgba(33, 33, 33, 0.7);
+}
+
+/* .mdc-layout-grid__cell {
+  background-color: red;
+} */
+
+.mdc-simple-menu {
+	overflow: hidden !important;
+}
+
+.grey-bg {
+	background: rgba(0, 0, 0, 0.26);
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:active {
+	color: black;
+}
+
+.mdc-list-item__text,
+.mdc-list-item__text__secondary {
+	font-family: "Quicksand", sans-serif;
+}
+
+.mdc-list-item__text {
+	font-weight: bold;
+}
+
+.mdc-grid-tile__primary {
+	background-color: rgba(129, 129, 129, 0.3);
+}
+
+.mdc-grid-tile__title,
+.mdc-grid-tile__support-text {
+	font-family: "Quicksand", sans-serif;
+	padding-bottom: 3px;
+}
+
+.mdc-grid-tile__title {
+	font-weight: bold;
+}
+
+.app-fab--absolute {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+}
+
+@media (min-width: 1024px) {
+	.app-fab--absolute {
+		bottom: 2rem;
+		right: 2rem;
+	}
+}
+
+#foreground-content {
+	position: absolute;
+	width: 100%;
+}
+
+#product-name {
+	font-family: "Quicksand", sans-serif;
+	letter-spacing: 0.4em;
+	font-weight: bold;
+}
+
+#customer-profile {
+	font-family: "Quicksand", sans-serif;
+	text-transform: uppercase;
+	margin-right: 20px;
+	font-size: 15px;
+	letter-spacing: 0em;
+	font-weight: normal;
+	color: white;
+}
+
+#customer-profile-menu > ul > li {
+	font-family: "Quicksand", sans-serif;
+	font-weight: normal;
+	font-size: 15px;
+}
+
+#friends-list-nav {
+	font-family: "Quicksand", sans-serif;
+	text-transform: uppercase;
+	margin-right: 20px;
+	font-size: 15px;
+	letter-spacing: 0em;
+	font-weight: normal;
+	color: var(--mdc-theme-secondary);
+}
+
+#notifications-nav {
+	font-family: "Quicksand", sans-serif;
+	text-transform: uppercase;
+	margin-right: 20px;
+	font-size: 15px;
+	letter-spacing: 0em;
+	font-weight: normal;
+	color: white;
+}
+
+#notifications-nav:hover,
+#customer-profile:hover {
+	font-weight: bold;
+	color: var(--mdc-theme-secondary);
+}
+
+#page-name {
+	margin-top: 17px;
+	margin-left: 10px;
+	border-left: 1px solid white;
+	padding-left: 17px;
+	text-transform: uppercase;
+	font-family: "Quicksand", sans-serif;
+	font-size: 18px;
+}
+
+#friends-list-container {
+	background: #37474f;
+}
+
+#pending-request-container {
+	background: rgb(156, 20, 68);
+	margin-bottom: 50px;
+	padding-bottom: 50px;
+}
+
+#friends-list-container {
+	margin-bottom: 50px;
+	padding-bottom: 50px;
+}
+
+#friends-list-header,
+#pending-request-header {
+	font-family: "Quicksand", sans-serif;
+	font-size: 20px;
+	text-transform: uppercase;
+	color: white;
+	letter-spacing: 0.1em;
+	margin-top: 3%;
+}
+
+#pending-request-list {
+	width: inherit;
+	padding: 0;
+}
+
+#pending-request-list > .mdc-list-item {
+	background-color: rgba(129, 129, 129, 0.3);
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#request-span {
+	margin-right: 5%;
+}
+
+#request-span > .material-icons {
+	margin-right: 20px;
+}
+
+#add-friend-dialog {
+	position: absolute;
+	background-color: #212121;
+	display: none;
+	width: 50%;
+	height: 35%;
+	top: 25%;
+	left: 25%;
+}
+
+#add-friend-dialog > div > div {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+#dialog-header {
+	color: white;
+	font-family: "Quicksand", sans-serif;
+	font-size: 30px;
+	margin-bottom: 5px;
+}
+
+#dialog-description {
+	color: white;
+	font-family: "Quicksand", sans-serif;
+	font-size: 15px;
+	margin-top: 5px;
+}
+
+#email-address-input {
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#dialog-buttons-container {
+	margin-top: 10%;
+}
+
+#cancel-button {
+	margin-right: 20px;
+}
+
+#loading-progress {
+	display: none;
+}

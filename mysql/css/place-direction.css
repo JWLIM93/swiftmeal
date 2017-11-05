@@ -2,10 +2,6 @@
 	background-color: rgba(33, 33, 33, 0.7);
 }
 
-/* .mdc-layout-grid__cell {
-  background-color: red;
-} */
-
 .app-fab--absolute {
 	position: fixed;
 	bottom: 1rem;
@@ -19,16 +15,22 @@
 	}
 }
 
+.mdc-fab {
+	background-color: var(--mdc-theme-secondary);
+}
+
 .mdc-simple-menu {
 	overflow: hidden !important;
 }
 
-.mdc-textfield-helptext {
+.mdc-form-field > label {
 	font-family: "Quicksand", sans-serif;
-	font-size: 13px;
+	font-size: 15px;
+	text-transform: capitalize;
 }
 
-.mdc-textfield__label {
+.mdc-snackbar {
+	background-color: var(--mdc-theme-primary);
 	font-family: "Quicksand", sans-serif;
 }
 
@@ -60,7 +62,7 @@
 	font-size: 15px;
 	letter-spacing: 0em;
 	font-weight: normal;
-	color: var(--mdc-theme-secondary);
+	color: white;
 }
 
 #customer-profile-menu > ul > li {
@@ -90,7 +92,8 @@
 }
 
 #friends-list-nav:hover,
-#notifications-nav:hover {
+#notifications-nav:hover,
+#customer-profile:hover {
 	font-weight: bold;
 	color: var(--mdc-theme-secondary);
 }
@@ -105,54 +108,56 @@
 	font-size: 18px;
 }
 
-#edit-profile-container {
+#invitation-lobby-container {
 	background-color: rgb(21, 50, 133);
-	height: 750px;
-	max-height: 750px;
+	overflow: auto;
 }
 
-#edit-profile-header {
+#invitation-lobby-header {
 	font-family: "Quicksand", sans-serif;
 	color: white;
 	padding-left: 18px;
 	margin-top: 40px;
-	margin-bottom: 40px;
+	margin-bottom: 0;
 }
 
-#edit-profile-divider,
-#other-customizations-divider {
-	background-color: rgba(33, 33, 33, 0.5);
-	border-radius: 20px;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	text-transform: uppercase;
-	color: white;
-	font-size: 13px;
-	letter-spacing: 0.2em;
-	font-weight: normal;
-	margin-top: 30px;
-}
-
-#input-fields-container {
-	padding-left: 18px;
-	padding-right: 18px;
-	margin-bottom: 15px;
-}
-
-#name-input,
-#mobile-input,
-#email-address-input {
-	width: 100%;
-}
-
-#edit-profile-description {
+#invitation-lobby-description {
 	padding-left: 18px;
 	color: white;
 	font-family: "Quicksand", sans-serif;
 	padding-bottom: 15px;
-	padding-top: 10px;
+	padding-top: 0;
+	margin-top: 0;
+}
+
+#lobby-list-group {
+	padding-bottom: 50px;
+	margin-top: 30px;
+}
+
+#group-icon {
+	padding-right: 8px;
+	margin: 0;
+	vertical-align: bottom;
+	padding-left: 24px;
+}
+
+#accepted-count-container {
+	padding-left: 16px;
+	color: white;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-family: "Quicksand", sans-serif;
+}
+
+#lobby-list > .mdc-list-item {
+	background-color: rgba(129, 129, 129, 0.3);
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: white;
+	font-family: "Quicksand", sans-serif;
 }
 
 #loading-progress {

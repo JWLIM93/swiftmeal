@@ -1,12 +1,4 @@
 var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector(".mdc-toolbar"));
-const snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
-const snackbarMessageObj = {
-	message: "Waiting for friends ...",
-	timeout: 9999999
-};
-var confirmReserveDialog = new mdc.dialog.MDCDialog(document.querySelector(".mdc-dialog"));
-
-snackbar.show(snackbarMessageObj);
 
 // Fix toolbar to top
 toolbar.fixedAdjustElement = document.querySelector(".mdc-toolbar-fixed-adjust");
@@ -14,11 +6,8 @@ toolbar.fixedAdjustElement = document.querySelector(".mdc-toolbar-fixed-adjust")
 // Instantiate profile expandable menu
 let menu = new mdc.menu.MDCSimpleMenu(document.querySelector(".mdc-simple-menu"));
 
-// Instantiate snackbar
-mdc.snackbar.MDCSnackbar.attachTo(document.querySelector(".mdc-snackbar"));
-
-// Instantiate confirmation dialog
-mdc.dialog.MDCDialog.attachTo(document.querySelector(".mdc-dialog"));
+// Instantiate textfield
+mdc.textfield.MDCTextfield.attachTo(document.querySelector(".mdc-textfield"));
 
 // Profile menu - Individual menu selection listenr
 document.querySelector("#menu-edit-profile-button").addEventListener("click", () => {
@@ -53,11 +42,11 @@ document.querySelector("#friends-list-nav").addEventListener("click", () => {
 document.querySelector("#customer-profile").addEventListener("click", () => (menu.open = !menu.open));
 
 // CLick listeners for confirmation dialog
-confirmReserveDialog.listen("MDCDialog:accept", function() {
-	window.location = "/mysql/current-location.php";
+dialog.listen("MDCDialog:accept", function() {
+	console.log("accepted");
 });
 
-confirmReserveDialogdialog.listen("MDCDialog:cancel", function() {
+dialog.listen("MDCDialog:cancel", function() {
 	console.log("canceled");
 });
 

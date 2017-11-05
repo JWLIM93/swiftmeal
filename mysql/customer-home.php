@@ -63,12 +63,12 @@
     <div id="map"></div>
     <div id="foreground-content" class="mdc-layout-grid mdc-layout-grid--fixed-column-width">
       <div id="area-selection-content" class="mdc-layout-grid__inner">
-        <div id="recommendations-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top">
+        <div id="recommendations-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
           <div id="recommendations-header" class="mdc-elevation--z10">
             <h3 id="welcome">Welcome, Justin!</h3>
             <h3 id="welcome-sub-heading">Start your food exploration here ...</h3>
           </div>
-          <div id="recommendations" class="mdc-layout-grid__inner mdc-elevation--z10">
+          <div id="recommendations" class="mdc-layout-grid__inner">
             <!-- Area Selection -->
             <div id="area-selector" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
               <select class="mdc-select" data-mdc-auto-init="MDCRipple">
@@ -96,8 +96,8 @@
               <li id="recommended-place-1" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
                 <i class="mdc-list-item__start-detail material-icons" aria-hidden="true">restaurant</i>
                 <span class="mdc-list-item__text">
-                  Swensen's
-                  <span class="mdc-list-item__text__secondary">16 Shenton Way, Singapore 123445</span>
+                  Swensen's fvfgfgfgfgfg grhghg g gb sfd fgs fg fg dfgf g
+                  <span class="mdc-list-item__text__secondary">16 Shenton Way, Singapore 123445 bgbgf gf gf h h fg fg g g dgr g ggr</span>
                 </span>
               </li>
               <li id="recommended-place-2" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
@@ -133,7 +133,7 @@
           <div id="recommendations-footer" class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-left">
               <button id="active-friends" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">
-                12 friends online
+                No Online Friends
               </button>
             </div>
             <div id="request-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-right">
@@ -143,23 +143,16 @@
             </div>
           </div>
         </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top"></div>
-      </div>
-      <div id="dialog-underlay" class="mdc-elevation--z14">
-        ddd
       </div>
     </div>
+    <div id="dialog-underlay" class="mdc-elevation--z14"></div>
     <!-- Popup dialog -->
     <div id="active-friends-dialog" class="mdc-layout-grid mdc-elevation--z16 md-theme--dark">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-11 mdc-layout-grid__cell--align-middle">
-              <h1 id="dialog-header">12 Online Friends</h1>
+              <h1 id="dialog-header">No Online Friends</h1>
               <p id="dialog-description">List of friends that are currently online.</p>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-right">
@@ -285,6 +278,294 @@
         </div>
       </div>
     </div>
+    <!-- Single recommendation focus and reviews dialog -->
+    <div id="recommendation-focus-dialog" class="mdc-layout-grid mdc-elevation--z16 md-theme--dark">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+              <h1 id="dialog-header">Justin's Grill & Bar</h1>
+              <p id="dialog-description">18 Shenton Way, Singapore 126667</p>
+              <span id="likes-dislikes-container">
+                <i id="recommendation-like" class="material-icons">favorite</i>
+                189
+                <i id="recommendation-dislike" class="material-icons">favorite_border</i>
+                20
+              </span>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle mdc-layout-grid--align-right">
+              <a id="recommendation-focus-dialog-close-button" href="#" class="material-icons" aria-label="Close dialog" title="Close dialog">
+                close
+              </a>
+              <a id="recommendation-focus-dialog-proceed-button" href="#" class="material-icons" aria-label="Select and proceed with recommendation"
+                title="Select and proceed with recommendation">
+                arrow_forward
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+          <!-- Reviews section -->
+          <div id="reviews-list-group" class="mdc-list-group">
+            <h3 id="reviews-list-group-subheader" class="mdc-list-group__subheader">Reviews (47)</h3>
+            <ul id="reviews-list" class="mdc-list mdc-list--two-line msgs-list">
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li role="separator" class="mdc-list-divider"></li>
+              <li id="reviews-list-item" class="mdc-list-item">
+                <span class="mdc-list-item__text">
+                  Ali Connors
+                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                </span>
+
+                <span class="mdc-list-item__end-detail">
+                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                  <span id="up-down-vote-container">
+                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                      thumb_down
+                    </a>
+                    <span>
+                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                        thumb_up
+                      </a>
+                    </span>
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Invite dialog -->
     <aside id="invite-dialog" class="mdc-dialog" role="invite-dialog" aria-labelledby="invite-dialog-label" aria-describedby="invite-dialog-description">
       <div class="mdc-dialog__surface">
@@ -311,6 +592,7 @@
     window.mdc.autoInit();
   </script>
   <script src="js/map.js"></script>
+  <script src="/library/ellipsis.min.js"></script>
   <script src="js/customer-home.js"></script>
 </body>
 

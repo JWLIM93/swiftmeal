@@ -217,7 +217,7 @@
         <!-- Floating Action Button - Invite selection -->
         <button id="add-friend-fab" class="mdc-fab material-icons app-fab--absolute" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
             <span class="mdc-fab__icon">
-                check
+                arrow_forward
             </span>
         </button>
     </main>
