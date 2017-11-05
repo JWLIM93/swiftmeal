@@ -40,48 +40,53 @@
             <h3>Authenticate</h3>
           </div>
           <!-- Email Address Text Input -->
-          <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="mdc-form-field">
-              <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                <input required maxlength=200 id="email-address-field" type="text" class="mdc-textfield__input">
-                <label for="email-address-field" class="mdc-textfield__label">Email Address</label>
+          <form name="registerForm" onsubmit="return submitLogin()" action="phpScripts/postRequests.php" method="post">
+            <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <div class="mdc-form-field">
+                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                  <input required maxlength=200 id="email-address-field" type="text" class="mdc-textfield__input">
+                  <label for="email-address-field" class="mdc-textfield__label">Email Address</label>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Email Address Help Text -->
-          <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="email-validation-msg">
-              <em>abcd@gmail.com</em>
-            </p>
-          </div>
-          <!-- Password Text Input -->
-          <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="mdc-form-field">
-              <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                <input required minlength=8 id="password-field" type="password" class="mdc-textfield__input">
-                <label for="password-field" class="mdc-textfield__label">Password</label>
+            <!-- Email Address Help Text -->
+            <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="email-validation-msg">
+                <em id="email_error_message">abcd@gmail.com</em>
+              </p>
+            </div>
+            <!-- Password Text Input -->
+            <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <div class="mdc-form-field">
+                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                  <input required minlength=8 id="password-field" type="password" class="mdc-textfield__input">
+                  <label for="password-field" class="mdc-textfield__label">Password</label>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Password Help Text -->
-          <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="pw-validation-msg">
-              <em>Minimum 8 characters are required for password</em>
-            </p>
-          </div>
-          <!-- Buttons -->
-          <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <a href="register.php" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Register</a>
-            <a href="customer-home.php" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Login</a>
-          </div>
+            <!-- Password Help Text -->
+            <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="pw-validation-msg">
+                <em id='password_error_msg'>Minimum 8 characters are required for password</em>
+              </p>
+            </div>
+            <!-- Buttons -->
+            <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <a href="register.php" class="mdc-button mdc-button--accent" data-mdc-auto-init="MDCRipple">Register</a>
+              <button name="login" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">Login</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </main>
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  <script>window.mdc.autoInit();</script>
+  <script>
+    window.mdc.autoInit();
+  </script>
   <script src="js/map.js"></script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>
