@@ -1,5 +1,39 @@
 # swiftmeal-web
 
+
+## Changes (5 Nov):
+
+#change-password
+
+Fab location changed, NEW DIALOG for update password failure, new current new and confirm new password fields, fixed fields ID from previously.
+
+#recommendation-invite
+
+Added new selector count header.
+
+#customer-home
+
+**REVAMPED CUSTOMER HOME, now includes reviews**
+
+Update default text for online friends indicator to "No Online Friends" (both activator and dialog popout), map is now interactable due to a new flow of event, reworked underlying div css layout.
+New flow for recommendation selection. (Area > FlyToAreaDefaultLatLng > Recommend button > 5 recommendations appear with 5 markers on map > click on 1 recommendation > selected marker focused > click on marker > Recommendation details popup > close/select recommendation) **Use loading bar whenever there's page load or content load**
+
+#edit-profile
+Updated css, merge required
+
+#invite-lobby
+New screen, clean merge required. To keep background query for accepted invite request. 
+
+#current-location
+Show for all friends in a invite group for them to input their current location in string.
+
+#place-direction
+Map direction from entered current location and show to user. Revamp WIP
+
+#customer-notifications
+Central place for friends and place invites/requests. Revamp WIP
+
+
 ## Design Status
 
 | Page                              | Status        | Comments                                              |
@@ -56,35 +90,3 @@ If the pre-requisites did not list your part, it will fall into integration 2! S
 Please do check that your PHP functions are all working to speed up the process and know where to change to alicloud instance db connection.
 
 For MySQL use @Junwei instance. -->
-
-## Changes (5 Nov):
-
-#change-password
-
-Fab location changed, NEW DIALOG for update password failure, new current new and confirm new password fields, fixed fields ID from previously.
-
-#recommendation-invite
-
-Added new selector count header.
-
-#customer-home
-
-**REVAMPED CUSTOMER HOME, now includes reviews**
-
-Update default text for online friends indicator to "No Online Friends" (both activator and dialog popout), map is now interactable due to a new flow of event, reworked underlying div css layout.
-New flow for recommendation selection. (Area > FlyToAreaDefaultLatLng > Recommend button > 5 recommendations appear with 5 markers on map > click on 1 recommendation > selected marker focused > click on marker > Recommendation details popup > close/select recommendation) **Use loading bar whenever there's page load or content load**
-
-#edit-profile
-Updated css, merge required
-
-#invite-lobby
-New screen, clean merge required. To keep background query for accepted invite request. 
-
-#current-location
-Show for all friends in a invite group for them to input their current location in string.
-
-#place-direction
-Map direction from entered current location and show to user. Revamp WIP
-
-#customer-notifications
-Central place for friends and place invites/requests. Revamp WIP
