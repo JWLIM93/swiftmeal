@@ -21,6 +21,8 @@
 
   <!-- GLOBAL CSS -->
   <link rel="stylesheet" href="css/common.css">
+
+  <!-- AHEAD JAVASCRIPT -->
 </head>
 
 <body>
@@ -40,33 +42,33 @@
             <h3>Authenticate</h3>
           </div>
           <!-- Email Address Text Input -->
-          <form name="registerForm" onsubmit="return submitLogin()" action="phpScripts/postRequests.php" method="post">
+          <form name="registerForm" onsubmit="return submitLogin()" action="scripts/post-requests.php" method="post">
             <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required maxlength=200 id="email-address-field" type="text" class="mdc-textfield__input">
-                  <label for="email-address-field" class="mdc-textfield__label">Email Address</label>
+                <div class=" mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input required maxlength=200 name="userEmail" id="email-address-field" type="text" class=" mdc-text-field__input ">
+                  <label for="email-address-field " class=" mdc-text-field__label">Email Address</label>
                 </div>
               </div>
             </div>
             <!-- Email Address Help Text -->
             <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="email-validation-msg">
+              <p class=" mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="email-validation-msg">
                 <em id="email_error_message">abcd@gmail.com</em>
               </p>
             </div>
             <!-- Password Text Input -->
             <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required minlength=8 id="password-field" type="password" class="mdc-textfield__input">
-                  <label for="password-field" class="mdc-textfield__label">Password</label>
+                <div class=" mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input required minlength=8 name='userPassword' id="password-field " type="password" class=" mdc-text-field__input">
+                  <label for="password-field" class=" mdc-text-field__label">Password</label>
                 </div>
               </div>
             </div>
             <!-- Password Help Text -->
-            <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="pw-validation-msg">
+            <div id="single-field-helptext " class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <p class=" mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="pw-validation-msg">
                 <em id='password_error_msg'>Minimum 8 characters are required for password</em>
               </p>
             </div>
@@ -86,6 +88,7 @@
     window.mdc.autoInit();
   </script>
   <script src="js/map.js"></script>
+  <script src="js/toolbar.js"></script>
   <script src="js/index.js"></script>
 </body>
 

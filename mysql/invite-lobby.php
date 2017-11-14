@@ -8,7 +8,7 @@
 
     <!-- MAPBOX CDN -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet'/>
 
     <!-- MATERIAL DESIGN COMPONENTS CDN -->
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -17,12 +17,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:400,700">
 
     <!-- GOOGLE ICON FONT -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- LOCAL CSS -->
     <link rel="stylesheet" href="css/invite-lobby.css">
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/common.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- AHEAD JAVASCRIPT -->
+    <script src="js/friends-display.js"></script>
 </head>
 
 <body>
@@ -163,7 +170,7 @@
             </div>
         </div>
         <!-- Floating Action Button - Invite selection -->
-        <button id="to-reservation-fab" class="mdc-fab material-icons app-fab--absolute mdc-theme--dark" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
+        <button id="confirm-reservation-fab" class="mdc-fab material-icons app-fab--absolute mdc-theme--dark" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
             <span class="mdc-fab__icon">
                 arrow_forward
             </span>
@@ -192,6 +199,7 @@
     <script>
         window.mdc.autoInit();
     </script>
+    <script src="js/toolbar.js"></script>
     <script src="js/invite-lobby.js"></script>
 </body>
 

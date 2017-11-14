@@ -23,6 +23,12 @@
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/common.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- AHEAD JAVASCRIPT -->
+    <script src="js/friends-display.js"></script>
 </head>
 
 <body>
@@ -215,7 +221,7 @@
             </div>
         </div>
         <!-- Floating Action Button - Invite selection -->
-        <button id="add-friend-fab" class="mdc-fab material-icons app-fab--absolute" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
+        <button id="to-lobby-fab" class="mdc-fab material-icons app-fab--absolute" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
             <span class="mdc-fab__icon">
                 arrow_forward
             </span>
@@ -226,6 +232,7 @@
     <script>
         window.mdc.autoInit();
     </script>
+    <script src="js/toolbar.js"></script>
     <script src="js/recommendation-invite.js"></script>
 </body>
 

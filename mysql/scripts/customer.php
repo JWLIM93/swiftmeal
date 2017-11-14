@@ -11,7 +11,7 @@
  *
  * @author 'KL
  */
-require_once 'User.php';
+require_once 'user.php';
 class customer extends user {
     private $cust_id;
     private $active;

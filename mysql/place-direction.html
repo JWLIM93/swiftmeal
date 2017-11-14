@@ -23,6 +23,11 @@
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/common.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- AHEAD JAVASCRIPT -->
 </head>
 
 <body>
@@ -63,39 +68,35 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle">
                 </div>
-                <div id="invitation-lobby-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle mdc-elevation--z10">
-                    <div class="mdc-layout-grid__inner">
+                <div id="invitation-lobby-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+                    <div id="restaurant-info" class="mdc-layout-grid__inner mdc-elevation--z10">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
                             <h1 id="invitation-lobby-header">Justin's Grill & Bar</h1>
                             <p id="invitation-lobby-description">12 Shenton Way, Singapore 127657</p>
-                            <section id="dynamic-demo-toolbar">
-                                <nav id="dynamic-tab-bar" class="mdc-tab-bar mdc-tab-bar--indicator-accent" role="tablist">
-                                    <a role="tab" aria-controls="panel-1" class="mdc-tab mdc-tab--active" href="#panel-1">Item One</a>
-                                    <a role="tab" aria-controls="panel-2" class="mdc-tab" href="#panel-2">Item Two</a>
-                                    <a role="tab" aria-controls="panel-3" class="mdc-tab" href="#panel-3">Item Three</a>
-                                    <span class="mdc-tab-bar__indicator"></span>
-                                </nav>
-                            </section>
-                            <section>
-                                <div class="panels">
-                                    <p class="panel active" id="panel-1" role="tabpanel" aria-hidden="false">Item One</p>
-                                    <p class="panel" id="panel-2" role="tabpanel" aria-hidden="true">Item Two</p>
-                                    <p class="panel" id="panel-3" role="tabpanel" aria-hidden="true">Item Three</p>
-                                </div>
-                                <div class="dots">
-                                    <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
-                                    <a class="dot" data-trigger="panel-2" href="#panel-2"></a>
-                                    <a class="dot" data-trigger="panel-3" href="#panel-3"></a>
-                                </div>
-                            </section>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                    </div>
+                    <div id="driving-direction-container" class="mdc-layout-grid__inner mdc-elevation--z10">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+                            <h3 id="directions-header">Driving</h3>
+                            <p id="directions-description">12 Shenton Way, Singapore 127657</p>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                    </div>
+                    <div id="driving-direction-container" class="mdc-layout-grid__inner mdc-elevation--z10">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+                            <h3 id="directions-header">Transit</h3>
+                            <p id="directions-description">12 Shenton Way, Singapore 127657</p>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Floating Action Button - Invite selection -->
+        <!-- Floating Action Button -->
         <button id="done-fab" class="mdc-fab material-icons app-fab--absolute mdc-theme--dark" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
             <span class="mdc-fab__icon">
                 check
@@ -107,6 +108,7 @@
     <script>
         window.mdc.autoInit();
     </script>
+    <script src="js/toolbar.js"></script>
     <script src="js/place-direction.js"></script>
 </body>
 

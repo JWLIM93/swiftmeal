@@ -23,6 +23,11 @@
 
   <!-- GLOBAL CSS -->
   <link rel="stylesheet" href="css/common.css">
+
+  <!-- JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- AHEAD JAVASCRIPT -->
 </head>
 
 <body>
@@ -72,40 +77,40 @@
               <div id="input-fields-super-container" class="mdc-layout-grid__inner">
                 <!-- Current Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
-                  <div id="current-password-input" class="mdc-textfield mdc-textfield--box" data-mdc-auto-init="MDCTextfield">
-                    <input type="password" id="current-password-input-box" class="mdc-textfield__input">
-                    <label for="current-password-input-box" class="mdc-textfield__label">Current Password</label>
-                    <div class="mdc-textfield__bottom-line"></div>
+                  <div id="current-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
+                    <input type="password" id="current-password-input-box" class=" mdc-text-field__input">
+                    <label for="current-password-input-box" class=" mdc-text-field__label">Current Password</label>
+                    <div class=" mdc-text-field__bottom-line"></div>
                   </div>
                 </div>
                 <!-- New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
-                  <div id="new-password-input" class="mdc-textfield mdc-textfield--box" data-mdc-auto-init="MDCTextfield">
-                    <input type="password" id="new-password-input-box" class="mdc-textfield__input">
-                    <label for="name-input-box" class="mdc-textfield__label">New Password</label>
-                    <div class="mdc-textfield__bottom-line"></div>
+                  <div id="new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
+                    <input type="password" id="new-password-input-box" class=" mdc-text-field__input">
+                    <label for="name-input-box" class=" mdc-text-field__label">New Password</label>
+                    <div class=" mdc-text-field__bottom-line"></div>
                   </div>
                 </div>
                 <!-- Confirm New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
-                  <div id="confirm-new-password-input" class="mdc-textfield mdc-textfield--box" data-mdc-auto-init="MDCTextfield">
-                    <input type="text" id="confirm-new-password-box" class="mdc-textfield__input">
-                    <label for="confirm-new-password-input-box" class="mdc-textfield__label">Confirm New Password</label>
-                    <div class="mdc-textfield__bottom-line"></div>
+                  <div id="confirm-new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
+                    <input type="text " id="confirm-new-password-box" class=" mdc-text-field__input">
+                    <label for="confirm-new-password-input-box" class=" mdc-text-field__label ">Confirm New Password</label>
+                    <div class=" mdc-text-field__bottom-line">
+                    </div>
                   </div>
                 </div>
                 <!-- Floating Actiobn Button to submit request -->
-                <button id="update-password-fab" class=" mdc-fab material-icons app-fab--absolute mdc-elevation--z13 " aria-label="Check
-                  " data-mdc-auto-init="MDCRipple ">
-                  <span class="mdc-fab__icon ">
+                <button id="update-password-fab" class="mdc-fab material-icons app-fab--absolute mdc-elevation--z13" aria-label="Check" data-mdc-auto-init="MDCRipple">
+                  <span class="mdc-fab__icon">
                     check
                   </span>
                 </button>
               </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle "></div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
             </div>
           </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle "></div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
         </div>
       </div>
       <aside id="update-failure-dialog" class="mdc-dialog" role="alertdialog" aria-labelledby="update-failure-dialog-label" aria-describedby="update-failure-dialog-description">
@@ -132,6 +137,7 @@
   <script>
     window.mdc.autoInit();
   </script>
+  <script src="js/toolbar.js"></script>
   <script src="js/customer-change-password.js "></script>
 </body>
 

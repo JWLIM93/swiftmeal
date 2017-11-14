@@ -49,11 +49,10 @@ function loginUser($email,$password){
                     $isOnlinesql = "UPDATE user SET isOnline = '1' WHERE UID = '$user_ID'";
                     $isOnlineQuery = connect_db()->query($isOnlinesql) or die("Fail to query db".mysqli_error('index.php'));
                     $_SESSION['Obj'] = $custSession;
-                    echo "Login in as Customer Welcome ". $custSession->getFullName();
                     
                 }
                 else{
-                    Echo "Account doesn't Exisit";
+                    Echo "Account doesn't Exist";
                 }
             }
         }
@@ -72,7 +71,6 @@ function loginUser($email,$password){
                     $owner_id = $ownerResult['OwnerID'];
                     $ownerSession = new Owner($user_ID,$name,$email,$password,$contact_no,'login',$owner_id,1);
                     $_SESSION['Obj'] = $ownerSession;
-                    echo "Login in as Owner Welcome ". $ownerSession->getFullName();
             
         }
         
@@ -82,7 +80,7 @@ function loginUser($email,$password){
     }
     else{
         echo "Login Failed.";
-        header( "refresh:5;url=../index.php" );
+        header( "refresh:10;url=../index.php" );
     }
 }
 
@@ -154,7 +152,8 @@ function getAreas(){
     $areaSQL = "SELECT * from area ORDER BY AreaName ASC ";
     $areaResult = connect_db()->query($areaSQL) or die(mysqli_error());
     while($row= mysqli_fetch_array($areaResult)){
-        array_push($array,$row);
+        $area = new Area($row['AreaID'],$row['AreaName'],$row['PlaceCount'],$row['defaultLat'],$row['defaultLong']);
+        array_push($array,$area);
         
         
     }
@@ -169,9 +168,16 @@ function validateEditProfile($userObj){
     $userId = $userObj->getUser_id();
     $editSql = "UPDATE user SET Name='$full_name', Email='$email', MobileNo='$phone' WHERE UID='$userId'";
     $editResult = connect_db()->query($editSql) or die("validateEdit function fail");
+    $_SESSION['Obj'] = $userObj;
 }
 
-
+function validateEditPassword($userObj){
+    $password = $userObj->getPassword();
+    $userId = $userObj->getUser_id();
+    
+    $editSql = "UPDATE user SET UP='$password' WHERE UID='$userId'";
+    $editResult = connect_db()->query($editSql) or die("validateEdit function fail");
+}
 
 
 ?>

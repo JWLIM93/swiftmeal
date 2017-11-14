@@ -21,6 +21,9 @@
 
   <!-- GLOBAL CSS -->
   <link rel="stylesheet" href="css/common.css">
+
+  <!-- AHEAD JAVASCRIPT -->
+  <script src="js/friends-display.js"></script>
 </head>
 
 <body>
@@ -40,79 +43,79 @@
             <h3>Registration</h3>
           </div>
           <!-- Name Text Input -->
-          <form name="registerationForm" action="phpScripts/postRequests.php" method="post" id="Register" onsubmit="return submitRegister()">
+          <form name="registerationForm" action="scripts/post-requests.php" method="post" id="Register" onsubmit="return submitRegister()">
             <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required maxlength=200 id="name-field" type="text" class="mdc-textfield__input">
-                  <label for="name-field" class="mdc-textfield__label">Name</label>
+                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input required maxlength=200 name="usersName" id="name-field" type="text" class="mdc-text-field__input">
+                  <label for="name-field" class="mdc-text-field__label ">Name</label>
                 </div>
               </div>
             </div>
             <!-- Name Help Text -->
-            <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="name-validation-msg">
+            <div id="single-field-helptext " class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="name-validation-msg">
                 <em id="name_error_msg">Alex Tan</em>
               </p>
             </div>
             <!-- Email Address Text Input -->
             <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required maxlength=200 id="email-address-field" type="text" class="mdc-textfield__input">
-                  <label for="email-address-field" class="mdc-textfield__label">Email Address</label>
+                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input required maxlength=200 name="userEmail" id="email-address-field" type="text" class="mdc-text-field__input">
+                  <label for="email-address-field" class="mdc-text-field__label">Email Address</label>
                 </div>
               </div>
             </div>
             <!-- Email Address Help Text -->
             <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="email-validation-msg">
-                <em id="email_error_msg">abcd@gmail.com</em>
+              <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="email-validation-msg ">
+                <em id="email_error_msg ">abcd@gmail.com</em>
               </p>
             </div>
             <!-- Password Text Input -->
             <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required minlength=8 id="password-field" type="password" class="mdc-textfield__input">
-                  <label for="password-field" class="mdc-textfield__label">Password</label>
+                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input required minlength=8 name="userPassword" id="password-field" type="password" class="mdc-text-field__input">
+                  <label for="password-field" class="mdc-text-field__label">Password</label>
                 </div>
               </div>
             </div>
             <!-- Password Help Text -->
             <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="pw-validation-msg">
+              <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="pw-validation-msg">
                 <em id="password_error_msg">8 characters are required for password</em>
               </p>
             </div>
             <!-- Password Text Input -->
             <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required name="retypePassword" id="password-field" type="password" class="mdc-textfield__input">
-                  <label for="password-field" class="mdc-textfield__label">Confirm Password</label>
+                <div class="mdc-text-field " data-mdc-auto-init="MDCTextField">
+                  <input required minlength=8 name="retypePassword" id="password-field" type="password" class="mdc-text-field__input">
+                  <label for="password-field" class="mdc-text-field__label">Confirm Password</label>
                 </div>
               </div>
             </div>
             <!-- Password Help Text -->
             <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="pw-validation-msg">
+              <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="pw-validation-msg">
                 <em id="confirm_password_error_msg">8 characters are required for password</em>
               </p>
             </div>
             <!-- Contact Text Input -->
-            <div id="single-field-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <div class="mdc-form-field">
-                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input required maxlength=200 id="contact-field" type="text" class="mdc-textfield__input">
-                  <label for="contact-field" class="mdc-textfield__label">Contact No.</label>
+            <div id="single-field-container " class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+              <div class="mdc-form-field ">
+                <div class="mdc-text-field " data-mdc-auto-init="MDCTextField">
+                  <input required maxlength=200 name="userPhone" id="contact-field" type="text" class="mdc-text-field__input ">
+                  <label for="contact-field" class="mdc-text-field__label ">Contact No.</label>
                 </div>
               </div>
             </div>
             <!-- Contact Help Text -->
             <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <p class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg" id="contact-validation-msg">
-                <em id="phone_error_msg">91234567</em>
+              <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="contact-validation-msg">
+                <em id="phone_error_msg ">91234567</em>
               </p>
             </div>
             <!-- Role Selection -->
@@ -131,7 +134,7 @@
                       Restaurant Owner
                     </li>
                   </ul>
-                  <input type="hidden" name="typeOfUser" id="hidden" value="" />
+                  <input name-"typeOfUser" type="hidden" id="hidden" value="" />
                 </div>
               </div>
             </div>
@@ -151,6 +154,7 @@
     window.mdc.autoInit();
   </script>
   <script src="js/map.js"></script>
+  <script src="js/toolbar.js"></script>
   <script src="js/register.js"></script>
 </body>
 

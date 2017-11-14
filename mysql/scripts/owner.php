@@ -11,8 +11,8 @@
  *
  * @author 'KL
  */
-require_once 'User.php';
-class Owner extends user {
+require_once 'user.php';
+class owner extends user {
     //put your code here
 
     private $owner_id;

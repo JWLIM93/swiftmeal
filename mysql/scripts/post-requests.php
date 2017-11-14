@@ -1,7 +1,7 @@
 <?php
 include 'customer.php';
-include 'Owner.php';
-include 'DBFunctions.php';
+include 'owner.php';
+include 'db-functions.php';
 session_start();
 //Edit Profile
 function editProfile(){
@@ -15,16 +15,12 @@ function editProfile(){
     $email = $_POST['Email'];
     $phone_number = $_POST['Phone_number'];
     $full_name = $_POST['FullName'];
-    echo $user_id;
-    echo $email;
-    echo $phone_number;
-    echo $full_name;
-
 
     if ($email != "" && $phone_number != "" && $full_name != ""){
    
             $editProf = new customer($user_id,$full_name,$email,"",$phone_number,'edit',"",1);
             validateEditProfile($editProf);
+            header('Location: ../customer-home.php');
      
     } else {
         echo "ToDo: Message alert validation - blank name or email or phone number";
@@ -49,19 +45,14 @@ if(!empty($_POST) and isset($_POST['register'])){
                 $password = sha1($password);
                 $registerCustomer = new customer($user_id,$fullName,$email,$password,$phone_number,'register',$cust_id,1);
                 validateCustRegister($registerCustomer);
-                echo "Registerd as Customer";
             }
           
             else{
                 $user_id = userIDGenerator($userType, $phone_number, $fullName);
                 $owner_id = userIDGenerator($userType, $phone_number,$email);
                 $password = sha1($password);
-                $registerOwner = new Owner($user_id,$fullName,$email,$password,$phone_number,'register',$owner_id,1);
-               validateOwnerRegister($registerOwner);
-                echo "Registered as Owner!";
-                
-          
-
+                $registerOwner = new owner($user_id,$fullName,$email,$password,$phone_number,'register',$owner_id,1);
+                validateOwnerRegister($registerOwner);
             }
         
          
@@ -72,7 +63,7 @@ if(!empty($_POST) and isset($_POST['register'])){
     } else {
         echo "ToDo: Validation when user doesn't retype same pw for register.";
     }          
-    header('Location:../index.php');
+    header('Location: ../index.php');
 }
 else if(!empty($_POST) and isset($_POST['login'])){
     $email = $_POST['userEmail'];
@@ -84,11 +75,11 @@ else if(!empty($_POST) and isset($_POST['login'])){
      if ($sessionObj instanceof customer){
          header('Location: ../customer-home.php');
      }
-     elseif($sessionObj instanceof Owner){
+     elseif($sessionObj instanceof owner){
          header('Location: ../owner_index.php');
      }
     }else{
-        header('Location../index.php');
+        header('Location: ../index.php');
     }
      
     

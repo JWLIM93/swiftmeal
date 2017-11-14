@@ -23,6 +23,11 @@
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/common.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+
+    <!-- AHEAD JAVASCRIPT -->
 </head>
 
 <body>
@@ -70,10 +75,11 @@
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
                             <h1 id="location-header">Enter your current location</h1>
                             <p id="location-description">Your location will be used to provide you with directions to the recommended place.</p>
-                            <div id="current-location-textfield" class="mdc-textfield mdc-textfield--box">
-                                <input type="text" id="current-location-box" class="mdc-textfield__input">
-                                <label for="current-location-box" class="mdc-textfield__label">Address / Zipcode</label>
-                                <div class="mdc-textfield__bottom-line"></div>
+                            <div id="current-location-textfield" class="mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
+                                <input type="text" id="current-location-box" class=" mdc-text-field__input">
+                                <label for="current-location-box" class=" mdc-text-field__label">Address / Zipcode</label>
+                                <div class="mdc-text-field__bottom-line">
+                                </div>
                             </div>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle"></div>
@@ -82,19 +88,20 @@
             </div>
         </div>
         <!-- Floating Action Button - Invite selection -->
-        <button id="to-reservation-fab" class="mdc-fab material-icons app-fab--absolute" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
+        <button id="to-directions-fab" class="mdc-fab material-icons app-fab--absolute" aria-label="Favorite" data-mdc-auto-init="MDCRipple">
             <span class="mdc-fab__icon">
                 arrow_forward
             </span>
         </button>
     </main>
 
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js "></script>
 
     <script>
         window.mdc.autoInit();
     </script>
     <script src="js/map.js"></script>
+    <script src="js/toolbar.js"></script>
     <script src="js/current-location.js"></script>
 </body>
 

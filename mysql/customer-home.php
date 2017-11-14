@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+include 'scripts/customer.php';
+session_start();
+$customer = $_SESSION['Obj'];
+?>
+
 <html class="mdc-typography">
 
 <head>
@@ -24,6 +29,13 @@
 
   <!-- GLOBAL CSS -->
   <link rel="stylesheet" href="css/common.css">
+
+  <!-- JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- AHEAD JAVASCRIPT -->
+  <script src="js/friends-display.js"></script>
+  
 </head>
 
 <body>
@@ -65,21 +77,13 @@
       <div id="area-selection-content" class="mdc-layout-grid__inner">
         <div id="recommendations-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
           <div id="recommendations-header" class="mdc-elevation--z10">
-            <h3 id="welcome">Welcome, Justin!</h3>
+            <h3 id="welcome">Welcome, <?php echo $customer->getFullName()?>!</h3>
             <h3 id="welcome-sub-heading">Start your food exploration here ...</h3>
           </div>
           <div id="recommendations" class="mdc-layout-grid__inner">
             <!-- Area Selection -->
             <div id="area-selector" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-              <select class="mdc-select" data-mdc-auto-init="MDCRipple">
-                <option value="" selected>Select an area</option>
-                <optgroup label="Areas">
-                  <option value="shenton-way">Shenton Way</option>
-                  <option value="raffles-place">Raffles Place</option>
-                  <option value="outram-park">Outram Park</option>
-                  <option value="bedok">Bedok</option>
-                </optgroup>
-              </select>
+            <?php require_once 'scripts/area-generator.php';?>
             </div>
             <!-- Toggle Button -->
             <div id="trending-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
@@ -92,42 +96,7 @@
           </div>
           <div id="recommended-list" class="mdc-elevation--z10">
             <!-- List of recommendations (5) -->
-            <ul class="mdc-list mdc-list--two-line">
-              <li id="recommended-place-1" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-                <i class="mdc-list-item__start-detail material-icons" aria-hidden="true">restaurant</i>
-                <span class="mdc-list-item__text">
-                  Swensen's fvfgfgfgfgfg grhghg g gb sfd fgs fg fg dfgf g
-                  <span class="mdc-list-item__text__secondary">16 Shenton Way, Singapore 123445 bgbgf gf gf h h fg fg g g dgr g ggr</span>
-                </span>
-              </li>
-              <li id="recommended-place-2" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-                <i class="mdc-list-item__start-detail material-icons" aria-hidden="true">restaurant</i>
-                <span class="mdc-list-item__text">
-                  Justin's Grill & Bar
-                  <span class="mdc-list-item__text__secondary">18 Shenton Way, Singapore 126667</span>
-                </span>
-              </li>
-              <li id="recommended-place-3" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-                <i class="mdc-list-item__start-detail material-icons" aria-hidden="true">restaurant</i>
-                <span class="mdc-list-item__text">
-                  Swensen's
-                  <span class="mdc-list-item__text__secondary">16 Shenton Way, Singapore 123445</span>
-                </span>
-              </li>
-              <li id="recommended-place-4" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-                <i class="mdc-list-item__start-detail material-icons" aria-hidden="true">restaurant</i>
-                <span class="mdc-list-item__text">
-                  Justin's Grill & Bar
-                  <span class="mdc-list-item__text__secondary">18 Shenton Way, Singapore 126667</span>
-                </span>
-              </li>
-              <li id="recommended-place-5" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-                <i class="mdc-list-item__start-detail material-icons" aria-hidden="true">restaurant</i>
-                <span class="mdc-list-item__text">
-                  Justin's Grill & Bar
-                  <span class="mdc-list-item__text__secondary">18 Shenton Way, Singapore 126667</span>
-                </span>
-              </li>
+            <ul id="restaurant" class="mdc-list mdc-list--two-line">
             </ul>
           </div>
           <div id="recommendations-footer" class="mdc-layout-grid__inner">
@@ -164,115 +133,7 @@
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
           <div id="active-friends-grid-list" class="mdc-grid-list mdc-grid-list--twoline-caption">
-            <ul class="mdc-grid-list__tiles">
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Jeremy Lim</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">
-                  <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                </div>
-                <span class="mdc-grid-tile__secondary">
-                  <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                  <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                </span>
-              </li>
+            <ul id="active-friends-list" class="mdc-grid-list__tiles">
             </ul>
           </div>
         </div>
@@ -592,6 +453,7 @@
     window.mdc.autoInit();
   </script>
   <script src="js/map.js"></script>
+  <!-- <script src="js/toolbar.js"></script> -->
   <script src="/library/ellipsis.min.js"></script>
   <script src="js/customer-home.js"></script>
 </body>

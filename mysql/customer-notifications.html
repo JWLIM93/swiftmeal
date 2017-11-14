@@ -24,6 +24,12 @@
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/common.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- AHEAD JAVASCRIPT -->
+    <script src="js/friends-display.js"></script>
 </head>
 
 <body>
@@ -261,23 +267,24 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                     <h1 id="dialog-header">Add a friend</h1>
                     <p id="dialog-description">You can easily add a friend by entering their email address.</p>
-                    <div id="email-address-input" class="mdc-textfield mdc-textfield--box" data-mdc-auto-init="MDCTextfield">
-                        <input type="text" id="tf-box" class="mdc-textfield__input">
-                        <label for="tf-box" class="mdc-textfield__label">Friend's Email Address</label>
-                        <div class="mdc-textfield__bottom-line"></div>
+                    <div id="email-address-input" class=.mdc-text-field.mdc-text-field--box " data-mdc-auto-init="MDCTextField ">
+                        <input type="text " id="tf-box " class=.mdc-text-field__input">
+                        <label for="tf-box" class=.mdc-text-field__label ">Friend's Email Address</label>
+                        <div class=.mdc-text-field__bottom-line">
                     </div>
-                    <div class="mdc-layout-grid__inner">
-                        <div id="dialog-buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid--align-right">
-                            <button id="cancel-button" class="mdc-button" data-mdc-auto-init="MDCRipple">
-                                Cancel
-                            </button>
-                            <button id="friend-request-button" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
-                                Request
-                            </button>
-                        </div>
+                </div>
+                <div class="mdc-layout-grid__inner">
+                    <div id="dialog-buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid--align-right">
+                        <button id="cancel-button" class="mdc-button" data-mdc-auto-init="MDCRipple">
+                            Cancel
+                        </button>
+                        <button id="friend-request-button" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
+                            Request
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 
@@ -285,6 +292,7 @@
     <script>
         window.mdc.autoInit();
     </script>
+    <script src="js/toolbar.js"></script>
     <script src="js/customer-notifications.js"></script>
 </body>
 

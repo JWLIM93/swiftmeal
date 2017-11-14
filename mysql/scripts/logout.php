@@ -1,5 +1,5 @@
 <?php
-include 'DBFunctions.php';
+include 'db-functions.php';
 include 'customer.php';
 session_start();
 $customer = $_SESSION['Obj'];

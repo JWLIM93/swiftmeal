@@ -24,6 +24,13 @@
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/common.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- AHEAD JAVASCRIPT -->
+    <script src="js/friends-display.js"></script>
+
 </head>
 
 <body>
@@ -71,57 +78,6 @@
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
                             <h1 id="pending-request-header">Pending Requests</h1>
                             <ul id="pending-request-list" class="mdc-list mdc-list--two-line mdc-list--avatar-list">
-                                <li class="mdc-list-item">
-                                    <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_person_white_24px.svg" width="56" height="56" alt="avatar">
-                                    <span class="mdc-list-item__text">
-                                        Lim Jun Wei
-                                        <span class="mdc-list-item__text__secondary">Added you on 12/06/2017</span>
-                                    </span>
-                                    <span id="request-span" class="mdc-list-item__end-detail">
-                                        <a href="#" class="material-icons" aria-label="Accept request" title="Accept request">
-                                            check
-                                        </a>
-                                        <span>
-                                            <a href="#" class="material-icons" aria-label="Decline request" title="Decline request">
-                                                close
-                                            </a>
-                                        </span>
-                                    </span>
-                                </li>
-                                <li class="mdc-list-item">
-                                    <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_person_white_24px.svg" width="56" height="56" alt="avatar">
-                                    <span class="mdc-list-item__text">
-                                        Lee Kok Leong
-                                        <span class="mdc-list-item__text__secondary">Added you on 09/06/2017</span>
-                                    </span>
-                                    <span id="request-span" class="mdc-list-item__end-detail">
-                                        <a href="#" class="material-icons" aria-label="Accept request" title="Accept request">
-                                            check
-                                        </a>
-                                        <span>
-                                            <a href="#" class="material-icons" aria-label="Decline request" title="Decline request">
-                                                close
-                                            </a>
-                                        </span>
-                                    </span>
-                                </li>
-                                <li class="mdc-list-item">
-                                    <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_person_white_24px.svg" width="56" height="56" alt="avatar">
-                                    <span class="mdc-list-item__text">
-                                        Ng Cai Feng
-                                        <span class="mdc-list-item__text__secondary">Added you on 04/06/2017</span>
-                                    </span>
-                                    <span id="request-span" class="mdc-list-item__end-detail">
-                                        <a href="#" class="material-icons" aria-label="Accept request" title="Accept request">
-                                            check
-                                        </a>
-                                        <span>
-                                            <a href="#" class="material-icons" aria-label="Decline request" title="Decline request">
-                                                close
-                                            </a>
-                                        </span>
-                                    </span>
-                                </li>
                             </ul>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
@@ -132,114 +88,6 @@
                             <h1 id="friends-list-header">Your Friends</h1>
                             <div class="mdc-grid-list mdc-grid-list--twoline-caption">
                                 <ul id="friends-list" class="mdc-grid-list__tiles">
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Jeremy Lim</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdc-grid-tile">
-                                        <div class="mdc-grid-tile__primary">
-                                            <img class="mdc-grid-tile__primary-content" src="/src/ic_person_white_24px.svg" />
-                                        </div>
-                                        <span class="mdc-grid-tile__secondary">
-                                            <span class="mdc-grid-tile__title">Lim Bun Wei</span>
-                                            <span class="mdc-grid-tile__support-text">Since 29/12/2016</span>
-                                        </span>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -261,10 +109,10 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                     <h1 id="dialog-header">Add a friend</h1>
                     <p id="dialog-description">You can easily add a friend by entering their email address.</p>
-                    <div id="email-address-input" class="mdc-textfield mdc-textfield--box" data-mdc-auto-init="MDCTextfield">
-                        <input type="text" id="tf-box" class="mdc-textfield__input">
-                        <label for="tf-box" class="mdc-textfield__label">Friend's Email Address</label>
-                        <div class="mdc-textfield__bottom-line"></div>
+                    <div id="email-address-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
+                        <input type="text" id="tf-box" class=" mdc-text-field__input">
+                        <label for="tf-box" class="mdc-text-field__label">Friend's Email Address</label>
+                        <div class=" mdc-text-field__bottom-line"></div>
                     </div>
                     <div class="mdc-layout-grid__inner">
                         <div id="dialog-buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid--align-right">
@@ -282,7 +130,10 @@
     </main>
 
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <script>window.mdc.autoInit();</script>
+    <script>
+        window.mdc.autoInit();
+    </script>
+    <script src="js/toolbar.js"></script>
     <script src="js/customer-friends.js"></script>
 </body>
 
