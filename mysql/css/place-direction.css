@@ -59,10 +59,10 @@
 hr {
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
-    background-image: -moz-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
-    background-image: -ms-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
-    background-image: -o-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
+    background-image: -webkit-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+    background-image: -moz-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+    background-image: -ms-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+    background-image: -o-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
 }
 
 #name-validation-msg,
@@ -178,7 +178,7 @@ hr {
 }
 
 #reservation-info {
-    background-color: rgb(156, 20, 68);
+    background-color: rgb(21, 50, 133);
 }
 
 #driving-direction-container,
