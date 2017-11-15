@@ -54,7 +54,7 @@
                 </div>
             </section>
         </div>
-        <div id="loading-progress" role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-linear-progress--accent">
+        <div id="loading-progress" role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-theme--light">
             <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
                 <span class="mdc-linear-progress__bar-inner"></span>
             </div>

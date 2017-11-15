@@ -9,6 +9,11 @@ html {
     --mdc-theme-secondary: #e91e63;
 }
 
+.mdc-theme--light {
+    --mdc-theme-primary: #e91e63;
+    --mdc-theme-secondary: #2962ff;
+}
+
 .mdc-theme--dark {
     --mdc-theme-primary: #2962ff;
     --mdc-theme-secondary: #e91e63;

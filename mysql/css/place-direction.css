@@ -16,7 +16,7 @@
 }
 
 .mdc-fab {
-    background-color: var(--mdc-theme-secondary);
+    background-color: var(--mdc-theme-primary);
 }
 
 .mdc-simple-menu {
@@ -32,6 +32,37 @@
 .mdc-snackbar {
     background-color: var(--mdc-theme-primary);
     font-family: "Quicksand", sans-serif;
+}
+
+.icon-text {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Quicksand", sans-serif;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+.for-directions-icon {
+    color: white;
+}
+
+.for-directions-address {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    vertical-align: top !important;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
+    background-image: -moz-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
+    background-image: -ms-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
+    background-image: -o-linear-gradient(left, #f0f0f0, rgb(156, 20, 68));
 }
 
 #name-validation-msg,
@@ -108,70 +139,124 @@
     font-size: 18px;
 }
 
-#invitation-lobby-header {
+#reservation-id-header {
     font-family: "Quicksand", sans-serif;
     color: white;
-    padding-left: 18px;
     margin-top: 40px;
     margin-bottom: 0;
-}
-
-#invitation-lobby-description {
-    padding-left: 18px;
-    color: white;
-    font-family: "Quicksand", sans-serif;
-    padding-bottom: 15px;
-    padding-top: 0;
-    margin-top: 0;
-}
-
-#lobby-list-group {
-    padding-bottom: 50px;
-    margin-top: 30px;
-}
-
-#group-icon {
-    padding-right: 8px;
-    margin: 0;
-    vertical-align: bottom;
-    padding-left: 24px;
-}
-
-#accepted-count-container {
-    padding-left: 16px;
-    color: white;
-    font-size: 20px;
+    padding-bottom: 0;
     text-transform: uppercase;
-    font-family: "Quicksand", sans-serif;
-}
-
-#lobby-list > .mdc-list-item {
-    background-color: rgba(129, 129, 129, 0.3);
+    font-weight: bold;
+    letter-spacing: 0;
     padding-left: 16px;
     padding-right: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: white;
-    font-family: "Quicksand", sans-serif;
 }
 
-#restaurant-info {
-    margin-bottom: 30px;
-    background-color: rgb(21, 50, 133);
+#reservation-id {
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#reservation-date-created {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#place-direction-container {
+    margin-bottom: 40px;
+}
+
+#reservation-info {
+    background-color: rgb(156, 20, 68);
 }
 
 #driving-direction-container,
 #transit-direction-container {
-    margin-bottom: 30px;
     background-color: #37474f;
+    display: none;
+    margin-bottom: 30px;
 }
 
-#directions-header {
+#restaurant-name {
+    color: white;
+    margin-bottom: 0;
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#pax {
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#datetime {
+    padding-top: 0;
+    margin-top: 0;
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#direction-type {
     text-transform: uppercase;
     font-family: "Quicksand", sans-serif;
     color: white;
     letter-spacing: 0.2em;
-    padding-left: 18px;
+    padding-top: 20px;
+}
+
+#navigation-drive-choice,
+#navigation-transit-choice {
+    margin: 0 auto;
+    color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+#car-icon {
+    padding-left: 25%;
+}
+
+#transit-icon {
+    padding-left: 30%;
+}
+
+#reservation-info-inner {
+    padding-bottom: 30px;
+}
+
+#from-address {
+    margin-bottom: 10px;
+}
+
+#to-address {
+    margin-top: 10px;
+}
+
+#direction-container {
+    padding-bottom: 30px;
 }
 
 #loading-progress {

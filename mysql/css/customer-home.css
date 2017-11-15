@@ -422,5 +422,5 @@ time {
 }
 
 #loading-progress {
-    display: block;
+    display: none;
 }

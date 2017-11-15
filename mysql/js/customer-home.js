@@ -28,7 +28,6 @@ mdc.iconToggle.MDCIconToggle.attachTo(
 recommendButton.addEventListener('click', () => {
     loadingBar.style.display = 'block';
     recommendedList.style.display = 'block';
-    recommendButton.style.display = 'none';
 
     // Populate markers with actual coordinates
     populateMarkers();
