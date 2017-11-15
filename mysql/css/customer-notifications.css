@@ -14,6 +14,10 @@
     background: rgba(0, 0, 0, 0.26);
 }
 
+.mdc-text-field__label {
+    font-family: "Quicksand", sans-serif;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -44,19 +48,6 @@ a:active {
 
 .mdc-grid-tile__title {
     font-weight: bold;
-}
-
-.app-fab--absolute {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-}
-
-@media (min-width: 1024px) {
-    .app-fab--absolute {
-        bottom: 2rem;
-        right: 2rem;
-    }
 }
 
 #foreground-content {
@@ -93,7 +84,7 @@ a:active {
     font-size: 15px;
     letter-spacing: 0em;
     font-weight: normal;
-    color: var(--mdc-theme-secondary);
+    color: white;
 }
 
 #notifications-nav {
@@ -103,10 +94,10 @@ a:active {
     font-size: 15px;
     letter-spacing: 0em;
     font-weight: normal;
-    color: white;
+    color: var(--mdc-theme-secondary);
 }
 
-#notifications-nav:hover,
+#friends-list-nav:hover,
 #customer-profile:hover {
     font-weight: bold;
     color: var(--mdc-theme-secondary);
@@ -122,23 +113,13 @@ a:active {
     font-size: 18px;
 }
 
-#friends-list-container {
-    background: #37474f;
-}
-
-#pending-request-container {
+#pending-invite-container {
     background: rgb(156, 20, 68);
     margin-bottom: 50px;
     padding-bottom: 50px;
 }
 
-#friends-list-container {
-    margin-bottom: 50px;
-    padding-bottom: 50px;
-}
-
-#friends-list-header,
-#pending-request-header {
+#pending-invite-header {
     font-family: "Quicksand", sans-serif;
     font-size: 20px;
     text-transform: uppercase;
@@ -147,12 +128,12 @@ a:active {
     margin-top: 3%;
 }
 
-#pending-request-list {
+#pending-invite-list {
     width: inherit;
     padding: 0;
 }
 
-#pending-request-list > .mdc-list-item {
+#pending-invite-list > .mdc-list-item {
     background-color: rgba(129, 129, 129, 0.3);
     padding-top: 5px;
     padding-bottom: 5px;
@@ -160,54 +141,11 @@ a:active {
     padding-right: 20px;
 }
 
-#request-span {
+#invite-span {
     margin-right: 5%;
 }
 
-#request-span > .material-icons {
-    margin-right: 20px;
-}
-
-#add-friend-dialog {
-    position: absolute;
-    background-color: #212121;
-    display: none;
-    width: 50%;
-    height: 35%;
-    top: 25%;
-    left: 25%;
-}
-
-#add-friend-dialog > div > div {
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-#dialog-header {
-    color: white;
-    font-family: "Quicksand", sans-serif;
-    font-size: 30px;
-    margin-bottom: 5px;
-}
-
-#dialog-description {
-    color: white;
-    font-family: "Quicksand", sans-serif;
-    font-size: 15px;
-    margin-top: 5px;
-}
-
-#email-address-input {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#dialog-buttons-container {
-    margin-top: 10%;
-}
-
-#cancel-button {
+#invite-span > .material-icons {
     margin-right: 20px;
 }
 
