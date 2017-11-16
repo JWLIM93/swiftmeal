@@ -1,0 +1,335 @@
+.mdc-toolbar {
+    background-color: rgba(33, 33, 33, 0.7);
+}
+
+/* .mdc-layout-grid__cell {
+  background-color: red;
+} */
+
+.mdc-simple-menu {
+    overflow: hidden !important;
+}
+
+.grey-bg {
+    background: rgba(0, 0, 0, 0.26);
+}
+
+.mdc-text-field__label {
+    font-family: "Quicksand", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:active {
+    color: black;
+}
+
+.mdc-list-item__text,
+.mdc-list-item__text__secondary {
+    font-family: "Quicksand", sans-serif;
+}
+
+.mdc-list-item__text {
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.mdc-grid-tile__primary {
+    background-color: rgba(129, 129, 129, 0.3);
+}
+
+.mdc-grid-tile__title,
+.mdc-grid-tile__support-text {
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 3px;
+}
+
+.mdc-grid-tile__title {
+    font-weight: bold;
+}
+
+.mdc-list-item__end-detail {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.mdc-list-group__subheader {
+    background-color: rgba(129, 129, 129, 0.3);
+    margin-bottom: 0;
+}
+
+#foreground-content {
+    position: absolute;
+    width: 100%;
+}
+
+#product-name {
+    font-family: "Quicksand", sans-serif;
+    letter-spacing: 0.4em;
+    font-weight: bold;
+}
+
+#customer-profile {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: var(--mdc-theme-secondary);
+}
+
+#customer-profile-menu > ul > li {
+    font-family: "Quicksand", sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+#friends-list-nav {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#notifications-nav {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#friends-list-nav:hover,
+#notifications-nav:hover {
+    font-weight: bold;
+    color: var(--mdc-theme-secondary);
+}
+
+#page-name {
+    margin-top: 17px;
+    margin-left: 10px;
+    border-left: 1px solid white;
+    padding-left: 17px;
+    text-transform: uppercase;
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+}
+
+#past-recommendations-container {
+    background: rgb(21, 50, 133);
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+#past-recommendations-header {
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.1em;
+    margin-top: 3%;
+}
+
+#past-recommendations-list {
+    width: inherit;
+    padding: 0;
+}
+
+#past-recommendations-list > .mdc-list-item {
+    background-color: rgba(129, 129, 129, 0.3);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#add-review-button {
+    margin-right: 10px;
+}
+
+#reviews-dialog {
+    position: absolute;
+    background-color: #212121;
+    display: none;
+    width: 90%;
+    max-height: 85vh;
+    top: 10%;
+    left: 5%;
+    padding-bottom: 70px;
+}
+
+#reviews-dialog > div > div {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#dialog-underlay {
+    background-color: rgba(33, 33, 33, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#dialog-header {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+#dialog-description {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+#dialog-sub-description {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#likes-dislikes-container {
+    color: white;
+    font-size: 28px;
+    font-family: "Quicksand", sans-serif;
+}
+
+#recommendation-like,
+#recommendation-dislike {
+    color: var(--mdc-theme-secondary);
+    vertical-align: middle;
+    font-size: 40px;
+}
+
+#recommendation-dislike {
+    margin-left: 20px;
+}
+
+#reviews-dialog-close-button {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+#reviews-dialog-close-button:active {
+    color: var(--mdc-theme-secondary);
+}
+
+#reviews-dialog-close-button:focus {
+    color: var(--mdc-theme-secondary);
+}
+
+#add-review-textarea {
+    max-width: 100vh;
+    resize: none;
+}
+
+#add-review-textarea::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#add-review-textarea::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+#add-review-textarea::-webkit-scrollbar-thumb {
+    background-color: var(--mdc-theme-secondary);
+}
+
+#like-container,
+#dislike-container {
+    margin: 0 auto;
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-size: 35px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#confirm-review-container {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+#confirm-review-button {
+    color: white;
+    font-size: 30px;
+    margin-right: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+#confirm-review-button:active,
+#confirm-review-button:focus {
+    color: var(--mdc-theme-primary);
+}
+
+#reviews-list-group {
+    padding: 0;
+    margin-top: 3vh;
+    height: 45vh;
+    overflow-y: auto;
+}
+
+#reviews-list-group::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#reviews-list-group::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+#reviews-list-group::-webkit-scrollbar-thumb {
+    background-color: var(--mdc-theme-secondary);
+}
+
+#reviews-list-group-subheader {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+#reviews-list-item {
+    background-color: rgba(129, 129, 129, 0.3);
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#reviews-list-item > span,
+#reviews-list-item > span > span {
+    font-family: "Quicksand", sans-serif;
+}
+
+#loading-progress {
+    display: none;
+}
