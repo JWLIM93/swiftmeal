@@ -29,6 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- AHEAD JAVASCRIPT -->
+    <script src="js/friends-display.js"></script>
 
 </head>
 
@@ -75,47 +76,8 @@
                     <div id="pending-invite-container" class="mdc-layout-grid__inner mdc-elevation--z10">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-                            <h1 id="pending-invite-header">Pending Invites - 32</h1>
+                            <h1 id="pending-invite-header">Pending Invites - 0</h1>
                             <ul id="pending-invite-list" class="mdc-list mdc-list--two-line mdc-list--avatar-list">
-                                <li class="mdc-list-item">
-                                    <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                    <span class="mdc-list-item__text">
-                                        Justin's Grill & Bar
-                                        <span class="mdc-list-item__text__secondary">Invited by Justin Fong on 21 October 2017, 4:55PM</span>
-                                    </span>
-                                    <span id="invite-span" class="mdc-list-item__end-detail">
-                                        <a href="#" class="material-icons" aria-label="Accept invitation" title="Accept invitation">check</a>
-                                        <span>
-                                            <a href="#" class="material-icons" aria-label="Decline invitation" title="Decline invitation">close</a>
-                                        </span>
-                                    </span>
-                                </li>
-                                <li class="mdc-list-item">
-                                    <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                    <span class="mdc-list-item__text">
-                                        Justin's Grill & Bar
-                                        <span class="mdc-list-item__text__secondary">Invited by Justin Fong on 21 October 2017, 4:55PM</span>
-                                    </span>
-                                    <span id="invite-span" class="mdc-list-item__end-detail">
-                                        <a href="#" class="material-icons" aria-label="Accept invitation" title="Accept invitation">check</a>
-                                        <span>
-                                            <a href="#" class="material-icons" aria-label="Decline invitation" title="Decline invitation">close</a>
-                                        </span>
-                                    </span>
-                                </li>
-                                <li class="mdc-list-item">
-                                    <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                    <span class="mdc-list-item__text">
-                                        Justin's Grill & Bar
-                                        <span class="mdc-list-item__text__secondary">Invited by Justin Fong on 21 October 2017, 4:55PM</span>
-                                    </span>
-                                    <span id="invite-span" class="mdc-list-item__end-detail">
-                                        <a href="#" class="material-icons" aria-label="Accept invitation" title="Accept invitation">check</a>
-                                        <span>
-                                            <a href="#" class="material-icons" aria-label="Decline invitation" title="Decline invitation">close</a>
-                                        </span>
-                                    </span>
-                                </li>
                             </ul>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>

@@ -16,6 +16,8 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
         case 'friendRequest' :friendRequest($UID, $_GET['RequestEmail'], $conn);break;
         case 'SendMealRequest' :sendMealRequest($CustID,$_GET['Requester'],$Rest,$conn);break;
         case 'ReservePlace' :MakeReservation($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$conn);break;
+        case 'AcceptMealRequest' :ConfirmMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID'],$conn);break;
+        case 'DenyMealRequest' :DenyMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID'],$conn);break;
         default: break;
     }
 }
@@ -82,7 +84,7 @@ function MakeReservation($CustID,$Pax,$time,$date,$con){
     $customer = $_SESSION['Obj'];
     $PlaceID=$customer->getPlaceID();
     $RestID=$customer->getRestID();
-    $UpdateRequestStatus="UPDATE request SET isValid=0 WHERE CustomerID=$CustID AND PlaceID = $PlaceID";
+    $UpdateRequestStatus="UPDATE request SET isValid=0 WHERE CustomerID='".$CustID."' AND PlaceID ='" .$PlaceID."'";
     mysqli_query($con, $UpdateRequestStatus);
     $BookingID = BookingIDGenerator($CustID);
     $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . $date . "','".$time."',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
@@ -98,6 +100,16 @@ function MakeReservation($CustID,$Pax,$time,$date,$con){
     else{
         echo "fail";
     }
+}
+
+function ConfirmMealRequest($CustID,$Requester,$PlaceID,$con){
+    $updatemeal="UPDATE request SET isAccepted=1, isValid=0 WHERE CustomerID='".$Requester."' AND RequestTo='".$CustID."' AND PlaceID='".$PlaceID."'";
+    mysqli_query($con, $updatemeal);
+}
+
+function DenyMealRequest($CustID,$Requester,$PlaceID,$con){
+    $updatemeal="UPDATE request SET isAccepted=0, isValid=0 WHERE CustomerID='".$Requester."' AND RequestTo='".$CustID."' AND PlaceID='".$PlaceID."'";
+    mysqli_query($con, $updatemeal);
 }
 
 function BookingIDGenerator($CustID){

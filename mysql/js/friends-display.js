@@ -7,6 +7,7 @@ let OnlineFriendsChecker = [];
 let OnlineFriendsAmount = 0;
 let RecommendationCounter = 0;
 let Accepts = [];
+let MealRequests = [];
 var CheckboxCount = 0;
 // First Run of Check Online
 checkOnline();
@@ -72,7 +73,18 @@ function checkOnline() {
                     Accepts.push(json.AcceptedMealRequests[i].UID);
                 }
             }
-
+            
+            for(i=0;i<json.MealRequests.length;i++){
+                if(MealRequests.indexOf(json.MealRequests[i].PlaceID)=== -1){
+                    DisplayMealRequests(json.MealRequests[i].Name,json.MealRequests[i].Date,json.MealRequests[i].Time,json.MealRequests[i].Restname,json.MealRequests[i].UID,json.MealRequests[i].PlaceID);
+                    MealRequests.push(json.MealRequests[i].PlaceID);
+                }
+            }
+            
+            if(document.getElementById("pending-invite-header")!==null){
+                document.getElementById("pending-invite-header").innerHTML="Pending Invites - " + MealRequests.length;
+            }
+            
             if (document.getElementById('accepted-count-container') !== null) {
                 document.getElementById('accepted-count-container').innerHTML =
                     Accepts.length + ' Accepted';
@@ -146,6 +158,40 @@ function DenyRequests(uid) {
             }
             let parent = document.getElementById('pending-request-list');
             let child = document.getElementById(uid);
+            parent.removeChild(child);
+        }
+    });
+}
+
+function AcceptMealRequests(uid,place) {
+    $.ajax({
+        url: 'scripts/friend-operations.php?Requester=' + uid+'&PlaceID='+place,
+        data: { action: 'AcceptMealRequest' },
+        type: 'post',
+        success: function(output) {
+            let index = MealRequests.indexOf(place);
+            if (index > -1) {
+                MealRequests.splice(index, 1);
+            }
+            let parent = document.getElementById('pending-invite-list');
+            let child = document.getElementById(place);
+            parent.removeChild(child);
+        }
+    });
+}
+
+function DeclineMealRequests(uid,place) {
+     $.ajax({
+        url: 'scripts/friend-operations.php?Requester=' + uid+'&PlaceID='+place,
+        data: { action: 'DenyMealRequest' },
+        type: 'post',
+        success: function(output) {
+            let index = MealRequests.indexOf(place);
+            if (index > -1) {
+                MealRequests.splice(index, 1);
+            }
+            let parent = document.getElementById('pending-invite-list');
+            let child = document.getElementById(place);
             parent.removeChild(child);
         }
     });
@@ -343,6 +389,54 @@ function DisplayInviteLobby(name) {
     listnode.appendChild(textnode);
     if (document.getElementById('lobby-list') !== null) {
         document.getElementById('lobby-list').appendChild(listnode);
+    }
+}
+
+function DisplayMealRequests(name,date,time,restname,uid,placeid){
+    var listnode = document.createElement("li");
+    listnode.className="mdc-list-item";
+    listnode.id = placeid;
+    var imgnode = document.createElement("img");
+    imgnode.className="mdc-list-item__start-detail grey-bg";
+    imgnode.src = "/src/ic_restaurant_white_24px.svg";
+    imgnode.width="56";
+    imgnode.height="56";
+    imgnode.alt="restaurant";
+    var spannode = document.createElement("span");
+    spannode.className="mdc-list-item__text";
+    var textnode = document.createTextNode(restname);
+    var spannode2 = document.createElement("span");
+    spannode2.className="mdc-list-item__text__secondary";
+    var textnode2 = document.createTextNode("Invited by "+name+" on "+date+", "+time);
+    spannode2.appendChild(textnode2);
+    spannode.appendChild(textnode);
+    spannode.appendChild(spannode2);
+    var spannode3 = document.createElement("span");
+    spannode3.className="mdc-list-item__end-detail";
+    spannode3.id ="invite-span";
+    var anode1 = document.createElement('a');
+    anode1.className = 'material-icons';
+    anode1.title = 'Accept Invitation';
+    anode1.innerHTML="check";
+    anode1.addEventListener('click', function() {
+        AcceptMealRequests(uid,placeid);
+    });
+    var spannode4 = document.createElement("span");
+    var anode2 = document.createElement('a');
+    anode2.className = 'material-icons';
+    anode2.title = 'Decline Invitation';
+    anode2.innerHTML="close";
+    anode2.addEventListener('click', function() {
+        DeclineMealRequests(uid,placeid);
+    });
+    spannode4.appendChild(anode2);
+    spannode3.appendChild(anode1);
+    spannode3.appendChild(spannode4);
+    listnode.appendChild(imgnode);
+    listnode.appendChild(spannode);
+    listnode.appendChild(spannode3)
+    if(document.getElementById("pending-invite-list")!==null){
+        document.getElementById("pending-invite-list").appendChild(listnode);
     }
 }
 
