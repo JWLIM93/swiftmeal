@@ -25,6 +25,7 @@
     max-width: 277px;
     margin-top: 20px;
     font-family: "Quicksand", sans-serif;
+    background-color: transparent;
 }
 
 #map {

@@ -42,16 +42,29 @@ function markerToMapFocus(lat, lng, zoom = 16) {
     }); // make the flying slow // change the speed at which it zooms out
 }
 
-function populateMarkers(recommendationCoordinates) {
+function populateMarkers() {
     $('.marker').remove();
 
-    for (i = 0; i < recommendationCoordinates.length; i++) {
+    for (i = 0; i < coordinates.length; i++) {
         var el = document.createElement('div');
         el.className = 'marker mdc-elevation--z12';
         el.id = 'r' + i;
 
         el.addEventListener('click', function() {
             if (recommendationFocusDialog.style.display != 'block') {
+                viewAllReviews();
+                var nameadd = document.getElementById('restaurant').name;
+                var nameadd2 = nameadd.split(',');
+                document.getElementById(
+                    'reviews-dialog-header'
+                ).childNodes[0].nodeValue =
+                    nameadd2[0];
+                document.getElementById(
+                    'reviews-dialog-description'
+                ).childNodes[0].nodeValue =
+                    nameadd2[1];
+                sessionStorage.setItem('RestName', nameadd2[0]);
+                sessionStorage.setItem('RestAdd', nameadd2[1]);
                 recommendationFocusDialog.style.display = 'block';
                 dialogUnderlay.style.display = 'block';
             } else {

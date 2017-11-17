@@ -120,23 +120,11 @@
             </div>
             <!-- Role Selection -->
             <div id="role-selector" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-              <div class="mdc-select" role="listbox" tabindex="0" data-mdc-auto-init="MDCSelect">
-                <span class="mdc-select__selected-text">Role</span>
-                <div class="mdc-simple-menu mdc-select__menu" data-mdc-auto-init="MDCRipple">
-                  <ul class="mdc-list mdc-simple-menu__items">
-                    <li class="mdc-list-item" role="option" id="selection-header" aria-disabled="true">
-                      Select a role
-                    </li>
-                    <li class="mdc-list-item" role="option" id="customer" tabindex="0">
-                      Customer
-                    </li>
-                    <li class="mdc-list-item" role="option" id="restaurant-owner" tabindex="1">
-                      Restaurant Owner
-                    </li>
-                  </ul>
-                  <input name-"typeOfUser" type="hidden" id="hidden" value="" />
-                </div>
-              </div>
+              <select class="mdc-select" name="typeOfUser">
+                <option id="selection-header" value="" selected>Select a Role</option>
+                <option id="customer" value="Customer">Customer</option>
+                <option id="restaurant-owner" value="Restaurant Owner">Restaurant Owner</option>
+              </select>
             </div>
             <!-- Buttons -->
             <div id="buttons-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">

@@ -21,7 +21,7 @@ class Restaurant{
     private $isValid;
 
     public function Restaurant($placeID,$block,$building,$floor,$street,$unit,$geoX,$geoY,
-    $geoLat,$geoLong,$dateAdded,$timeAdded,$restauarntID,$restaurantName,$countLikes,$countDislikes,$isValid){
+    $geoLat,$geoLong,$dateAdded,$timeAdded,$restaurantID,$restaurantName,$countLikes,$countDislikes,$isValid){
         $this->placeID = $placeID;
         $this->block = $block;
         $this->building = $building;
@@ -34,7 +34,7 @@ class Restaurant{
         $this->geoLong = $geoLong;
         $this->dateAdded = $dateAdded;
         $this->timeAdded = $timeAdded;
-        $this->restauarntID = $restauarntID;
+        $this->restaurantID = $restaurantID;
         $this->restaurantName = $restaurantName;
         $this->countLikes = $countLikes;
         $this->countDislikes = $countDislikes;
@@ -131,8 +131,8 @@ class Restaurant{
     public function setTimeAdded($timeAdded){
         $this->timeAdded = $timeAdded;
     }
-    public function setRestaurantID($restauarntID){
-        $this->restaurantID = $restauarntID;
+    public function setRestaurantID($restaurantID){
+        $this->restaurantID = $restaurantID;
     }
     public function setRestaurantName($restaurantName){
         $this->restaurantName = $restaurantName;

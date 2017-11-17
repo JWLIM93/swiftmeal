@@ -35,6 +35,7 @@ $customer = $_SESSION['Obj'];
 
   <!-- AHEAD JAVASCRIPT -->
   <script src="js/friends-display.js"></script>
+  <script src="js/customer-review.js"></script>
   
 </head>
 
@@ -87,7 +88,7 @@ $customer = $_SESSION['Obj'];
             </div>
             <!-- Toggle Button -->
             <div id="trending-recommendations" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
-              <i class="mdc-icon-toggle material-icons" role="button" aria-pressed="false" aria-label="Recommend trending places" tabindex="0"
+              <i id="trending-button" class="mdc-icon-toggle material-icons" role="button" aria-pressed="false" aria-label="Recommend trending places" tabindex="0"
                 data-mdc-auto-init="MDCIconToggle" data-toggle-on='{"label": "Trending recommendations enabled", "content": "trending_up", "cssClass": "activated-accent"}'
                 data-toggle-off='{"label": "Trending recommendations disabled", "content": "trending_up"}'>
                 trending_up
@@ -145,8 +146,8 @@ $customer = $_SESSION['Obj'];
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-              <h1 id="dialog-header">Justin's Grill & Bar</h1>
-              <p id="dialog-description">18 Shenton Way, Singapore 126667</p>
+              <h1 id="reviews-dialog-header">Justin's Grill & Bar</h1>
+              <p id="reviews-dialog-description">18 Shenton Way, Singapore 126667</p>
               <span id="likes-dislikes-container">
                 <i id="recommendation-like" class="material-icons">favorite</i>
                 189
@@ -168,260 +169,9 @@ $customer = $_SESSION['Obj'];
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
           <!-- Reviews section -->
           <div id="reviews-list-group" class="mdc-list-group">
-            <h3 id="reviews-list-group-subheader" class="mdc-list-group__subheader">Reviews (47)</h3>
+            <h3 id="reviews-list-group-subheader" class="mdc-list-group__subheader"></h3>
             <ul id="reviews-list" class="mdc-list mdc-list--two-line msgs-list">
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
-              <li role="separator" class="mdc-list-divider"></li>
-              <li id="reviews-list-item" class="mdc-list-item">
-                <span class="mdc-list-item__text">
-                  Ali Connors
-                  <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                </span>
-
-                <span class="mdc-list-item__end-detail">
-                  <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                  <span id="up-down-vote-container">
-                    <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                      thumb_down
-                    </a>
-                    <span>
-                      <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                        thumb_up
-                      </a>
-                    </span>
-                  </span>
-                </span>
-              </li>
+              
             </ul>
           </div>
         </div>

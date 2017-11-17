@@ -16,6 +16,9 @@ var loadingBar = document.getElementById('loading-progress');
 var recommendButton = document.getElementById('request-recommendations');
 var recommendedList = document.getElementById('recommended-list');
 
+var trendingButton = document.getElementById('trending-button');
+var coordinates = [];
+
 // Dialog instantiation
 mdc.dialog.MDCDialog.attachTo(document.querySelector('#invite-dialog'));
 
@@ -63,6 +66,9 @@ document
         } else {
             recommendationFocusDialog.style.display = 'none';
             dialogUnderlay.style.display = 'none';
+            document.getElementById('reviews-list').innerHTML = '';
+            document.getElementById('reviews-list-group-subheader').innerHTML =
+                '';
         }
     });
 
@@ -76,7 +82,9 @@ recommendationDialogProceedButton.addEventListener('click', () => {
 inviteDialog.listen('MDCDialog:accept', function() {
     loadingBar.style.display = 'block';
     dialogUnderlay.style.display = 'none';
-    window.location = '/mysql/recommendation-invite.php';
+    window.location =
+        '/mysql/recommendation-invite.php?Place=' +
+        document.getElementById('restaurant').value;
 });
 
 inviteDialog.listen('MDCDialog:cancel', function() {
@@ -95,20 +103,10 @@ dialogUnderlay.addEventListener('click', () => {
 });
 
 // Listen if user selects any recommendations from the list
-document.getElementById('recommended-list').addEventListener('click', () => {
-    // Get which item in the list is clicked and activate the corresponding marker
-    // For testing only activate one, change when merge
-    var markerToFocus = recommendationMarkers[0];
+document.getElementById('recommended-list').addEventListener('click', () => {});
 
-    // After which, set focus on the marker corresponds to the list item.
-    markerToFocus.style.borderColor = 'var(--mdc-theme-primary)';
-    markerToFocus.style.borderStyle = 'solid';
-    markerToFocus.style.borderWidth = '2.5px';
-
-    markerToFocus.removeAttribute;
-
-    // Fly map deeper to the marker
-    markerToMapFocus(103.86033, 1.283951);
+trendingButton.addEventListener('click', () => {
+    // Here
 });
 
 $(document).ready(function() {
@@ -116,7 +114,6 @@ $(document).ready(function() {
         var string = $(this).val();
         var arr = string.split(',');
         var areaID = arr[0];
-        console.log(areaID);
 
         if (areaID) {
             $.ajax({
@@ -128,11 +125,39 @@ $(document).ready(function() {
                     window.mdc.autoInit();
                     // $.getScript("js/map.js");
                     $('#restaurant li').click(function() {
+                        document.getElementById('restaurant').value = $(
+                            this
+                        ).attr('name');
+                        var selectedrest = $(this).children();
+                        for (i = 0; i < selectedrest.length; i++) {
+                            if (
+                                selectedrest[i].id ===
+                                'selected-restaurant-name'
+                            ) {
+                                console.log(selectedrest[i]);
+                                document.getElementById('restaurant').name =
+                                    selectedrest[i].textContent;
+                            }
+                        }
                         var location = $(this).attr('id');
                         var arrayLocation = location.split(',');
                         var long = arrayLocation[0];
                         var lat = arrayLocation[1];
-                        updateMapToNewLocation(lat, long);
+                        markerToMapFocus(lat, long);
+                        let markers = document.getElementsByClassName('marker');
+                        for (i = 0; i < markers.length; i++) {
+                            markers[i].style.borderColor = null;
+                            markers[i].style.borderStyle = null;
+                            markers[i].style.borderWidth = null;
+                        }
+                        let markerToFocus = document.getElementById(
+                            'r' + $(this).attr('value')
+                        );
+                        // After which, set focus on the marker corresponds to the list item.
+                        markerToFocus.style.borderColor =
+                            'var(--mdc-theme-primary)';
+                        markerToFocus.style.borderStyle = 'solid';
+                        markerToFocus.style.borderWidth = '2.5px';
                     });
                 }
             });
@@ -155,4 +180,5 @@ document.getElementById('area').addEventListener('change', () => {
     var lat = arr[2];
     var long = arr[1];
     updateMapToNewLocation(lat, long);
+    coordinates = [];
 });

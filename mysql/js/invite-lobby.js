@@ -8,6 +8,8 @@ const snackbarMessageObj = {
 var confirmReserveDialog = new mdc.dialog.MDCDialog(
     document.querySelector('.mdc-dialog')
 );
+var loadingBar = document.getElementById('loading-progress');
+var listOfTimeSelection = document.getElementsByClassName('time-selection');
 
 snackbar.show(snackbarMessageObj);
 
@@ -19,7 +21,18 @@ mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'));
 
 // CLick listeners for confirmation dialog
 confirmReserveDialog.listen('MDCDialog:accept', function() {
-    window.location = '/mysql/current-location.php';
+    $.ajax({
+        url: 'scripts/friend-operations.php?Pax=' + (Accepts.length + 1),
+        data: { action: 'ReservePlace' },
+        type: 'post',
+        success: function(output) {
+            if (output === 'succeed') {
+                window.location = '/mysql/current-location.php';
+            } else {
+                console.log(output);
+            }
+        }
+    });
 });
 
 confirmReserveDialog.listen('MDCDialog:cancel', function() {
@@ -30,6 +43,7 @@ confirmReserveDialog.listen('MDCDialog:cancel', function() {
 document
     .querySelector('#confirm-reservation-fab')
     .addEventListener('click', () => {
+        loadingBar.style.display = 'none';
         confirmReserveDialog.show();
     });
 
@@ -48,4 +62,23 @@ function hideFAB() {
             .getElementById('confirm-reservation-fab')
             .classList.remove('mdc-fab--exited');
     }
+}
+
+// Time selector listener
+for (let i = 0; i < listOfTimeSelection.length; i++) {
+    listOfTimeSelection[i].addEventListener('click', () => {
+        for (let r = 0; r < listOfTimeSelection.length; r++) {
+            let tempElement = document.getElementById(
+                listOfTimeSelection[r].getAttribute('id')
+            );
+            tempElement.style.color = 'white';
+            tempElement.style.fontWeight = 'normal';
+        }
+
+        let element = document.getElementById(
+            listOfTimeSelection[i].getAttribute('id')
+        );
+        element.style.color = 'var(--mdc-theme-secondary)';
+        element.style.fontWeight = 'bold';
+    });
 }

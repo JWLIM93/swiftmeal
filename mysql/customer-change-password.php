@@ -129,7 +129,7 @@
             <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action">Try again</button>
           </footer>
         </div>
-        <div class="mdc-dialog__backdrop "></div>
+        <div class="mdc-dialog__backdrop"></div>
       </aside>
   </main>
 

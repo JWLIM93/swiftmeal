@@ -23,3 +23,7 @@ html {
 .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::after {
     background-color: rgba(255, 255, 255, 0.2);
 }
+
+#product-name {
+    cursor: pointer;
+}

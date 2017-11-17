@@ -6,11 +6,25 @@ let FriendsChecker = [];
 let OnlineFriendsChecker = [];
 let OnlineFriendsAmount = 0;
 let RecommendationCounter = 0;
+let Accepts = [];
+var CheckboxCount = 0;
 // First Run of Check Online
 checkOnline();
 
 // Check Online Function will poll everything
 function checkOnline() {
+    if (
+        document.getElementById('invitation-lobby-header') !== null &&
+        document.getElementById('invitation-lobby-description') !== null
+    ) {
+        document.getElementById(
+            'invitation-lobby-header'
+        ).innerHTML = sessionStorage.getItem('RestName');
+        document.getElementById(
+            'invitation-lobby-description'
+        ).innerHTML = sessionStorage.getItem('RestAdd');
+    }
+
     status = $.ajax({
         url: 'scripts/online-poller.php',
         success: function(data) {
@@ -26,7 +40,10 @@ function checkOnline() {
                 ) {
                     RecommendationCounter++;
                     OnlineFriendsChecker.push(json.OnlineFriends[i].UID);
-                    DisplayOnlineFriends(json.OnlineFriends[i].Name);
+                    DisplayOnlineFriends(
+                        json.OnlineFriends[i].Name,
+                        json.OnlineFriends[i].UID
+                    );
                 }
             }
             RecommendationCounter = 0;
@@ -49,6 +66,18 @@ function checkOnline() {
                     FriendsChecker.push(json.Friends[i].UID);
                 }
             }
+            for (i = 0; i < json.AcceptedMealRequests.length; i++) {
+                if (Accepts.indexOf(json.AcceptedMealRequests[i].UID) === -1) {
+                    DisplayInviteLobby(json.AcceptedMealRequests[i].Name);
+                    Accepts.push(json.AcceptedMealRequests[i].UID);
+                }
+            }
+
+            if (document.getElementById('accepted-count-container') !== null) {
+                document.getElementById('accepted-count-container').innerHTML =
+                    Accepts.length + ' Accepted';
+            }
+
             if (FriendRequestChecker.length === 0) {
                 if (
                     document.getElementById('pending-request-container') !==
@@ -71,14 +100,27 @@ function checkOnline() {
                         'No Friends Available';
                 }
             }
-        },
+            CheckboxCount = 0;
+            var selected = document.getElementsByClassName(
+                'mdc-checkbox__native-control'
+            );
+            for (j = 0; j < selected.length; j++) {
+                if (selected[j].checked === true) {
+                    CheckboxCount++;
+                }
+            }
+            if (document.getElementById('selection-count-header') !== null) {
+                document.getElementById('selection-count-header').innerHTML =
+                    CheckboxCount + ' friend selected';
+            }
+        }
     }).responseText;
 }
 
 function AcceptRequests(uid) {
     $.ajax({
         url: 'scripts/friend-operations.php?Requester=' + uid,
-        data: {action: 'confirmRequest'},
+        data: { action: 'confirmRequest' },
         type: 'post',
         success: function(output) {
             let index = FriendRequestChecker.indexOf(uid);
@@ -88,14 +130,14 @@ function AcceptRequests(uid) {
             let parent = document.getElementById('pending-request-list');
             let child = document.getElementById(uid);
             parent.removeChild(child);
-        },
+        }
     });
 }
 
 function DenyRequests(uid) {
     $.ajax({
         url: 'scripts/friend-operations.php?Deletee=' + uid,
-        data: {action: 'denyRequest'},
+        data: { action: 'denyRequest' },
         type: 'post',
         success: function(output) {
             let index = FriendRequestChecker.indexOf(uid);
@@ -105,7 +147,7 @@ function DenyRequests(uid) {
             let parent = document.getElementById('pending-request-list');
             let child = document.getElementById(uid);
             parent.removeChild(child);
-        },
+        }
     });
 }
 
@@ -125,7 +167,7 @@ function DisplayFriendRequests(date, name, uid) {
     let spannode1 = document.createElement('span');
     spannode1.className = 'mdc-list-item__text';
     let spannode2 = document.createElement('span');
-    spannode1.className = 'mdc-list-item__text__secondary';
+    spannode2.className = 'mdc-list-item__text__secondary';
     let textnode1 = document.createTextNode(name + ' ');
     let textnode2 = document.createTextNode('Added you on ' + date);
     spannode2.appendChild(textnode2);
@@ -198,7 +240,7 @@ function DisplayFriends(date, name) {
     }
 }
 
-function DisplayOnlineFriends(name) {
+function DisplayOnlineFriends(name, uid) {
     // -----------------customer home display---------------------------
     let listnode = document.createElement('li');
     listnode.className = 'mdc-grid-tile';
@@ -235,6 +277,7 @@ function DisplayOnlineFriends(name) {
     inputnode.type = 'checkbox';
     inputnode.id = 'friend-' + RecommendationCounter + '-checkbox';
     inputnode.className = 'mdc-checkbox__native-control';
+    inputnode.value = uid;
     let divnode5 = document.createElement('div');
     divnode5.className = 'mdc-checkbox__background';
     divnode5.innerHTML =
@@ -285,4 +328,22 @@ function DisplayOnlineFriends(name) {
     }
 }
 
-interval = setInterval(checkOnline, 3000);
+function DisplayInviteLobby(name) {
+    let listnode = document.createElement('li');
+    listnode.className = 'mdc-list-item';
+    listnode.id = 'lobby-list-item';
+    let imgnode = document.createElement('img');
+    imgnode.className = 'mdc-list-item__start-detail';
+    imgnode.src = '/src/ic_person_white_24px.svg';
+    imgnode.width = '56';
+    imgnode.height = '56';
+    imgnode.alt = 'Avatar';
+    let textnode = document.createTextNode(name);
+    listnode.appendChild(imgnode);
+    listnode.appendChild(textnode);
+    if (document.getElementById('lobby-list') !== null) {
+        document.getElementById('lobby-list').appendChild(listnode);
+    }
+}
+
+interval = setInterval(checkOnline, 500);

@@ -20,7 +20,6 @@ function editProfile(){
    
             $editProf = new customer($user_id,$full_name,$email,"",$phone_number,'edit',"",1);
             validateEditProfile($editProf);
-            header('Location: ../customer-home.php');
      
     } else {
         echo "ToDo: Message alert validation - blank name or email or phone number";
@@ -39,31 +38,31 @@ if(!empty($_POST) and isset($_POST['register'])){
         $phone_number = $_POST['userPhone'];
         if ($fullName != "" && $email != "" && $phone_number != ""){
             $userType = $_POST['typeOfUser'];
-            if(strcmp($userType,"Customer")){
+        
+            if($userType=="Customer"){
                 $user_id = userIDGenerator($userType, $phone_number, $fullName);
-                $cust_id = userIDGenerator($userType, $phone_number, $email);
+                $cust_id = IDGenerator($userType, $phone_number, $email);
+           
                 $password = sha1($password);
                 $registerCustomer = new customer($user_id,$fullName,$email,$password,$phone_number,'register',$cust_id,1);
                 validateCustRegister($registerCustomer);
             }
           
-            else{
+            elseif ($userType=="Restaurant Owner"){
+      
                 $user_id = userIDGenerator($userType, $phone_number, $fullName);
-                $owner_id = userIDGenerator($userType, $phone_number,$email);
+                $owner_id = IDGenerator($userType, $phone_number,$email);
                 $password = sha1($password);
-                $registerOwner = new owner($user_id,$fullName,$email,$password,$phone_number,'register',$owner_id,1);
+                $registerOwner = new Owner($user_id,$fullName,$email,$password,$phone_number,'register',$owner_id,1);
                 validateOwnerRegister($registerOwner);
-            }
-        
-         
+            } 
         } else {
             echo "ToDo: Message alert validation - blank name or email or phone number";
         }
-        
     } else {
         echo "ToDo: Validation when user doesn't retype same pw for register.";
     }          
-    header('Location: ../index.php');
+  header('Location: ../index.php');
 }
 else if(!empty($_POST) and isset($_POST['login'])){
     $email = $_POST['userEmail'];
@@ -75,7 +74,7 @@ else if(!empty($_POST) and isset($_POST['login'])){
      if ($sessionObj instanceof customer){
          header('Location: ../customer-home.php');
      }
-     elseif($sessionObj instanceof owner){
+     elseif($sessionObj instanceof Owner){
          header('Location: ../owner_index.php');
      }
     }else{
@@ -92,10 +91,24 @@ else if(!empty($_POST) && isset($_POST['edit'])){
 //user id genreator    
 function userIDGenerator($user,$contact,$name){
     $prefix="";
-    if (strcmp($user,"Customer")){
+    if ($user=="Customer"){
+        $prefix="UCUST";
+    }
+    else if ($user=="Restaurant Owner"){
+        $prefix="UREST";
+    }
+    $contact = substr($contact,0,4);
+    $name = strtoupper(substr(str_replace(" ", "", $name),0,3));
+    $ID = $prefix.date("is").$name.$contact;
+    return $ID;
+}
+
+function IDGenerator($user,$contact,$name){
+    $prefix="";
+    if ($user=="Customer"){
         $prefix="CUST";
     }
-    else if (strcmp($user,"Owner")){
+    else if ($user=="Restaurant Owner"){
         $prefix="REST";
     }
     $contact = substr($contact,0,4);

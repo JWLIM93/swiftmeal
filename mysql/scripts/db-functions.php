@@ -13,10 +13,10 @@ function connect_db(){
 //check prefix
 function checkPrefix($word){
     $prefix = substr($word, 0,4);
-    if ($prefix == 'CUST'){
+    if ($prefix == 'UCUST'){
         return 0;
     }
-    else if($prefix == 'REST'){
+    else if($prefix == 'UREST'){
         return 1;
     }
 }
@@ -49,7 +49,6 @@ function loginUser($email,$password){
                     $isOnlinesql = "UPDATE user SET isOnline = '1' WHERE UID = '$user_ID'";
                     $isOnlineQuery = connect_db()->query($isOnlinesql) or die("Fail to query db".mysqli_error('index.php'));
                     $_SESSION['Obj'] = $custSession;
-                    
                 }
                 else{
                     Echo "Account doesn't Exist";
@@ -71,7 +70,6 @@ function loginUser($email,$password){
                     $owner_id = $ownerResult['OwnerID'];
                     $ownerSession = new Owner($user_ID,$name,$email,$password,$contact_no,'login',$owner_id,1);
                     $_SESSION['Obj'] = $ownerSession;
-            
         }
         
     }
@@ -80,7 +78,7 @@ function loginUser($email,$password){
     }
     else{
         echo "Login Failed.";
-        header( "refresh:10;url=../index.php" );
+        session_destroy();
     }
 }
 
@@ -88,8 +86,6 @@ function loginUser($email,$password){
 function logOut($userID){
    $logOutSQL = "UPDATE user SET isOnline ='0' WHERE UID ='$userID'";
    $logOutResult = connect_db() ->query($logOutSQL) or die("unable to logout");
-   
-    
 }
 //Validate if user account exists when login.
 

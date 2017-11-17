@@ -5,13 +5,15 @@ include 'customer.php';
 session_start();
 $customer = $_SESSION['Obj'];
 $conn = connect_db();
-
+$CustID = $customer->getCustID();
 $UID = $customer->getUser_id(); //input session UID here
+$Place=$customer->getPlaceID();
 //$OnlineFriends will be all the name and uid of friends who are online, $Requests
 $OnlineFriends= array();
 $MealRequests = array();
 $FriendRequests = array();
 $Friends = array();
+$AcceptedMeals = array();
 //Poll for Online Friends
 $findfrens = "SELECT PUID FROM userspair WHERE UID = '" . $UID . "' AND isValid=1";
 $countResult = mysqli_query($conn, $findfrens);
@@ -25,7 +27,7 @@ while ($row = mysqli_fetch_array($countResult)) {
     }
 }
 //Poll for Meal Requests
-$findrequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, customer AS c, user AS u WHERE r.isValid=1 AND r.RequestTo = '" . $UID . "' AND r.CustomerID=c.CustomerID AND c.UID=u.UID;";
+$findrequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, customer AS c, user AS u WHERE r.isValid=1 AND r.RequestTo = '" . $CustID . "' AND r.CustomerID=c.CustomerID AND c.UID=u.UID;";
 $MealResult = mysqli_query($conn, $findrequests);
 while ($row2 = mysqli_fetch_array($MealResult)) {
     $tempMeal = (array('Name'=>$row2['name'],'UID'=>$row2['uid']));
@@ -47,7 +49,13 @@ while($row4 = mysqli_fetch_array($query_run)){
     array_push($Friends, $FriendsTemp);
 }
 
+$AcceptedMealRequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, user AS u, customer AS c WHERE r.PlaceID='".$Place."'AND r.CustomerID='" . $CustID . "' AND r.isValid=1 AND r.isAccepted=1 AND c.CustomerID=r.RequestTo AND c.UID=u.UID";
+$AcceptedRun = mysqli_query($conn, $AcceptedMealRequests);
+while($row5=mysqli_fetch_array($AcceptedRun)){
+    $AcceptMealsTemp = (array('Name'=>$row5['name'],'UID'=>$row5['uid']));
+    array_push($AcceptedMeals, $AcceptMealsTemp);
+}
 
 mysqli_close($conn);
-echo json_encode(array('OnlineFriends'=>$OnlineFriends,'MealRequests'=>$MealRequests,'FriendRequests'=>$FriendRequests,'Friends'=>$Friends));
+echo json_encode(array('OnlineFriends'=>$OnlineFriends,'MealRequests'=>$MealRequests,'FriendRequests'=>$FriendRequests,'Friends'=>$Friends,'AcceptedMealRequests'=>$AcceptedMeals));
 ?>

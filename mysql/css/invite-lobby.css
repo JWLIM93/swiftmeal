@@ -165,7 +165,43 @@
     font-family: "Quicksand", sans-serif;
 }
 
+#confirm-reserve-dialog-label,
+#confirm-reserve-dialog-list-description,
+#confirm-reserve-dialog-description,
+#confirm-reserve-dialog-list-description > ul > li {
+    font-family: "Quicksand", sans-serif;
+}
+
+#confirm-reserve-dialog-label {
+    font-weight: bold;
+}
+
+#confirm-reserve-dialog-list-description > ul > li {
+    cursor: pointer;
+}
+
+#confirm-reserve-dialog-list-description::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#confirm-reserve-dialog-list-description::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+#confirm-reserve-dialog-list-description::-webkit-scrollbar-thumb {
+    background-color: var(--mdc-theme-secondary);
+}
+
+.time-selection:hover {
+    color: var(--mdc-theme-secondary);
+}
+
+.time-selection:focus {
+    color: var(--mdc-theme-secondary);
+    font-weight: bold;
+}
+
 #loading-progress {
     display: block;
-    @include mdc-linear-progress-bar-color(var(--mdc-theme-secondary));
 }

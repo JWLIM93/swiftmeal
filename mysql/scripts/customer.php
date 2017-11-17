@@ -15,6 +15,8 @@ require_once 'user.php';
 class customer extends user {
     private $cust_id;
     private $active;
+    private $Place;
+    private $RestID;
     
     public function customer($user_id,$name,$email,$password,$phone_number,$status,$cust_id,$active){
         user::user($user_id,$name,$email,$password,$phone_number,$status);
@@ -22,6 +24,21 @@ class customer extends user {
         $this->active = $active;
         
     }
+    public function setPlaceID($PlaceID){
+        $this->Place = $PlaceID;
+    }
+    public function getPlaceID(){
+        return $this->Place;
+        
+    }
+    public function setRestID($RestID){
+        $this->RestID = $RestID;
+    }
+    public function getRestID(){
+        return $this->RestID;
+        
+    }
+    
     public function setCustId($cust_id){
         $this->cust_id = $cust_id;
         
