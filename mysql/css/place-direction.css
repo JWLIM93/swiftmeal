@@ -259,6 +259,20 @@ hr {
     padding-bottom: 30px;
 }
 
+#google-map-driving {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+#google-map-transit {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
 #loading-progress {
     display: none;
 }

@@ -1,5 +1,9 @@
 // Click listener for FAB
 document.querySelector('#to-directions-fab').addEventListener('click', () => {
+    sessionStorage.setItem(
+        'startLocation',
+        document.querySelector('#current-location-box').value
+    );
     window.location = '/mysql/place-direction.php';
 });
 

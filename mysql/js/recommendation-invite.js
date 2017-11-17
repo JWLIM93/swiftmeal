@@ -13,12 +13,11 @@ document.querySelector('#to-lobby-fab').addEventListener('click', () => {
                 type: 'post',
                 success: function(output) {
                     console.log(output);
+                    window.location = '/mysql/invite-lobby.php';
                 }
             });
         }
     }
-
-    window.location = '/mysql/invite-lobby.php';
 });
 
 // Animate floating action button

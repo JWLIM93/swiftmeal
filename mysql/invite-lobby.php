@@ -147,7 +147,30 @@ $customer = $_SESSION['Obj'];
                         </ul>
                     </section>
                     <section id="confirm-reserve-dialog-description" class="mdc-dialog__body">
-                        Swiftmeal will attempt to reserve the amount of seats required for this group on the chosen timing.
+                        Click 'Next' to select a date for your reservation
+                    </section>
+                    <footer class="mdc-dialog__footer">
+                        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+                        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Next</button>
+                    </footer>
+                </div>
+                <div class="mdc-dialog__backdrop"></div>
+            </aside>
+            <!-- Choose Date Dialog -->
+            <aside id="choose-date-dialog" class="mdc-dialog mdc-theme--dark" role="alertdialog" aria-labelledby="choose-date-dialog-label"
+                aria-describedby="choose-date-dialog-description">
+                <div class="mdc-dialog__surface">
+                    <header class="mdc-dialog__header">
+                        <h2 id="choose-date-dialog-label" class="mdc-dialog__header__title">
+                            Select a reservation date
+                        </h2>
+                    </header>
+                    <section id="choose-date-dialog-list-description" class="mdc-dialog__body mdc-dialog__body--scrollable">
+                        <ul id="date-selection-list" class="mdc-list time-selection-list">
+                        </ul>
+                    </section>
+                    <section id="choose-date-dialog-description" class="mdc-dialog__body">
+                        Swiftmeal will attempt to reserve the amount of seats required for this group on the chosen date and time.
                     </section>
                     <footer class="mdc-dialog__footer">
                         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>

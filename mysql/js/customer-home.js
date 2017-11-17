@@ -143,6 +143,14 @@ $(document).ready(function() {
                         var arrayLocation = location.split(',');
                         var long = arrayLocation[0];
                         var lat = arrayLocation[1];
+                        sessionStorage.setItem(
+                            'Longitude',
+                            parseFloat(arrayLocation[0])
+                        );
+                        sessionStorage.setItem(
+                            'Latitude',
+                            parseFloat(arrayLocation[1])
+                        );
                         markerToMapFocus(lat, long);
                         let markers = document.getElementsByClassName('marker');
                         for (i = 0; i < markers.length; i++) {

@@ -45,8 +45,8 @@ for($i=0;$i<count($restaurantArray);$i++){
   echo   "<li class='mdc-list-item' data-mdc-auto-init='MDCRipple' id='".$restaurantArray[$i]->getGeoLat().",".$restaurantArray[$i]->getGeoLong()."' value=".$i." name=".$restaurantArray[$i]->getRestaurantID().">".
   "<i class='mdc-list-item__start-detail material-icons' aria-hidden='true'>restaurant</i>".
  "<span id='selected-restaurant-name'class='mdc-list-item__text'>"
-    .$restaurantArray[$i]->getRestaurantName().
-   " <span class='mdc-list-item__text__secondary'>".$restaurantArray[$i]->getBuilding().",".$restaurantArray[$i]->getBlock()." ".$restaurantArray[$i]->getStreet().
+    .$restaurantArray[$i]->getRestaurantName().",".
+   " <span class='mdc-list-item__text__secondary'>".$restaurantArray[$i]->getBuilding()." ".$restaurantArray[$i]->getBlock()." ".$restaurantArray[$i]->getStreet().
   " #".$restaurantArray[$i]->getFloor()."-"
   .$restaurantArray[$i]->getUnit().
   "</span>".

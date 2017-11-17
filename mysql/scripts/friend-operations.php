@@ -15,7 +15,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
         case 'denyRequest': denyRequest($_GET['Deletee'],$UID,$conn);break;
         case 'friendRequest' :friendRequest($UID, $_GET['RequestEmail'], $conn);break;
         case 'SendMealRequest' :sendMealRequest($CustID,$_GET['Requester'],$Rest,$conn);break;
-        case 'ReservePlace' :MakeReservation($CustID,$_GET['Pax'],$conn);break;
+        case 'ReservePlace' :MakeReservation($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$conn);break;
         default: break;
     }
 }
@@ -78,25 +78,24 @@ function sendMealRequest($Requester,$Requestee,$RestID,$con){
     }
 }
 
-function MakeReservation($CustID,$Pax,$con){
+function MakeReservation($CustID,$Pax,$time,$date,$con){
     $customer = $_SESSION['Obj'];
     $PlaceID=$customer->getPlaceID();
     $RestID=$customer->getRestID();
     $UpdateRequestStatus="UPDATE request SET isValid=0 WHERE CustomerID=$CustID AND PlaceID = $PlaceID";
     mysqli_query($con, $UpdateRequestStatus);
     $BookingID = BookingIDGenerator($CustID);
-    $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . date("Y-m-d") . "','" . date("h:i:s") . "',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
+    $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . $date . "','".$time."',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
     if(mysqli_query($con, $Reserve)){
+        $customer->setBookingNum($BookingID);
+        $customer->setBookingDate(date("Y-m-d"));
+        $customer->setBookingTime(date("h:i:s"));
+        $customer->setReservationTime($time);
+        $customer->setReservationDate($date);
+        $customer->setPax($Pax);
         echo "succeed";
     }
     else{
-        echo $Pax;
-        echo "Place:";
-        echo $PlaceID;
-        echo "Rest:";
-        echo $RestID;
-        echo "book:";
-        echo $BookingID;
         echo "fail";
     }
 }

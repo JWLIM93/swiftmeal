@@ -17,6 +17,12 @@ class customer extends user {
     private $active;
     private $Place;
     private $RestID;
+    private $BookingNum;
+    private $BookingDate;
+    private $BookingTime;
+    private $ReservationTime;
+    private $ReservationDate;
+    private $Pax;
     
     public function customer($user_id,$name,$email,$password,$phone_number,$status,$cust_id,$active){
         user::user($user_id,$name,$email,$password,$phone_number,$status);
@@ -36,7 +42,48 @@ class customer extends user {
     }
     public function getRestID(){
         return $this->RestID;
-        
+    }
+    
+    public function setBookingNum($BookingNum){
+        $this->BookingNum = $BookingNum;
+    }
+    public function getBookingNum(){
+        return $this->BookingNum;
+    }
+    
+    public function setBookingDate($BookingDate){
+        $this->BookingDate = $BookingDate;
+    }
+    public function getBookingDate(){
+        return $this->BookingDate;
+    }
+    
+    public function setBookingTime($BookingTime){
+        $this->BookingTime = $BookingTime;
+    }
+    public function getBookingTime(){
+        return $this->BookingTime;
+    }
+    
+    public function setReservationTime($ReservationTime){
+        $this->ReservationTime = $ReservationTime;
+    }
+    public function getReservationTime(){
+        return $this->ReservationTime;
+    }
+    
+    public function setReservationDate($ReservationDate){
+        $this->ReservationDate = $ReservationDate;
+    }
+    public function getReservationDate(){
+        return $this->ReservationDate;
+    }
+    
+    public function setPax($Pax){
+        $this->Pax = $Pax;
+    }
+    public function getPax(){
+        return $this->Pax;
     }
     
     public function setCustId($cust_id){

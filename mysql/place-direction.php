@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+include 'scripts/customer.php';
+session_start();
+$customer = $_SESSION['Obj'];
+?>
+
 <html class="mdc-typography">
 
 <head>
@@ -29,6 +34,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- AHEAD JAVASCRIPT -->
+    <script src="js/google-direction.js"></script>
 </head>
 
 <body>
@@ -75,16 +81,16 @@
                             <div id="reservation-info-inner" class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                                     <p id="reservation-id-header">Reservation</p>
-                                    <h1 id="reservation-id">#5578210</h1>
-                                    <p id="reservation-date-created">10 November 2017, 12:35PM</p>
+                                    <h1 id="reservation-id"><?php echo $customer->getBookingNum() ?></h1>
+                                    <p id="reservation-date-created"><?php echo $customer->getBookingDate().", ".$customer->getBookingTime() ?></p>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                                     <hr>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-                                    <h2 id="restaurant-name">Justin's Grill & Bar</h2>
-                                    <p id="pax">Table for 20</p>
-                                    <p id="datetime">21 November 2017, 6:00PM</p>
+                                    <h2 id="restaurant-name"></h2>
+                                    <p id="pax">Table for <?php echo $customer->getPax() ?></p>
+                                    <p id="datetime"><?php echo $customer->getReservationDate().", ".$customer->getReservationTime(); ?></p>
                                 </div>
                                 <div id="navigation-drive-choice" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle">
                                     <i id="car-icon" class="material-icons">directions_car</i>
@@ -116,6 +122,7 @@
                                 <i class="material-icons for-directions-icon">directions</i>
                                 <span class="for-directions-address">12 Shenton Way, Singapore 453368</span>
                             </div>
+                            <div id="google-map-driving"></div>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                     </div>
@@ -137,6 +144,7 @@
                                 <i class="material-icons for-directions-icon">directions</i>
                                 <span class="for-directions-address">12 Shenton Way, Singapore 453368</span>
                             </div>
+                            <div id="google-map-transit"></div>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                     </div>
@@ -157,6 +165,9 @@
     </script>
     <script src="js/toolbar.js"></script>
     <script src="js/place-direction.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4dNkSAR94RnKv491aTmwgVXVy02Xvzes&callback=initMap">
+    </script>
 </body>
 
 </html>
