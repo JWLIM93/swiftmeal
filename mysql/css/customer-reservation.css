@@ -16,7 +16,7 @@
 }
 
 .mdc-fab {
-    background-color: var(--mdc-theme-primary);
+    background-color: var(--mdc-theme-secondary);
 }
 
 .mdc-simple-menu {
@@ -30,6 +30,45 @@
 }
 
 .mdc-text-field__label {
+    font-family: "Quicksand", sans-serif;
+}
+
+.date-selection {
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    font-size: 18px;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.time-selection:hover,
+.date-selection:hover {
+    background-color: #212121;
+}
+
+.time-selection {
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    font-size: 18px;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mdc-dialog__footer > .mdc-button {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+.mdc-dialog__header__title {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+.mdc-dialog__body {
     font-family: "Quicksand", sans-serif;
 }
 
@@ -115,21 +154,65 @@
     font-size: 18px;
 }
 
-#location-container {
-    background-color: rgb(156, 20, 68);
+#select-pax-container {
+    background-color: rgba(129, 129, 129, 0.3);
     margin-bottom: 50px;
     overflow: auto;
     padding-bottom: 16px;
 }
 
-#location-header {
+#select-pax-header {
     font-family: "Quicksand", sans-serif;
     color: white;
     margin-top: 40px;
     margin-bottom: 0;
 }
 
-#location-description {
+#select-pax-description {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 15px;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+#select-date-container {
+    background-color: rgba(129, 129, 129, 0.3);
+    margin-bottom: 50px;
+    overflow: auto;
+    padding-bottom: 16px;
+}
+
+#select-date-header {
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+#select-date-description {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 15px;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+#select-time-container {
+    background-color: rgba(129, 129, 129, 0.3);
+    margin-bottom: 50px;
+    overflow: auto;
+    padding-bottom: 16px;
+}
+
+#select-time-header {
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+#select-time-description {
     color: white;
     font-family: "Quicksand", sans-serif;
     padding-bottom: 15px;
@@ -139,6 +222,42 @@
 
 #current-location-textfield {
     width: 100%;
+}
+
+#number-of-pax-container {
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    font-family: "Quicksand", sans-serif;
+}
+
+#up-pax-container {
+    text-align: right;
+    color: white;
+    vertical-align: center;
+    font-family: "Quicksand", sans-serif;
+}
+
+#down-pax-container {
+    text-align: left;
+    color: white;
+    vertical-align: center;
+    font-family: "Quicksand", sans-serif;
+}
+
+#down-pax,
+#up-pax {
+    background-color: var(--mdc-theme-primary);
+    border-radius: 30px;
+    padding: 5px;
+    font-size: 30px;
+    vertical-align: center;
+    cursor: pointer;
+}
+
+#select-date-list {
+    margin-top: 0;
+    padding-top: 0;
 }
 
 #loading-progress {

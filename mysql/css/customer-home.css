@@ -73,6 +73,20 @@
     margin-bottom: 0;
 }
 
+.mdc-dialog__footer > .mdc-button {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+.mdc-dialog__header__title {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+.mdc-dialog__body {
+    font-family: "Quicksand", sans-serif;
+}
+
 a {
     text-decoration: none;
     color: white;
