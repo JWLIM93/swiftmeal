@@ -8,15 +8,14 @@ let numberOfReview = 0;
 // Take in restuarant ID and give you a list of reviews
 function viewAllReviews() {
     let restID;
-    if(document.getElementById('restaurant')!==null){
+    if (document.getElementById('restaurant') !== null) {
         restID = document.getElementById('restaurant').value;
-    }
-    else{
-        restID=sessionStorage.getItem("history-restid");
+    } else {
+        restID = sessionStorage.getItem('history-restid');
     }
     console.log(restID);
     $.ajax({
-        url: 'scripts/review-operations.php?RestaurantID=' + restID,
+        url: 'scripts/review-operations.php?restID=' + restID,
         data: { action: 'reviewRequest' },
         type: 'post',
         success: function(data) {
@@ -24,8 +23,51 @@ function viewAllReviews() {
                 document.getElementById('likes-dislikes-container').innerHTML =
                     'THERE ARE CURRENTLY NO REVIEWS FOR THIS RESTAURANT';
             } else {
-                console.log(data);
                 let json = JSON.parse(data);
+                document
+                    .getElementById('recommendation-like')
+                    .addEventListener('click', function() {
+                        $.ajax({
+                            url:
+                                'scripts/review-operations.php?flag=' +
+                                1 +
+                                '&restID=' +
+                                restID +
+                                '&count=' +
+                                parseInt(json.Likes['Likes']),
+                            data: { action: 'updatelikes' },
+                            type: 'post',
+                            success: function(output) {
+                                console.log(output);
+                                document.getElementById(
+                                    'recommendation-like'
+                                ).nextSibling.textContent =
+                                    parseInt(json.Likes['Likes']) + 1;
+                            }
+                        });
+                    });
+                document
+                    .getElementById('recommendation-dislike')
+                    .addEventListener('click', function() {
+                        $.ajax({
+                            url:
+                                'scripts/review-operations.php?flag=' +
+                                0 +
+                                '&restID=' +
+                                restID +
+                                '&count=' +
+                                parseInt(json.Likes['Dislikes']),
+                            data: { action: 'updatelikes' },
+                            type: 'post',
+                            success: function(output) {
+                                console.log(output);
+                                document.getElementById(
+                                    'recommendation-dislike'
+                                ).nextSibling.textContent =
+                                    parseInt(json.Likes['Dislikes']) + 1;
+                            }
+                        });
+                    });
                 document.getElementById(
                     'recommendation-like'
                 ).nextSibling.textContent =
@@ -118,36 +160,6 @@ function updateVoteStatus(restID, reviewID, voteStatus) {
             '&voteStatus=' +
             voteStatus,
         data: { action: 'updateVoteStatus' },
-        type: 'post',
-        success: function() {
-            // Clearing of the list and add it back again
-            $('#reviews-list').empty();
-            viewAllReviews(restID);
-        }
-    }).responseText;
-}
-
-// Add the Review to the resturant
-function addReviews(custID, restID, content) {
-    console.log('addReviews');
-    console.log(
-        'scripts/review-operations.php?custID=' +
-            custID +
-            '&restID=' +
-            restID +
-            '&content=' +
-            content
-    );
-    // alert("updateVoteStatus");
-    $.ajax({
-        url:
-            'scripts/review-operations.php?custID=' +
-            custID +
-            '&restID=' +
-            restID +
-            '&content=' +
-            content,
-        data: { action: 'addReviews' },
         type: 'post',
         success: function() {
             // Clearing of the list and add it back again

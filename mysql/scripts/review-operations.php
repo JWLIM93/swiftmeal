@@ -14,6 +14,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
         case 'reviewRequest': queryAllReview($_GET['RestaurantID']);break;
         case 'addReviews': insertCustomerReview($CustID,$_GET['restID'],$_GET['content']);break;
         case 'updateVoteStatus': voteStatus($_GET['reviewID'],$_GET['voteStatus']);break;   
+        case 'updatelikes': LikeDisLike($_GET['flag'],$_GET['restID'],$_GET['count']);
         default: break;
     }
 }
@@ -201,6 +202,27 @@ function isNotVisibleReview($reviewID){
 	
 }
 
+function LikeDisLike($flag,$restid,$currentcount){
+    $updatecount=$currentcount+1;
+    if($flag==0){
+        $dislikequery="UPDATE restaurant SET CountDislikes = '$updatecount' WHERE RestaurantID='".$restid."'";
+        if(connect_db()->query($dislikequery)){
+            echo "succeed";
+        }
+        else{
+            echo "fail";
+        }
+    }
+    else if($flag==1){
+        $likequery="UPDATE restaurant SET CountLikes = '$updatecount' WHERE RestaurantID='".$restid."'";
+        if(connect_db()->query($likequery)){
+            echo "succeed";
+        }
+        else{
+            echo "fail";
+        }
+    }
+}
 function ReviewIDGenerator($CustID){
     $prefix="REVW";
     $contact = rand(1000, 9999);

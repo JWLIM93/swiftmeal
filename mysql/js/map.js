@@ -51,25 +51,34 @@ function populateMarkers() {
         el.id = 'r' + i;
 
         el.addEventListener('click', function() {
-            if (recommendationFocusDialog.style.display != 'block') {
-                viewAllReviews();
-                var nameadd = document.getElementById('restaurant').name;
-                var nameadd2 = nameadd.split(',');
-                document.getElementById(
-                    'reviews-dialog-header'
-                ).childNodes[0].nodeValue =
-                    nameadd2[0];
-                document.getElementById(
-                    'reviews-dialog-description'
-                ).childNodes[0].nodeValue =
-                    nameadd2[1];
-                sessionStorage.setItem('RestName', nameadd2[0]);
-                sessionStorage.setItem('RestAdd', nameadd2[1]);
-                recommendationFocusDialog.style.display = 'block';
-                dialogUnderlay.style.display = 'block';
-            } else {
-                // dialog.style.display= "none";
-            }
+                if (recommendationFocusDialog.style.display != 'block') {
+                    viewAllReviews();
+                    var nameadd = document.getElementById('restaurant').name;
+                    var nameadd2 = nameadd.split(',');
+                    if(nameadd2[0]!="Hawker Center@"){
+                        document.getElementById(
+                            'reviews-dialog-header'
+                        ).childNodes[0].nodeValue =
+                            nameadd2[0];
+                        document.getElementById(
+                            'reviews-dialog-description'
+                        ).childNodes[0].nodeValue =
+                            nameadd2[1];
+                        sessionStorage.setItem('RestName', nameadd2[0]);
+                        sessionStorage.setItem('RestAdd', nameadd2[1]);
+                        recommendationFocusDialog.style.display = 'block';
+                        dialogUnderlay.style.display = 'block';
+                    }
+                    else{
+                        sessionStorage.setItem('RestName', nameadd2[0]);
+                        sessionStorage.setItem('RestAdd', nameadd2[1]);
+                        window.location = '/swiftmealrepo3/current-location.php';
+                    } 
+                }
+                    else {
+                    // dialog.style.display= "none";
+                }
+            
         });
 
         new mapboxgl.Marker(el).setLngLat(coordinates[i]).addTo(map);

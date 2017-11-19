@@ -45,33 +45,6 @@ a:active {
     background-color: rgba(129, 129, 129, 0.3);
 }
 
-.mdc-grid-tile__title,
-.mdc-grid-tile__support-text {
-    font-family: "Quicksand", sans-serif;
-    padding-bottom: 3px;
-}
-
-.mdc-grid-tile__title {
-    font-weight: bold;
-}
-
-.mdc-fab {
-    background-color: var(--mdc-theme-primary);
-}
-
-.app-fab--absolute {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-}
-
-@media (min-width: 1024px) {
-    .app-fab--absolute {
-        bottom: 2rem;
-        right: 2rem;
-    }
-}
-
 #map {
     /* Full width */
     position: absolute;
@@ -132,11 +105,13 @@ a:active {
     display: none;
 }
 
-#owner-info-container {
-    background: rgb(156, 20, 68);
+#restaurant-info-container {
+    background: rgb(21, 50, 133);
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
-#owner-info-header {
+#restaurant-info-header {
     font-family: "Quicksand", sans-serif;
     font-size: 20px;
     color: white;
@@ -147,7 +122,7 @@ a:active {
     font-weight: normal;
 }
 
-#owner-info-sub-header {
+#restaurant-info-sub-header {
     font-family: "Quicksand", sans-serif;
     font-size: 40px;
     color: white;
@@ -159,7 +134,7 @@ a:active {
     padding-bottom: 0;
 }
 
-#owner-info-description {
+#restaurant-info-description {
     font-family: "Quicksand", sans-serif;
     font-size: 20px;
     color: white;
@@ -170,7 +145,9 @@ a:active {
     font-weight: normal;
 }
 
-#restaurant-count-header {
+#reservations-count-header,
+#likes-count-header,
+#dislikes-count-header {
     font-family: "Quicksand", sans-serif;
     font-size: 40px;
     color: white;
@@ -187,7 +164,9 @@ a:active {
     font-weight: bold;
 }
 
-#restaurant-count-sub-header {
+#reservations-count-sub-header,
+#likes-count-sub-header,
+#dislikes-count-sub-header {
     font-family: "Quicksand", sans-serif;
     font-size: 15px;
     color: white;
@@ -220,87 +199,6 @@ a:active {
     text-transform: uppercase;
     font-weight: bold;
     vertical-align: middle;
-}
-
-#add-restaurant {
-    vertical-align: middle;
-    border-radius: 60px;
-    background-color: var(--mdc-theme-primary);
-    color: white;
-    font-size: 25px;
-    padding: 10px;
-}
-
-#restaurants-list {
-    width: inherit;
-    padding: 0;
-    margin-bottom: 50px;
-}
-
-#restaurants-list > .mdc-list-item {
-    background-color: rgba(129, 129, 129, 0.3);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#go-to-button {
-    margin-right: 10px;
-    display: none;
-}
-
-#add-restaurant-container {
-    background: rgb(21, 50, 133);
-    margin-top: 3vh;
-    display: none;
-}
-
-#add-restaurant-header {
-    font-family: "Quicksand", sans-serif;
-    font-size: 30px;
-    color: white;
-    letter-spacing: 0.1em;
-    margin-top: 60px;
-    padding-top: 0;
-    text-transform: uppercase;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-#add-restaurant-sub-header {
-    font-family: "Quicksand", sans-serif;
-    font-size: 15px;
-    color: white;
-    letter-spacing: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-bottom: 30px;
-    font-weight: normal;
-}
-
-#inputs-container {
-    padding-bottom: 60px;
-}
-
-#confirm-add-container {
-    background-color: #212121;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    display: none;
-}
-
-#confirm-header {
-    color: white;
-    font-size: 20px;
-    font-weight: normal;
-    font-family: "Quicksand", sans-serif;
-}
-
-#confirm-add-button {
-    color: white;
-    font-size: 40px;
-    text-align: right;
 }
 
 #loading-progress {

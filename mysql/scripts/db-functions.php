@@ -175,5 +175,13 @@ function validateEditPassword($userObj){
     $editResult = connect_db()->query($editSql) or die("validateEdit function fail");
 }
 
-
+function generateRandomID() {
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomID = '';
+    for ($i = 0; $i < 16; $i++) {
+        $randomID .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomID;
+}
 ?>
