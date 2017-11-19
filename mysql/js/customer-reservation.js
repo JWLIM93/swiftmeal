@@ -13,10 +13,13 @@ var confirmDialog = new mdc.dialog.MDCDialog(
     document.querySelector('#confirm-dialog')
 );
 
+var pax;
+
 upPaxButton.addEventListener('mousedown', () => {
     if (paxCount > 0 && paxCount < 10) {
         paxCount++;
         paxCounterDisplay.innerText = paxCount;
+        pax = paxCount;
     }
     upPaxButton.classList.add('mdc-elevation--z12');
 });
@@ -29,6 +32,7 @@ downPaxButton.addEventListener('mousedown', () => {
     if (paxCount > 1 && paxCount <= 10) {
         paxCount--;
         paxCounterDisplay.innerText = paxCount;
+        pax = paxCount;
     }
     downPaxButton.classList.add('mdc-elevation--z12');
 });
@@ -111,7 +115,24 @@ document.querySelector('#to-directions-fab').addEventListener('click', () => {
 
 // Listen for invite dialog activator
 confirmDialog.listen('MDCDialog:accept', function() {
-    window.location = '/mysql/place-direction.php';
+    $.ajax({
+        url:
+            'scripts/friend-operations.php?Pax=' +
+            parseInt(pax) +
+            '&Time=' +
+            timeSelected +
+            '&Date=' +
+            dateSelected,
+        data: { action: 'ReservePlace' },
+        type: 'post',
+        success: function(output) {
+            if (output === 'succeed') {
+                window.location = '/mysql/current-location.php';
+            } else {
+                console.log(output);
+            }
+        }
+    });
 });
 
 confirmDialog.listen('MDCDialog:cancel', function() {

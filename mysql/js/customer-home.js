@@ -89,7 +89,9 @@ inviteDialog.listen('MDCDialog:accept', function() {
 
 inviteDialog.listen('MDCDialog:cancel', function() {
     dialogUnderlay.style.display = 'none';
-    window.location = '/mysql/customer-reservation.php';
+    window.location =
+        '/mysql/customer-reservation.php?Place=' +
+        document.getElementById('restaurant').value;
 });
 
 // Listen for dialog underlay layer click, dimiss all pop-ups

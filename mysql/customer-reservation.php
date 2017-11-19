@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+include 'scripts/customer.php';
+session_start();
+$customer = $_SESSION['Obj'];
+$customer->setRestID($_GET['Place']);
+?>
+
 <html class="mdc-typography">
 
 <head>
