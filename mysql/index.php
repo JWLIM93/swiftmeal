@@ -88,7 +88,6 @@
     window.mdc.autoInit();
   </script>
   <script src="js/map.js"></script>
-  <script src="js/toolbar.js"></script>
   <script src="js/index.js"></script>
 </body>
 

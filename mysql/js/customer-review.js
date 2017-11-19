@@ -7,7 +7,14 @@ let numberOfReview = 0;
 // viewAllReviews(1);
 // Take in restuarant ID and give you a list of reviews
 function viewAllReviews() {
-    let restID = document.getElementById('restaurant').value;
+    let restID;
+    if(document.getElementById('restaurant')!==null){
+        restID = document.getElementById('restaurant').value;
+    }
+    else{
+        restID=sessionStorage.getItem("history-restid");
+    }
+    console.log(restID);
     $.ajax({
         url: 'scripts/review-operations.php?RestaurantID=' + restID,
         data: { action: 'reviewRequest' },
@@ -17,6 +24,7 @@ function viewAllReviews() {
                 document.getElementById('likes-dislikes-container').innerHTML =
                     'THERE ARE CURRENTLY NO REVIEWS FOR THIS RESTAURANT';
             } else {
+                console.log(data);
                 let json = JSON.parse(data);
                 document.getElementById(
                     'recommendation-like'

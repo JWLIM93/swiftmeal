@@ -1,8 +1,9 @@
 <?php
 include 'db-functions.php';
-//include 'customer.php';
+include 'customer.php';
 session_start();
-
+$customer = $_SESSION['Obj'];
+$CustID = $customer->getCustID();
 
 //List of variables i going to use
 $reviewList = array();
@@ -11,8 +12,8 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
     $action=$_POST['action'];
     switch($action){
         case 'reviewRequest': queryAllReview($_GET['RestaurantID']);break;
-        case 'addReviews': insertCustomerReview($_GET['custID'],$_GET['restID'],$_GET['content']);break;
-        case 'updateVoteStatus': voteStatus($_GET['reviewID'],$_GET['voteStatus']);
+        case 'addReviews': insertCustomerReview($CustID,$_GET['restID'],$_GET['content']);break;
+        case 'updateVoteStatus': voteStatus($_GET['reviewID'],$_GET['voteStatus']);break;   
         default: break;
     }
 }
@@ -66,12 +67,12 @@ function queryAllReview($resturantID){
 //insertCustomerReview(1,'018960754',"hello HOLA");
 function insertCustomerReview($custID,$restID,$content){
 	//Date , Time  , Generate ID
-	$date = date("Y/m/d");
-	$time = date("h:i:sa");
-	$uniqueId= uniqid();
+	$date = date("Y-m-d");
+	$time = date("h:i:s");
+	$uniqueId= ReviewIDGenerator($custID);
 
 	$insertCustomerReviewSQL = "INSERT INTO `review` (`ReviewID`, `content`, `CustomerID`, `RestaurantID`, `DateReviewed`, `TimeReviewed`, `Upvote`, `Downvote`, `isValid`, `isSpam`, `isVisible`) ".
-	"VALUES ('$uniqueId', '$content', $custID, '$restID', $date, '$time', '0', '0', '1', '0', '1')";
+	"VALUES ('".$uniqueId."', '".$content."', '".$custID."', '".$restID."', '".$date."', '".$time."', 0, 0, 1, 0, 1)";
     
 	if (connect_db()->query($insertCustomerReviewSQL) == TRUE) {
 		echo "Record Inserted successfully";
@@ -200,5 +201,12 @@ function isNotVisibleReview($reviewID){
 	
 }
 
+function ReviewIDGenerator($CustID){
+    $prefix="REVW";
+    $contact = rand(1000, 9999);
+    $name = strtoupper(substr(str_replace(" ", "", $CustID),0,4));
+    $ID = $prefix.date("is").$name.$contact;
+    return $ID;
+}
 
 ?>

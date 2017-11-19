@@ -201,7 +201,6 @@ time {
 
 #recommendations-header {
     background: rgba(41, 98, 255, 1);
-    /* background: rgba(33, 33, 33, 0.7); */
     padding-top: 5px;
     height: 100%;
     max-width: 441px;
@@ -450,6 +449,17 @@ time {
 #up-vote:focus,
 #down-vote:focus {
     color: var(--mdc-theme-primary);
+}
+
+#search-field {
+    width: 90vh;
+    padding-top: 1vh;
+    font-family: "Quicksand", sans-serif;
+}
+
+#search-field-container {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 #loading-progress {

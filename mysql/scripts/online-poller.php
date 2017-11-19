@@ -14,6 +14,7 @@ $MealRequests = array();
 $FriendRequests = array();
 $Friends = array();
 $AcceptedMeals = array();
+$RestHistory= array();
 //Poll for Online Friends
 $findfrens = "SELECT PUID FROM userspair WHERE UID = '" . $UID . "' AND isValid=1";
 $countResult = mysqli_query($conn, $findfrens);
@@ -48,7 +49,7 @@ while($row4 = mysqli_fetch_array($query_run)){
     $FriendsTemp=(array('Name'=>$row4['name'],'Date'=>$row4['date'],'UID'=>$row4['uid']));
     array_push($Friends, $FriendsTemp);
 }
-
+//Poll for Accepted Meal Requests
 $AcceptedMealRequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, user AS u, customer AS c WHERE r.PlaceID='".$Place."'AND r.CustomerID='" . $CustID . "' AND r.isValid=1 AND r.isAccepted=1 AND c.CustomerID=r.RequestTo AND c.UID=u.UID";
 $AcceptedRun = mysqli_query($conn, $AcceptedMealRequests);
 while($row5=mysqli_fetch_array($AcceptedRun)){
@@ -56,6 +57,14 @@ while($row5=mysqli_fetch_array($AcceptedRun)){
     array_push($AcceptedMeals, $AcceptMealsTemp);
 }
 
+//Poll for restaurants history
+$history = "SELECT r.RestaurantID AS restid, p.Street AS street, r.RestaurantName AS name, res.DateReserved AS date, res.TimeReserved AS time FROM restaurant AS r, reservation AS res, place AS p WHERE res.CustomerID='" . $CustID . "' AND res.RestaurantID=r.RestaurantID AND res.isFulfilled=1 AND p.PlaceID=r.PlaceID";
+$historyrun=mysqli_query($conn, $history);
+while($row6=mysqli_fetch_array($historyrun)){
+    $historytemp=(array('Restname'=>$row6['name'],'Date'=>$row6['date'],'Time'=>$row6['time'],'Street'=>$row6['street'],'RestID'=>$row6['restid']));
+    array_push($RestHistory, $historytemp);
+}
+
 mysqli_close($conn);
-echo json_encode(array('OnlineFriends'=>$OnlineFriends,'MealRequests'=>$MealRequests,'FriendRequests'=>$FriendRequests,'Friends'=>$Friends,'AcceptedMealRequests'=>$AcceptedMeals));
+echo json_encode(array('OnlineFriends'=>$OnlineFriends,'MealRequests'=>$MealRequests,'FriendRequests'=>$FriendRequests,'Friends'=>$Friends,'AcceptedMealRequests'=>$AcceptedMeals,'History'=>$RestHistory));
 ?>

@@ -260,16 +260,16 @@ hr {
 }
 
 #google-map-driving {
-    height: 400px;
+    height: 100vh;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 40px;
     margin-top: 16px;
 }
 
 #google-map-transit {
-    height: 400px;
+    height: 100vh;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 40px;
     margin-top: 16px;
 }
 

@@ -14,7 +14,7 @@ class Restaurant{
     private $geoLong;
     private $dateAdded;
     private $timeAdded;
-    private $restauarntID;
+    private $restaurantID;
     private $restaurantName;
     private $countLikes;
     private $countDislikes;

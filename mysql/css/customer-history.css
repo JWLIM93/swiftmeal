@@ -157,6 +157,7 @@ a:active {
 
 #add-review-button {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 #reviews-dialog {

@@ -117,3 +117,20 @@ confirmDialog.listen('MDCDialog:accept', function() {
 confirmDialog.listen('MDCDialog:cancel', function() {
     dialogUnderlay.style.display = 'none';
 });
+
+// Animate floating action button
+window.onscroll = function() {
+    hideFAB();
+};
+
+function hideFAB() {
+    if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
+        document
+            .getElementById('to-directions-fab')
+            .classList.add('mdc-fab--exited');
+    } else {
+        document
+            .getElementById('to-directions-fab')
+            .classList.remove('mdc-fab--exited');
+    }
+}

@@ -8,6 +8,7 @@ let OnlineFriendsAmount = 0;
 let RecommendationCounter = 0;
 let Accepts = [];
 let MealRequests = [];
+let HistoryMeals = [];
 var CheckboxCount = 0;
 // First Run of Check Online
 checkOnline();
@@ -78,6 +79,13 @@ function checkOnline() {
                 if(MealRequests.indexOf(json.MealRequests[i].PlaceID)=== -1){
                     DisplayMealRequests(json.MealRequests[i].Name,json.MealRequests[i].Date,json.MealRequests[i].Time,json.MealRequests[i].Restname,json.MealRequests[i].UID,json.MealRequests[i].PlaceID);
                     MealRequests.push(json.MealRequests[i].PlaceID);
+                }
+            }
+            
+            for(i=0;i<json.History.length;i++){
+                if(HistoryMeals.indexOf(json.History[i].RestID)===-1){
+                    DisplayHistory(json.History[i].Restname,json.History[i].Date,json.History[i].Time,json.History[i].Street,json.History[i].RestID);
+                    HistoryMeals.push(json.History[i].RestID);
                 }
             }
             
@@ -437,6 +445,55 @@ function DisplayMealRequests(name,date,time,restname,uid,placeid){
     listnode.appendChild(spannode3)
     if(document.getElementById("pending-invite-list")!==null){
         document.getElementById("pending-invite-list").appendChild(listnode);
+    }
+}
+
+function DisplayHistory(name,date,time,street,restid){
+    var listnode=document.createElement("li");
+    listnode.className="mdc-list-item";
+    listnode.id=name;
+    listnode.name =street;
+    var imgnode = document.createElement("img");
+    imgnode.className="mdc-list-item__start-detail grey-bg";
+    imgnode.src="/src/ic_restaurant_white_24px.svg";
+    imgnode.height="56";
+    imgnode.width="56";
+    imgnode.alt="restaurant";
+    var spannode = document.createElement("span");
+    spannode.className="mdc-list-item__text";
+    var textnode = document.createTextNode(name);
+    var spannode2 = document.createElement("span");
+    spannode2.className="mdc-list-item__text__secondary";
+    var textnode2 = document.createTextNode("Visited on "+date+", "+time);
+    spannode2.appendChild(textnode2);
+    spannode.appendChild(textnode);
+    spannode.appendChild(spannode2);
+    var anode=document.createElement('a');
+    anode.id="add-review-button";
+    anode.className="material-icons mdc-list-item__end-detail";
+    anode.title="Add Review";
+    anode.innerHTML="mode_comment";
+    anode.name=restid;
+    anode.addEventListener('click', function() {
+        var reviewsDialog = document.querySelector('#reviews-dialog');
+        var dialogUnderlay = document.getElementById('dialog-underlay');
+        if (reviewsDialog.style.display != 'block') {
+            document.getElementById("dialog-description").innerHTML=name;
+            document.getElementById("dialog-sub-description").innerHTML=street;
+            sessionStorage.setItem("history-restid",restid);
+            viewAllReviews();
+            reviewsDialog.style.display = 'block';
+            dialogUnderlay.style.display = 'block';
+        } else {
+            reviewsDialog.style.display = 'none';
+            dialogUnderlay.style.display = 'none';
+        }
+    });
+    listnode.appendChild(imgnode);
+    listnode.appendChild(spannode);
+    listnode.appendChild(anode);
+    if(document.getElementById("past-recommendations-list")!==null){
+        document.getElementById("past-recommendations-list").appendChild(listnode);
     }
 }
 
