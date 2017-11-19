@@ -15,7 +15,7 @@ function viewAllReviews() {
     }
     console.log(restID);
     $.ajax({
-        url: 'scripts/review-operations.php?restID=' + restID,
+        url: 'scripts/review-operations.php?RestaurantID=' + restID,
         data: { action: 'reviewRequest' },
         type: 'post',
         success: function(data) {

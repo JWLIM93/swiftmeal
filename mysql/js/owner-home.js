@@ -15,6 +15,11 @@ document.querySelector('#new-restaurant-fab').addEventListener('click', () => {
     }
 });
 
+document.querySelector('#confirm-add-button').addEventListener('click', () => {
+    confirmDialog.style.display = 'none';
+    addRestaurant.style.display = 'none';
+});
+
 // Animate floating action button
 window.onscroll = function() {
     hideFAB();

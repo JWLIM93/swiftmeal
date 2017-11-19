@@ -63,7 +63,6 @@
         </div>
     </header>
     <main class="mdc-toolbar-fixed-adjust mdc-theme--dark">
-        <div id="map"></div>
         <div id="foreground-content" class="mdc-layout-grid mdc-layout-grid--fixed-column-width">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
@@ -91,13 +90,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle">
+                        </div>
                     </div>
                     <div id="reviews-container" class="mdc-layout-grid__inner mdc-elevation--z10">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+                            <h1 id="reviews-pre-header">47</h1>
+                            <h1 id="reviews-header">Reviews</h1>
                             <div id="reviews-list-group" class="mdc-list-group">
-                                <h3 id="reviews-list-group-subheader" class="mdc-list-group__subheader">Reviews (47)</h3>
                                 <ul id="reviews-list" class="mdc-list mdc-list--two-line msgs-list">
                                     <li role="separator" class="mdc-list-divider"></li>
                                     <li id="reviews-list-item" class="mdc-list-item">
@@ -108,16 +109,6 @@
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
-                                                    </a>
-                                                </span>
-                                            </span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-list-divider"></li>
@@ -129,16 +120,6 @@
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
-                                                    </a>
-                                                </span>
-                                            </span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-list-divider"></li>
@@ -150,16 +131,6 @@
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
-                                                    </a>
-                                                </span>
-                                            </span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-list-divider"></li>
@@ -171,16 +142,6 @@
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
-                                                    </a>
-                                                </span>
-                                            </span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-list-divider"></li>
@@ -192,16 +153,6 @@
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
-                                                    </a>
-                                                </span>
-                                            </span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-list-divider"></li>
@@ -213,34 +164,140 @@
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                    </div>
+                    <div id="reservations-container" class="mdc-layout-grid__inner mdc-elevation--z10">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+                            <h1 id="reservations-header">Reservations</h1>
+                            <div id="reservations-list-group" class="mdc-list-group">
+                                <ul id="reservations-list" class="mdc-list mdc-list--two-line msgs-list">
+                                    <li role="separator" class="mdc-list-divider"></li>
+                                    <li id="reservations-list-item" class="mdc-list-item">
+                                        <span class="mdc-list-item__text">
+                                            Justin Fong
+                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
+                                        </span>
+
+                                        <span class="mdc-list-item__end-detail">
+                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                                            <span id="fulfil-reject-reservation-container">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                    block
                                                 </a>
                                                 <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                        check
                                                     </a>
                                                 </span>
                                             </span>
                                         </span>
                                     </li>
                                     <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
+                                    <li id="reservations-list-item" class="mdc-list-item">
                                         <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
+                                            Justin Fong
+                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
                                         </span>
 
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="up-down-vote-container">
-                                                <a href="#" id="down-vote" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    thumb_down
+                                            <span id="fulfil-reject-reservation-container">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                    block
                                                 </a>
                                                 <span>
-                                                    <a href="#" id="up-vote" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        thumb_up
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                        check
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li role="separator" class="mdc-list-divider"></li>
+                                    <li id="reservations-list-item" class="mdc-list-item">
+                                        <span class="mdc-list-item__text">
+                                            Justin Fong
+                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
+                                        </span>
+
+                                        <span class="mdc-list-item__end-detail">
+                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                                            <span id="fulfil-reject-reservation-container">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                    block
+                                                </a>
+                                                <span>
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                        check
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li role="separator" class="mdc-list-divider"></li>
+                                    <li id="reservations-list-item" class="mdc-list-item">
+                                        <span class="mdc-list-item__text">
+                                            Justin Fong
+                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
+                                        </span>
+
+                                        <span class="mdc-list-item__end-detail">
+                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                                            <span id="fulfil-reject-reservation-container">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                    block
+                                                </a>
+                                                <span>
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                        check
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li role="separator" class="mdc-list-divider"></li>
+                                    <li id="reservations-list-item" class="mdc-list-item">
+                                        <span class="mdc-list-item__text">
+                                            Justin Fong
+                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
+                                        </span>
+
+                                        <span class="mdc-list-item__end-detail">
+                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                                            <span id="fulfil-reject-reservation-container">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                    block
+                                                </a>
+                                                <span>
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                        check
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li role="separator" class="mdc-list-divider"></li>
+                                    <li id="reservations-list-item" class="mdc-list-item">
+                                        <span class="mdc-list-item__text">
+                                            Justin Fong
+                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
+                                        </span>
+
+                                        <span class="mdc-list-item__end-detail">
+                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
+                                            <span id="fulfil-reject-reservation-container">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                    block
+                                                </a>
+                                                <span>
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                        check
                                                     </a>
                                                 </span>
                                             </span>
@@ -252,7 +309,9 @@
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-top">
+                    <i id="delete-restaurant-button" class="material-icons mdc-elevation--z10">delete</i>
+                </div>
             </div>
         </div>
         <div id="dialog-underlay" class="mdc-elevation--z14"></div>

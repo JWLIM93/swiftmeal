@@ -13,13 +13,13 @@ let menu = new mdc.menu.MDCSimpleMenu(
 document
     .querySelector('#menu-edit-profile-button')
     .addEventListener('click', () => {
-        window.location = '/mysql/customer-edit-profile.php';
+        window.location = '/mysql/owner-edit-profile.php';
     });
 
 document
     .querySelector('#menu-change-password-button')
     .addEventListener('click', () => {
-        window.location = '/mysql/customer-change-password.php';
+        window.location = '/mysql/owner-change-password.php';
     });
 
 document

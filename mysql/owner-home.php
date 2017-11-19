@@ -208,6 +208,22 @@
                                             </span>
                                             <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
                                         </li>
+                                        <li id="justin-chicken-rice" class="mdc-list-item restaurant-item">
+                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
+                                            <span class="mdc-list-item__text">
+                                                Justin's Chicken Rice
+                                                <span class="mdc-list-item__text__secondary">854 Queens Street, Singapore 99889988</span>
+                                            </span>
+                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
+                                        </li>
+                                        <li id="justin-chicken-rice" class="mdc-list-item restaurant-item">
+                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
+                                            <span class="mdc-list-item__text">
+                                                Justin's Chicken Rice
+                                                <span class="mdc-list-item__text__secondary">854 Queens Street, Singapore 99889988</span>
+                                            </span>
+                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

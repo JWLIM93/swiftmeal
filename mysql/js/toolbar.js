@@ -54,7 +54,3 @@ document.querySelector('#friends-list-nav').addEventListener('click', () => {
 document
     .querySelector('#customer-profile')
     .addEventListener('click', () => (menu.open = !menu.open));
-
-document.querySelector('#product-name').addEventListener('click', () => {
-    window.location = '/mysql/customer-home.php';
-});

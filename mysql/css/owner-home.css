@@ -301,6 +301,7 @@ a:active {
     color: white;
     font-size: 40px;
     text-align: right;
+    cursor: pointer;
 }
 
 #loading-progress {
