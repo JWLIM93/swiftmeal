@@ -106,7 +106,7 @@
                 <!-- Confirm New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="confirm-new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input type="text " id="confirm-new-password-box" class=" mdc-text-field__input">
+                    <input required type="text " id="confirm-new-password-box" class=" mdc-text-field__input">
                     <label for="confirm-new-password-input-box" class=" mdc-text-field__label ">Confirm New Password</label>
                     <div class=" mdc-text-field__bottom-line">
                     </div>
