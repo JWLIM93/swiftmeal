@@ -187,116 +187,11 @@
                                         <span class="mdc-list-item__end-detail">
                                             <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
                                             <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
+                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Reject Reservation" title="Reject Reservation">
                                                     block
                                                 </a>
                                                 <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        check
-                                                    </a>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reservations-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Justin Fong
-                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    block
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        check
-                                                    </a>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reservations-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Justin Fong
-                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    block
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        check
-                                                    </a>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reservations-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Justin Fong
-                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    block
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        check
-                                                    </a>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reservations-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Justin Fong
-                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    block
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
-                                                        check
-                                                    </a>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reservations-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Justin Fong
-                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Down Vote Review" title="Down Vote Review">
-                                                    block
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Up Vote Review" title="Up Vote Review">
+                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Fulfil Reservation" title="Fulfil Reservation">
                                                         check
                                                     </a>
                                                 </span>

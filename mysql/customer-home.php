@@ -48,8 +48,40 @@ $customer = $_SESSION['Obj'];
         </section>
         <section class="mdc-toolbar__section">
           <div id="search-field-container" class="mdc-text-field">
-            <input type="text" id="search-field" class="mdc-text-field__input" placeholder="Search" oninput="">
+            <input type="text" id="search-field" class="mdc-text-field__input" placeholder="Search" oninput="showSearchDropdown(this)">
             <div class="mdc-text-field__bottom-line"></div>
+            <ul id="search-dropdown" class="mdc-list">
+              <li class="mdc-list-item search-dropdown-item">
+                <span class="mdc-list-item__text">
+                  Two-line item
+                  <span class="mdc-list-item__text__secondary">Secondary text</span>
+                </span>
+              </li>
+              <li class="mdc-list-item search-dropdown-item">
+                <span class="mdc-list-item__text">
+                  Two-line item
+                  <span class="mdc-list-item__text__secondary">Secondary text</span>
+                </span>
+              </li>
+              <li class="mdc-list-item search-dropdown-item">
+                <span class="mdc-list-item__text">
+                  Two-line item
+                  <span class="mdc-list-item__text__secondary">Secondary text</span>
+                </span>
+              </li>
+              <li class="mdc-list-item search-dropdown-item">
+                <span class="mdc-list-item__text">
+                  Two-line item
+                  <span class="mdc-list-item__text__secondary">Secondary text</span>
+                </span>
+              </li>
+              <li class="mdc-list-item search-dropdown-item">
+                <span class="mdc-list-item__text">
+                  Two-line item
+                  <span class="mdc-list-item__text__secondary">Secondary text</span>
+                </span>
+              </li>
+            </ul>
           </div>
         </section>
         <!-- Navigation toolbar -->

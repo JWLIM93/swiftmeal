@@ -2,6 +2,7 @@
     background-color: rgba(33, 33, 33, 0.7);
 }
 
+
 /* .mdc-layout-grid__cell {
   background-color: red;
 } */
@@ -16,9 +17,9 @@
     background-color: transparent;
 }
 
-.mdc-select > option,
-.mdc-select > optgroup,
-.mdc-select > optgroup > option {
+.mdc-select>option,
+.mdc-select>optgroup,
+.mdc-select>optgroup>option {
     color: black;
 }
 
@@ -73,7 +74,7 @@
     margin-bottom: 0;
 }
 
-.mdc-dialog__footer > .mdc-button {
+.mdc-dialog__footer>.mdc-button {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
 }
@@ -138,7 +139,7 @@ time {
     color: white;
 }
 
-#customer-profile-menu > ul > li {
+#customer-profile-menu>ul>li {
     font-family: "Quicksand", sans-serif;
     font-weight: normal;
     font-size: 15px;
@@ -195,7 +196,7 @@ time {
     margin-left: 5%;
 }
 
-#area-selector > .mdc-select > .mdc-simple-menu {
+#area-selector>.mdc-select>.mdc-simple-menu {
     min-width: 19%;
 }
 
@@ -240,7 +241,7 @@ time {
     padding-left: 6%;
 }
 
-#active-friends > p {
+#active-friends>p {
     font-family: "Quicksand", sans-serif;
     color: var(--mdc-theme-secondary);
     font-weight: bold;
@@ -249,13 +250,13 @@ time {
     font-size: 13px;
 }
 
-#request-recommendations > .mdc-button {
+#request-recommendations>.mdc-button {
     background-color: var(--mdc-theme-secondary);
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
 }
 
-#request-party > .mdc-button {
+#request-party>.mdc-button {
     color: var(--mdc-theme-secondary);
     border-color: var(--mdc-theme-secondary);
     font-family: "Quicksand", sans-serif;
@@ -290,7 +291,7 @@ time {
     left: 25%;
 }
 
-#active-friends-dialog > div > div {
+#active-friends-dialog>div>div {
     padding-left: 25px;
     padding-right: 25px;
 }
@@ -372,7 +373,7 @@ time {
     padding-bottom: 70px;
 }
 
-#recommendation-focus-dialog > div > div {
+#recommendation-focus-dialog>div>div {
     padding-left: 25px;
     padding-right: 25px;
 }
@@ -415,8 +416,8 @@ time {
     padding-bottom: 8px;
 }
 
-#reviews-list-item > span,
-#reviews-list-item > span > span {
+#reviews-list-item>span,
+#reviews-list-item>span>span {
     font-family: "Quicksand", sans-serif;
 }
 
@@ -452,14 +453,57 @@ time {
 }
 
 #search-field {
-    width: 90vh;
-    padding-top: 0.5vh;
+    padding-top: 0.1vh;
+    padding-left: 15px;
+    padding-right: 15px;
     font-family: "Quicksand", sans-serif;
+    border-bottom-color: white;
+    color: white;
+}
+
+#search-field::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: white;
+}
+
+#search-field::-moz-placeholder {
+    /* Firefox 19+ */
+    color: white;
 }
 
 #search-field-container {
+    width: 100%;
     margin-bottom: 0;
     padding-bottom: 0;
+    color: white;
+}
+
+#search-field-container>.mdc-text-field__input {
+    color: white;
+}
+
+#search-dropdown {
+    position: absolute;
+    background-color: #212121;
+    width: 97%;
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    display: none;
+}
+
+#search-dropdown>.mdc-list-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#search-dropdown>.mdc-list-item>.mdc-list-item__text>.mdc-list-item__text__secondary {
+    font-family: "Quicksand", sans-serif;
+}
+
+#search-dropdown>.mdc-list-item>.mdc-list-item__text {
+    font-weight: bold;
 }
 
 #loading-progress {
