@@ -78,17 +78,29 @@
                 <!-- Current Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="current-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input type="password" id="current-password-input-box" class=" mdc-text-field__input">
+                    <input required type="password" id="current-password-input-box" class=" mdc-text-field__input">
                     <label for="current-password-input-box" class=" mdc-text-field__label">Current Password</label>
                     <div class=" mdc-text-field__bottom-line"></div>
+                  </div>
+                  <!-- Password Help Text -->
+                  <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+                    <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="pw-validation-msg">
+                      <em id="current_password_error_msg">8 characters are required for password</em>
+                    </p>
                   </div>
                 </div>
                 <!-- New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input type="password" id="new-password-input-box" class=" mdc-text-field__input">
+                    <input required type="password" id="new-password-input-box" class=" mdc-text-field__input">
                     <label for="name-input-box" class=" mdc-text-field__label">New Password</label>
                     <div class=" mdc-text-field__bottom-line"></div>
+                  </div>
+                  <!-- Password Help Text -->
+                  <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+                    <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="pw-validation-msg">
+                      <em id="new_password_error_msg">Minimum 8 characters are required for the new password</em>
+                    </p>
                   </div>
                 </div>
                 <!-- Confirm New Password Input -->
@@ -98,6 +110,12 @@
                     <label for="confirm-new-password-input-box" class=" mdc-text-field__label ">Confirm New Password</label>
                     <div class=" mdc-text-field__bottom-line">
                     </div>
+                  </div>
+                  <!-- Password Help Text -->
+                  <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+                    <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="pw-validation-msg">
+                      <em id="confirm_password_error_msg">Retype new password for confirmation</em>
+                    </p>
                   </div>
                 </div>
                 <!-- Floating Actiobn Button to submit request -->

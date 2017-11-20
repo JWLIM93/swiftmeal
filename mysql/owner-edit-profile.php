@@ -120,7 +120,6 @@
                   </div>
                   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle"></div>
                 </div>
-                <p id="other-customizations-divider">Other Customizations</p>
                 <button class="mdc-fab material-icons app-fab--absolute mdc-elevation--z13" aria-label="Check" data-mdc-auto-init="MDCRipple"
                   name="edit">
                   <span class="mdc-fab__icon">
