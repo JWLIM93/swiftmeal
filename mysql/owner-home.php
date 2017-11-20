@@ -63,7 +63,7 @@
         </div>
     </header>
     <main class="mdc-toolbar-fixed-adjust mdc-theme--dark">
-        <div id="map"></div>
+        <!-- <div id="map"></div> -->
         <div id="foreground-content" class="mdc-layout-grid mdc-layout-grid--fixed-column-width">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>

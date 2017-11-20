@@ -12,6 +12,7 @@ document.querySelector('#new-restaurant-fab').addEventListener('click', () => {
         addRestaurant.style.display = 'grid';
     } else {
         addRestaurant.style.display = 'none';
+        confirmDialog.style.display = "none";
     }
 });
 
