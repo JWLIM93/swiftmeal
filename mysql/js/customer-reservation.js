@@ -52,16 +52,16 @@ for (let x = 0; x < 7; x++) {
     newDateItem.id =
         nextDate.getFullYear() +
         '-' +
-        nextDate.getMonth() +
+        (nextDate.getMonth() + 1) +
         '-' +
         nextDate.getDate();
     newDateItem.className = 'mdc-list-item date-selection';
     var textNode = document.createTextNode(
         nextDate.getFullYear() +
-            '-' +
-            nextDate.getMonth() +
-            '-' +
-            nextDate.getDate()
+        '-' +
+        (nextDate.getMonth() + 1) +
+        '-' +
+        nextDate.getDate()
     );
     newDateItem.appendChild(textNode);
     dateSelectionList.appendChild(newDateItem);
@@ -114,18 +114,19 @@ document.querySelector('#to-directions-fab').addEventListener('click', () => {
 });
 
 // Listen for invite dialog activator
-confirmDialog.listen('MDCDialog:accept', function() {
+confirmDialog.listen('MDCDialog:accept', function () {
     $.ajax({
-        url:
-            'scripts/friend-operations.php?Pax=' +
+        url: 'scripts/friend-operations.php?Pax=' +
             parseInt(pax) +
             '&Time=' +
             timeSelected +
             '&Date=' +
             dateSelected,
-        data: { action: 'ReservePlace' },
+        data: {
+            action: 'ReservePlace'
+        },
         type: 'post',
-        success: function(output) {
+        success: function (output) {
             if (output === 'succeed') {
                 window.location = '/mysql/current-location.php';
             } else {
@@ -135,12 +136,12 @@ confirmDialog.listen('MDCDialog:accept', function() {
     });
 });
 
-confirmDialog.listen('MDCDialog:cancel', function() {
+confirmDialog.listen('MDCDialog:cancel', function () {
     dialogUnderlay.style.display = 'none';
 });
 
 // Animate floating action button
-window.onscroll = function() {
+window.onscroll = function () {
     hideFAB();
 };
 

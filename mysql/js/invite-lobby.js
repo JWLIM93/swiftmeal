@@ -116,14 +116,14 @@ for (let x = 1; x < 7; x++) {
     newDateItem.id =
         nextDate.getFullYear() +
         '-' +
-        nextDate.getMonth() +
+        (nextDate.getMonth() + 1) +
         '-' +
         nextDate.getDate();
     newDateItem.className = 'mdc-list-item date-selection';
     var textNode = document.createTextNode(
         nextDate.getFullYear() +
             '-' +
-            nextDate.getMonth() +
+            (nextDate.getMonth() + 1) +
             '-' +
             nextDate.getDate()
     );

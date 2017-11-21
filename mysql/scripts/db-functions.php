@@ -66,7 +66,7 @@ function loginUser($email,$password){
             
                     session_start();
                     $name = $loginData['Name'];
-                    $contact_no = $loginData['ContactNo'];
+                    $contact_no = $loginData['MobileNo'];
                     $owner_id = $ownerResult['OwnerID'];
                     $ownerSession = new Owner($user_ID,$name,$email,$password,$contact_no,'login',$owner_id,1);
                     $_SESSION['Obj'] = $ownerSession;

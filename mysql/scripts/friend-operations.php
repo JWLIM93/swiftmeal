@@ -84,7 +84,7 @@ function MakeReservation($CustID,$Pax,$time,$date,$con){
     $customer = $_SESSION['Obj'];
     $PlaceID=$customer->getPlaceID();
     $RestID=$customer->getRestID();
-    $UpdateRequestStatus="UPDATE request SET isValid=0 WHERE CustomerID='".$CustID."' AND PlaceID ='" .$PlaceID."'";
+    $UpdateRequestStatus="UPDATE request SET isAccepted=0 WHERE CustomerID='".$CustID."' AND PlaceID ='" .$PlaceID."'";
     mysqli_query($con, $UpdateRequestStatus);
     $BookingID = BookingIDGenerator($CustID);
     $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . $date . "','".$time."',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";

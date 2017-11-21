@@ -72,13 +72,14 @@
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
+                <form name ="ChangePassword" method = "post" target="hiddenFrame">
               <h1 id="change-password-header">Update your password</h1>
               <p id="change-password-description">Change your password regularly to prevent unauthorised access to your account.</p>
               <div id="input-fields-super-container" class="mdc-layout-grid__inner">
                 <!-- Current Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="current-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input required type="password" id="current-password-input-box" class=" mdc-text-field__input">
+                    <input required type="password" id="current-password-input-box" class=" mdc-text-field__input" name="currentPW"/>
                     <label for="current-password-input-box" class=" mdc-text-field__label">Current Password</label>
                     <div class=" mdc-text-field__bottom-line"></div>
                   </div>
@@ -92,7 +93,7 @@
                 <!-- New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input required type="password" id="new-password-input-box" class=" mdc-text-field__input">
+                    <input required type="password" id="new-password-input-box" class=" mdc-text-field__input" name="newPW"/>
                     <label for="name-input-box" class=" mdc-text-field__label">New Password</label>
                     <div class=" mdc-text-field__bottom-line"></div>
                   </div>
@@ -106,7 +107,7 @@
                 <!-- Confirm New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="confirm-new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input required type="text " id="confirm-new-password-box" class=" mdc-text-field__input">
+                    <input required type="password" id="confirm-new-password-box" class=" mdc-text-field__input" name="confirmNewPW"/>
                     <label for="confirm-new-password-input-box" class=" mdc-text-field__label ">Confirm New Password</label>
                     <div class=" mdc-text-field__bottom-line">
                     </div>
@@ -124,7 +125,10 @@
                     check
                   </span>
                 </button>
+             
               </div>
+               </form>
+                <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
             </div>
           </div>
@@ -156,7 +160,7 @@
     window.mdc.autoInit();
   </script>
   <script src="js/toolbar.js"></script>
-  <script src="js/customer-change-password.js "></script>
+  <script src="js/customer-change-password.js"></script>
 </body>
 
 </html>

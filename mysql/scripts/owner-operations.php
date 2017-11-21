@@ -17,13 +17,14 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
         case 'getReservations': GetReservations($_GET['restid'],$conn);break;
         case 'accept' : AcceptReservation($_GET['BID'], $conn);break;
         case 'deny' : DenyReservation($_GET['BID'], $conn);break;
+        case 'deleteRestaurant' : DeleteRestaurant($_GET['restid'], $conn);break;
         default: break;
     }
 }
 
 function GetRestaurants($ownid,$con){
     $Restaurants = array();
-    $GetRestaurantQuery = "SELECT p.Street AS street, r.RestaurantID AS restid, r.RestaurantName AS name FROM place AS p, restaurant AS r WHERE r.OwnerID = '".$ownid."' AND r.PlaceID=p.PlaceID";
+    $GetRestaurantQuery = "SELECT p.Street AS street, r.RestaurantID AS restid, r.RestaurantName AS name FROM place AS p, restaurant AS r WHERE r.OwnerID = '".$ownid."' AND r.PlaceID=p.PlaceID AND r.isValid = 1";
     $queryrun = mysqli_query($con, $GetRestaurantQuery);
     while ($row = mysqli_fetch_array($queryrun)) {
         $temprest= (array('Street'=>$row['street'],'RestID'=>$row['restid'],'Restname'=>$row['name']));
@@ -64,15 +65,18 @@ function GetReservations($restid, $con){
 
 function AcceptReservation($BID, $con){
     $Accept = "UPDATE reservation SET isValid=1 WHERE BookingID='".$BID."'";
-    $queryrun = mysqli_query($con, $Accept);
+    mysqli_query($con, $Accept);
 }
 
 function DenyReservation($BID, $con){
     $Deny = "UPDATE reservation SET isValid=0 WHERE BookingID='".$BID."'";
-    $queryrun = mysqli_query($con, $Deny);
+    mysqli_query($con, $Deny);
 }
 
-
+function DeleteRestaurant($restid, $con){
+    $Delete = "UPDATE restaurant SET isValid=0 WHERE RestaurantID='".$restid."'";
+    mysqli_query($con, $Delete);
+}
 
 
 

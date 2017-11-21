@@ -50,7 +50,7 @@ while($row4 = mysqli_fetch_array($query_run)){
     array_push($Friends, $FriendsTemp);
 }
 //Poll for Accepted Meal Requests
-$AcceptedMealRequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, user AS u, customer AS c WHERE r.PlaceID='".$Place."'AND r.CustomerID='" . $CustID . "' AND r.isValid=1 AND r.isAccepted=1 AND c.CustomerID=r.RequestTo AND c.UID=u.UID";
+$AcceptedMealRequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, user AS u, customer AS c WHERE r.PlaceID='".$Place."'AND r.CustomerID='" . $CustID . "' AND r.isValid=0 AND r.isAccepted=1 AND c.CustomerID=r.RequestTo AND c.UID=u.UID";
 $AcceptedRun = mysqli_query($conn, $AcceptedMealRequests);
 while($row5=mysqli_fetch_array($AcceptedRun)){
     $AcceptMealsTemp = (array('Name'=>$row5['name'],'UID'=>$row5['uid']));

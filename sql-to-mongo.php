@@ -22,21 +22,6 @@ function connectToSQL() {
 	echo "Connected successfully";
 }
 
-function selectAllArea() {
-	global $sqlConn;
-	$sql = "SELECT * FROM area";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			echo "AreaId: " . $row["AreaID"]. "<br>AreaName: " . $row["AreaName"]. "<br>PlaceCount" . $row["PlaceCount"]. "<br>DefaultLat" . $row["defaultLat"] . "<br>DefaultLng" . $row["dafaultLng"];
-		}
-	} else {
-		echo "0 results";
-	}
-}
-
 function connectToMongo() {
 	global $mongoConn;
 	try {
@@ -63,8 +48,32 @@ function connectToMongo() {
 	}
 }
 
+function AreaSqlToMongo() {
+
+    $bulk = new MongoDB\Driver\BulkWrite;
+
+	global $sqlConn;
+	global $mongoConn;
+	
+	$sql = "SELECT * FROM area";
+	$result = mysqli_query($sqlConn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			$doc = ['_id' => $row["AreaID"], 'AreaName' => $row["AreaName"], 'PlaceCount' => $row["PlaceCount"], 'DefaultLat' => $row["defaultLat"], 'DefaultLong' => $row["defaultLong"]];
+			$bulk->insert($doc);
+			echo "AreaId: " . $row["AreaID"]. "AreaName: " . $row["AreaName"]. "PlaceCount" . $row["PlaceCount"]. "DefaultLat" . $row["defaultLat"] . "DefaultLng" . $row["defaultLong"]. "<br>";
+		}
+
+		$mongoConn->executeBulkWrite('swiftmeal.area', $bulk);
+	} else {
+		echo "0 results<br>";
+	}
+}
+
 connectToSQL();
-selectAllArea();
 connectToMongo();
+AreaSqlToMongo();
 
 ?>

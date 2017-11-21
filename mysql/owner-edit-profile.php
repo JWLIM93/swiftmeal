@@ -1,3 +1,9 @@
+<?php 
+include 'scripts/db-functions.php';
+include 'scripts/owner.php';
+session_start();
+
+?>
 <html class="mdc-typography">
 
 <head>
@@ -69,11 +75,8 @@
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-              <h1 id="edit-profile-header">
-                name
-              </h1>
+              <h1 id="edit-profile-header"> <?php $owner = $_SESSION['Obj']; echo $owner->getFullName();?></h1>
               <p id="edit-profile-divider">Personal Information</p>
-              <form action="scripts/post-requests.php" name="editProfile" method="post" onsubmit="return submitEdit()">
                 <p id="edit-profile-description">Customise your personal information to allow the community to easily recognise you.</p>
                 <div id="input-fields-super-container" class="mdc-layout-grid__inner">
                   <!-- Name Input -->
@@ -86,7 +89,7 @@
                     <!-- Name Input Helptext -->
                     <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                       <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="name-validation-msg">
-                        name
+                       <?php echo $owner->getFullName();?>
                       </p>
                     </div>
                   </div>
@@ -100,7 +103,7 @@
                     <!-- Email Address Input Helptext -->
                     <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                       <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="email-address-validation-msg">
-                        email
+                      <?php echo $owner->getEmail();?>
                       </p>
                     </div>
                   </div>
@@ -114,19 +117,18 @@
                     <!-- Mobile Input Helptext -->
                     <div id="single-field-helptext" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                       <p class="mdc-text-field-helptext mdc-text-field-helptext--persistent mdc-text-field-helptext--validation-msg" id="mobile-validation-msg">
-                        number
+                       <?php echo $owner->getPhone_number();?>
                       </p>
                     </div>
                   </div>
                   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle"></div>
                 </div>
-                <button class="mdc-fab material-icons app-fab--absolute mdc-elevation--z13" aria-label="Check" data-mdc-auto-init="MDCRipple"
+                <button id="edit-profile-fab" class="mdc-fab material-icons app-fab--absolute mdc-elevation--z13" aria-label="Check" data-mdc-auto-init="MDCRipple"
                   name="edit">
                   <span class="mdc-fab__icon">
-                    check
+                  check
                   </span>
                 </button>
-              </form>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
           </div>

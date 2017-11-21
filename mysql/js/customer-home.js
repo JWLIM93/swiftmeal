@@ -41,6 +41,7 @@ recommendButton.addEventListener('click', () => {
             url: 'scripts/ajax-data.php',
             data: 'areaID=' + areaID,
             success: function(html) {
+                loadingBar.style.display = 'none';
                 $('#restaurant').html(html);
                 populateMarkers();
                 window.mdc.autoInit();
@@ -93,6 +94,7 @@ recommendButton.addEventListener('click', () => {
             url: 'scripts/ajax-data-random.php',
             data: 'areaID=' + areaID,
             success: function(html) {
+                loadingBar.style.display = 'none';
                 $('#restaurant').html(html);
                 populateMarkers();
                 window.mdc.autoInit();
@@ -140,6 +142,7 @@ recommendButton.addEventListener('click', () => {
             }
         });
     } else {
+        loadingBar.style.display = 'none';
         $('#restaurant').html(
             '<li id="recommended-place-1" class="mdc-list-item" data-mdc-auto-init="MDCRipple">' +
                 '<span class="mdc-list-item__text">' +
