@@ -74,8 +74,8 @@ else if(!empty($_POST) and isset($_POST['login'])){
      if ($sessionObj instanceof customer){
          header('Location: ../customer-home.php');
      }
-     elseif($sessionObj instanceof Owner){
-         header('Location: ../owner_index.php');
+     elseif($sessionObj instanceof owner){
+         header('Location: ../owner-home.php');
      }
     }else{
         header('Location: ../index.php');
@@ -88,7 +88,7 @@ else if(!empty($_POST) && isset($_POST['edit'])){
 }
 
 
-//user id genreator    
+//user id generator    
 function userIDGenerator($user,$contact,$name){
     $prefix="";
     if ($user=="Customer"){

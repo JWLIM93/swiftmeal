@@ -12,7 +12,7 @@ function connect_db(){
 }
 //check prefix
 function checkPrefix($word){
-    $prefix = substr($word, 0,4);
+    $prefix = substr($word, 0,5);
     if ($prefix == 'UCUST'){
         return 0;
     }
@@ -56,7 +56,7 @@ function loginUser($email,$password){
             }
         }
         else if($userTypeCheck == 1){
-            $checkValidOwnersql = "SELECT * FROM restaurant_owner WHERE UID ='$user_ID'";
+            $checkValidOwnersql = "SELECT * FROM owner WHERE UID ='$user_ID'";
             $checkResult = connect_db()->query($checkValidOwnersql) or die("Fail to query db". mysqli_error('index.php'));
      
             if(mysqli_num_rows($checkResult)==1){
