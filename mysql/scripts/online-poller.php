@@ -28,10 +28,10 @@ while ($row = mysqli_fetch_array($countResult)) {
     }
 }
 //Poll for Meal Requests
-$findrequests = "SELECT u.Name AS name, r.CustomerID AS uid ,r.RequestDate AS date, r.RequestTime AS time, rest.RestaurantName AS restname , rest.PlaceID AS placeid FROM restaurant AS rest, request AS r, customer AS c, user AS u WHERE r.isValid=1 AND r.RequestTo = '" . $CustID . "' AND r.CustomerID=c.CustomerID AND c.UID=u.UID AND rest.PlaceID=r.PlaceID";
+$findrequests = "SELECT u.Name AS name, r.CustomerID AS uid ,r.RequestDate AS date, r.RequestTime AS time, rest.RestaurantName AS restname , rest.PlaceID AS placeid, p.GeoLat AS lat, p.GeoLong AS lng, p.Street AS street, rest.RestaurantID AS id FROM place AS p, restaurant AS rest, request AS r, customer AS c, user AS u WHERE r.isValid=1 AND r.RequestTo = '" . $CustID . "' AND r.CustomerID=c.CustomerID AND c.UID=u.UID AND rest.PlaceID=r.PlaceID AND r.PlaceID=p.PlaceID";
 $MealResult = mysqli_query($conn, $findrequests);
 while ($row2 = mysqli_fetch_array($MealResult)) {
-    $tempMeal = (array('Name'=>$row2['name'],'UID'=>$row2['uid'],'Date'=>$row2['date'],'Time'=>$row2['time'],'Restname'=>$row2['restname'],'PlaceID'=>$row2['placeid']));
+    $tempMeal = (array('Name'=>$row2['name'],'UID'=>$row2['uid'],'Date'=>$row2['date'],'Time'=>$row2['time'],'Restname'=>$row2['restname'],'PlaceID'=>$row2['placeid'],'Lat'=>$row2['lat'],'Long'=>$row2['lng'],'Street'=>$row2['street'],'RestID'=>$row2['id']));
     array_push($MealRequests,$tempMeal);
 }
 //Poll for Friend Requests

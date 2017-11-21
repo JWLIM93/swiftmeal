@@ -1,17 +1,18 @@
 <?php
 include 'db-functions.php';
 include 'owner.php';
+include 'customer.php';
 session_start();
 $owner = $_SESSION['Obj'];
 $conn = connect_db();
 $UID = $owner->getUser_id(); 
-$OwnerID = $owner->getOwnerID();
 
 if(isset($_POST['action']) && !empty($_POST['action'])){
     $action=$_POST['action'];
     switch($action){
         case 'changepw': ChangePassword($_GET['OLDPW'],$UID,$_GET['PW'],$owner,$conn);break;
         case 'editProfileInformation': editProfile($_GET['name'],$_GET['email'],$_GET['mobile'],$UID,$conn);break;
+        case 'editProfileInformationCUST': editProfileCUST($_GET['name'],$_GET['email'],$_GET['mobile'],$UID,$conn);break;
         default: break;
     }
 }
@@ -58,7 +59,34 @@ function editProfile($name,$email,$mobileNo,$uid,$con){
 		echo "succeed";
 	}else{
 		echo "fail";
-	}  
+	}
 }
 
+
+function editProfileCUST($name,$email,$mobileNo,$uid,$con){
+	if($name != "" || $email != "" || $mobileNo != ""){
+		global $owner;
+		if($name != ""){			
+			$updateNameSQL = "UPDATE user SET Name='".$name."' WHERE UID='".$uid."'";
+			$owner->setFullName($name); 
+			mysqli_query($con, $updateNameSQL);
+		}
+		if($email != ""){
+			$updateEmailSQL = "UPDATE user SET Email='".$email."' WHERE UID='".$uid."'";
+			$owner->setEmail($email); 
+			mysqli_query($con, $updateEmailSQL);
+		}
+		if($mobileNo != ""){
+			$mobileNoSQL = "UPDATE user SET MobileNo='".$mobileNo."' WHERE UID='".$uid."'";
+			$owner->setPhone_number($mobileNo); 
+			mysqli_query($con, $mobileNoSQL);
+		}
+		$_SESSION['Obj'] = $owner;
+		echo "succeed";
+	}else{
+		echo "fail";
+	}
+	
+  
+}
 ?>

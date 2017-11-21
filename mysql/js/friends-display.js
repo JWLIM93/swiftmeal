@@ -74,25 +74,43 @@ function checkOnline() {
                     Accepts.push(json.AcceptedMealRequests[i].UID);
                 }
             }
-            
-            for(i=0;i<json.MealRequests.length;i++){
-                if(MealRequests.indexOf(json.MealRequests[i].PlaceID)=== -1){
-                    DisplayMealRequests(json.MealRequests[i].Name,json.MealRequests[i].Date,json.MealRequests[i].Time,json.MealRequests[i].Restname,json.MealRequests[i].UID,json.MealRequests[i].PlaceID);
+
+            for (i = 0; i < json.MealRequests.length; i++) {
+                if (MealRequests.indexOf(json.MealRequests[i].PlaceID) === -1) {
+                    DisplayMealRequests(
+                        json.MealRequests[i].Name,
+                        json.MealRequests[i].Date,
+                        json.MealRequests[i].Time,
+                        json.MealRequests[i].Restname,
+                        json.MealRequests[i].UID,
+                        json.MealRequests[i].PlaceID,
+                        json.MealRequests[i].Lat,
+                        json.MealRequests[i].Long,
+                        json.MealRequests[i].Street,
+                        json.MealRequests[i].RestID
+                    );
                     MealRequests.push(json.MealRequests[i].PlaceID);
                 }
             }
-            
-            for(i=0;i<json.History.length;i++){
-                if(HistoryMeals.indexOf(json.History[i].RestID)===-1){
-                    DisplayHistory(json.History[i].Restname,json.History[i].Date,json.History[i].Time,json.History[i].Street,json.History[i].RestID);
+
+            for (i = 0; i < json.History.length; i++) {
+                if (HistoryMeals.indexOf(json.History[i].RestID) === -1) {
+                    DisplayHistory(
+                        json.History[i].Restname,
+                        json.History[i].Date,
+                        json.History[i].Time,
+                        json.History[i].Street,
+                        json.History[i].RestID
+                    );
                     HistoryMeals.push(json.History[i].RestID);
                 }
             }
-            
-            if(document.getElementById("pending-invite-header")!==null){
-                document.getElementById("pending-invite-header").innerHTML="Pending Invites - " + MealRequests.length;
+
+            if (document.getElementById('pending-invite-header') !== null) {
+                document.getElementById('pending-invite-header').innerHTML =
+                    'Pending Invites - ' + MealRequests.length;
             }
-            
+
             if (document.getElementById('accepted-count-container') !== null) {
                 document.getElementById('accepted-count-container').innerHTML =
                     Accepts.length + ' Accepted';
@@ -171,9 +189,23 @@ function DenyRequests(uid) {
     });
 }
 
-function AcceptMealRequests(uid,place) {
+function AcceptMealRequests(
+    uid,
+    place,
+    lat,
+    long,
+    restname,
+    street,
+    date,
+    time,
+    restid
+) {
     $.ajax({
-        url: 'scripts/friend-operations.php?Requester=' + uid+'&PlaceID='+place,
+        url:
+            'scripts/friend-operations.php?Requester=' +
+            uid +
+            '&PlaceID=' +
+            place,
         data: { action: 'AcceptMealRequest' },
         type: 'post',
         success: function(output) {
@@ -184,13 +216,43 @@ function AcceptMealRequests(uid,place) {
             let parent = document.getElementById('pending-invite-list');
             let child = document.getElementById(place);
             parent.removeChild(child);
+            sessionStorage.setItem('Longitude', lat);
+            sessionStorage.setItem('Latitude', long);
+            sessionStorage.setItem('RestName', restname);
+            sessionStorage.setItem('RestAdd', street);
+            $.ajax({
+                url:
+                    'scripts/friend-operations.php?Pax=' +
+                    2 +
+                    '&Time=' +
+                    time +
+                    '&Date=' +
+                    date +
+                    '&placeid=' +
+                    place +
+                    '&restid=' +
+                    restid,
+                data: { action: 'ReservePlace2' },
+                type: 'post',
+                success: function(output) {
+                    if (output === 'succeed') {
+                        window.location = 'current-location.php';
+                    } else {
+                        console.log(output);
+                    }
+                }
+            });
         }
     });
 }
 
-function DeclineMealRequests(uid,place) {
-     $.ajax({
-        url: 'scripts/friend-operations.php?Requester=' + uid+'&PlaceID='+place,
+function DeclineMealRequests(uid, place) {
+    $.ajax({
+        url:
+            'scripts/friend-operations.php?Requester=' +
+            uid +
+            '&PlaceID=' +
+            place,
         data: { action: 'DenyMealRequest' },
         type: 'post',
         success: function(output) {
@@ -400,87 +462,112 @@ function DisplayInviteLobby(name) {
     }
 }
 
-function DisplayMealRequests(name,date,time,restname,uid,placeid){
-    var listnode = document.createElement("li");
-    listnode.className="mdc-list-item";
+function DisplayMealRequests(
+    name,
+    date,
+    time,
+    restname,
+    uid,
+    placeid,
+    lat,
+    long,
+    street,
+    restid
+) {
+    var listnode = document.createElement('li');
+    listnode.className = 'mdc-list-item';
     listnode.id = placeid;
-    var imgnode = document.createElement("img");
-    imgnode.className="mdc-list-item__start-detail grey-bg";
-    imgnode.src = "/src/ic_restaurant_white_24px.svg";
-    imgnode.width="56";
-    imgnode.height="56";
-    imgnode.alt="restaurant";
-    var spannode = document.createElement("span");
-    spannode.className="mdc-list-item__text";
+    var imgnode = document.createElement('img');
+    imgnode.className = 'mdc-list-item__start-detail grey-bg';
+    imgnode.src = '/src/ic_restaurant_white_24px.svg';
+    imgnode.width = '56';
+    imgnode.height = '56';
+    imgnode.alt = 'restaurant';
+    var spannode = document.createElement('span');
+    spannode.className = 'mdc-list-item__text';
     var textnode = document.createTextNode(restname);
-    var spannode2 = document.createElement("span");
-    spannode2.className="mdc-list-item__text__secondary";
-    var textnode2 = document.createTextNode("Invited by "+name+" on "+date+", "+time);
+    var spannode2 = document.createElement('span');
+    spannode2.className = 'mdc-list-item__text__secondary';
+    var textnode2 = document.createTextNode(
+        'Invited by ' + name + ' on ' + date + ', ' + time
+    );
     spannode2.appendChild(textnode2);
     spannode.appendChild(textnode);
     spannode.appendChild(spannode2);
-    var spannode3 = document.createElement("span");
-    spannode3.className="mdc-list-item__end-detail";
-    spannode3.id ="invite-span";
+    var spannode3 = document.createElement('span');
+    spannode3.className = 'mdc-list-item__end-detail';
+    spannode3.id = 'invite-span';
     var anode1 = document.createElement('a');
     anode1.className = 'material-icons';
     anode1.title = 'Accept Invitation';
-    anode1.innerHTML="check";
+    anode1.innerHTML = 'check';
     anode1.addEventListener('click', function() {
-        AcceptMealRequests(uid,placeid);
+        AcceptMealRequests(
+            uid,
+            placeid,
+            lat,
+            long,
+            restname,
+            street,
+            date,
+            time,
+            restid
+        );
     });
-    var spannode4 = document.createElement("span");
+    var spannode4 = document.createElement('span');
     var anode2 = document.createElement('a');
     anode2.className = 'material-icons';
     anode2.title = 'Decline Invitation';
-    anode2.innerHTML="close";
+    anode2.innerHTML = 'close';
     anode2.addEventListener('click', function() {
-        DeclineMealRequests(uid,placeid);
+        DeclineMealRequests(uid, placeid);
     });
     spannode4.appendChild(anode2);
     spannode3.appendChild(anode1);
     spannode3.appendChild(spannode4);
     listnode.appendChild(imgnode);
     listnode.appendChild(spannode);
-    listnode.appendChild(spannode3)
-    if(document.getElementById("pending-invite-list")!==null){
-        document.getElementById("pending-invite-list").appendChild(listnode);
+    listnode.appendChild(spannode3);
+    if (document.getElementById('pending-invite-list') !== null) {
+        document.getElementById('pending-invite-list').appendChild(listnode);
     }
 }
 
-function DisplayHistory(name,date,time,street,restid){
-    var listnode=document.createElement("li");
-    listnode.className="mdc-list-item";
-    listnode.id=name;
-    listnode.name =street;
-    var imgnode = document.createElement("img");
-    imgnode.className="mdc-list-item__start-detail grey-bg";
-    imgnode.src="/src/ic_restaurant_white_24px.svg";
-    imgnode.height="56";
-    imgnode.width="56";
-    imgnode.alt="restaurant";
-    var spannode = document.createElement("span");
-    spannode.className="mdc-list-item__text";
+function DisplayHistory(name, date, time, street, restid) {
+    var listnode = document.createElement('li');
+    listnode.className = 'mdc-list-item';
+    listnode.id = name;
+    listnode.name = street;
+    var imgnode = document.createElement('img');
+    imgnode.className = 'mdc-list-item__start-detail grey-bg';
+    imgnode.src = '/src/ic_restaurant_white_24px.svg';
+    imgnode.height = '56';
+    imgnode.width = '56';
+    imgnode.alt = 'restaurant';
+    var spannode = document.createElement('span');
+    spannode.className = 'mdc-list-item__text';
     var textnode = document.createTextNode(name);
-    var spannode2 = document.createElement("span");
-    spannode2.className="mdc-list-item__text__secondary";
-    var textnode2 = document.createTextNode("Visited on "+date+", "+time);
+    var spannode2 = document.createElement('span');
+    spannode2.className = 'mdc-list-item__text__secondary';
+    var textnode2 = document.createTextNode('Visited on ' + date + ', ' + time);
     spannode2.appendChild(textnode2);
     spannode.appendChild(textnode);
     spannode.appendChild(spannode2);
-    var anode=document.createElement('a');
-    anode.id="add-review-button";
-    anode.className="material-icons mdc-list-item__end-detail";
-    anode.title="Add Review";
-    anode.innerHTML="mode_comment";
-    anode.name=restid;
+    var anode = document.createElement('a');
+    anode.id = 'add-review-button';
+    anode.className = 'material-icons mdc-list-item__end-detail';
+    anode.title = 'Add Review';
+    anode.innerHTML = 'mode_comment';
+    anode.name = restid;
     anode.addEventListener('click', function() {
         var reviewsDialog = document.querySelector('#reviews-dialog');
         var dialogUnderlay = document.getElementById('dialog-underlay');
         if (reviewsDialog.style.display != 'block') {
-            document.getElementById("dialog-description").innerHTML=name;
-            document.getElementById("dialog-sub-description").innerHTML=street;
-            sessionStorage.setItem("history-restid",restid);
+            document.getElementById('dialog-description').innerHTML = name;
+            document.getElementById(
+                'dialog-sub-description'
+            ).innerHTML = street;
+            sessionStorage.setItem('history-restid', restid);
             viewAllReviews();
             reviewsDialog.style.display = 'block';
             dialogUnderlay.style.display = 'block';
@@ -492,8 +579,10 @@ function DisplayHistory(name,date,time,street,restid){
     listnode.appendChild(imgnode);
     listnode.appendChild(spannode);
     listnode.appendChild(anode);
-    if(document.getElementById("past-recommendations-list")!==null){
-        document.getElementById("past-recommendations-list").appendChild(listnode);
+    if (document.getElementById('past-recommendations-list') !== null) {
+        document
+            .getElementById('past-recommendations-list')
+            .appendChild(listnode);
     }
 }
 

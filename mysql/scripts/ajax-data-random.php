@@ -2,9 +2,13 @@
 include "db-functions.php";
 include "restaurant.php";
 include "hawker.php";
+include "customer.php";
+session_start();
 
 if(isset($_POST['areaID']) && !empty($_POST['areaID'])){
     $areaID = $_POST['areaID'];
+    $customer = $_SESSION['Obj'];
+    $custID = $customer->getCustID();
     //$areaID = "NS10";
     $recommendationArray = array();
     $placeArray = array();
@@ -57,6 +61,25 @@ if(isset($_POST['areaID']) && !empty($_POST['areaID'])){
        }
  
   }
+if(count($recommendationArray) != 0){
+       $date = date("Y-m-d");
+       $time = date("h:i:s");
+       $recommendationID = generateRandomID();
+       $fiveRecommendationID ="";
+       for($i=0;$i<count($recommendationArray);$i++){
+         
+           if($recommendationArray[$i] instanceof Restaurant){
+           $fiveRecommendationID.=$recommendationArray[$i]->getRestaurantID().",";
+           }else if ($recommendationArray[$i] instanceof hawker){
+                $fiveRecommendationID.=$recommendationArray[$i]->getHawkerID().",";
+           }
+         
+           //echo($addRecommendation);
+       }
+       $addRecommendation =  "INSERT INTO userrecommendation (RecommendationID,CustomerID,DateRecommended,TimeRecommended,RecommendedPlaces,AreaID) VALUES('".$recommendationID."','".$custID."','".$date."','".$time."','".$fiveRecommendationID."','".$areaID."')";
+           //echo $addRecommendation ."<br/>";
+       $addRecommendationResult = connect_db()->query($addRecommendation) or die(mysqli_error());
+}
   if(count($recommendationArray)!= 0){
   for($j = 0 ;$j < count($recommendationArray);$j++){
       if($recommendationArray[$j] instanceof Restaurant){

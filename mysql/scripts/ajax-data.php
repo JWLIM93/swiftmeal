@@ -2,10 +2,15 @@
 
 include 'db-functions.php';
 include 'restaurant.php';
+include 'customer.php';
+session_start();
 
 if(isset($_POST['areaID']) && !empty($_POST['areaID'])){
         $areaID = $_POST['areaID'];
+        $customer = $_SESSION['Obj'];
+        $custID = $customer->getCustID();
         $restaurantArray = array();
+        
         $restaurantSQL = "SELECT * FROM place p, placearea pa, area a,restaurant r
         WHERE
         p.PlaceID = pa.PlaceID AND
@@ -24,9 +29,20 @@ if(isset($_POST['areaID']) && !empty($_POST['areaID'])){
 
          
        }
+       $date = date("Y-m-d");
+       $time = date("h:i:s");
+       $recommendationID = generateRandomID();
+       $fiveRecommendationID ="";
        
+       for($i=0;$i<count($restaurantArray);$i++){
+           $fiveRecommendationID.=$restaurantArray[$i]->getRestaurantID().",";
+          
    
-      
+           //echo($addRecommendation);
+       }
+       $addRecommendation =  "INSERT INTO userrecommendation (RecommendationID,CustomerID,DateRecommended,TimeRecommended,RecommendedPlaces,AreaID) VALUES('".$recommendationID."','".$custID."','".$date."','".$time."','".$fiveRecommendationID."','".$areaID."')";
+           //echo $addRecommendation ."<br/>";
+       $addRecommendationResult = connect_db()->query($addRecommendation) or die(mysqli_error());
    
        }
            else{

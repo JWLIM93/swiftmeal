@@ -18,6 +18,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
         case 'ReservePlace' :MakeReservation($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$conn);break;
         case 'AcceptMealRequest' :ConfirmMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID'],$conn);break;
         case 'DenyMealRequest' :DenyMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID'],$conn);break;
+        case 'ReservePlace2' :MakeReservation2($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$conn,$_GET['placeid'],$_GET['restid']);break;
         default: break;
     }
 }
@@ -118,6 +119,26 @@ function BookingIDGenerator($CustID){
     $name = strtoupper(substr(str_replace(" ", "", $CustID),0,4));
     $ID = $prefix.date("is").$name.$contact;
     return $ID;
+}
+
+function MakeReservation2($CustID,$Pax,$time,$date,$con,$PlaceID,$RestID){
+    $customer = $_SESSION['Obj'];
+    $UpdateRequestStatus="UPDATE request SET isAccepted=0 WHERE CustomerID='".$CustID."' AND PlaceID ='" .$PlaceID."'";
+    mysqli_query($con, $UpdateRequestStatus);
+    $BookingID = BookingIDGenerator($CustID);
+    $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . $date . "','".$time."',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
+    if(mysqli_query($con, $Reserve)){
+        $customer->setBookingNum($BookingID);
+        $customer->setBookingDate(date("Y-m-d"));
+        $customer->setBookingTime(date("h:i:s"));
+        $customer->setReservationTime($time);
+        $customer->setReservationDate($date);
+        $customer->setPax($Pax);
+        echo "succeed";
+    }
+    else{
+        echo "fail";
+    }
 }
 
 ?>
