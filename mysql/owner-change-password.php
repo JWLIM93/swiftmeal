@@ -75,7 +75,7 @@
                 <!-- Current Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="current-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input required type="password" id="current-password-input-box" class=" mdc-text-field__input">
+                    <input type="password" id="current-password-input-box" class=" mdc-text-field__input">
                     <label for="current-password-input-box" class=" mdc-text-field__label">Current Password</label>
                     <div class=" mdc-text-field__bottom-line"></div>
                   </div>
@@ -89,7 +89,7 @@
                 <!-- New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input required type="password" id="new-password-input-box" class=" mdc-text-field__input">
+                    <input type="password" id="new-password-input-box" class=" mdc-text-field__input">
                     <label for="name-input-box" class=" mdc-text-field__label">New Password</label>
                     <div class=" mdc-text-field__bottom-line"></div>
                   </div>
@@ -103,7 +103,7 @@
                 <!-- Confirm New Password Input -->
                 <div id="input-fields-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
                   <div id="confirm-new-password-input" class=" mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-                    <input required type="text " id="confirm-new-password-box" class=" mdc-text-field__input">
+                    <input type="password" id="confirm-new-password-box" class=" mdc-text-field__input">
                     <label for="confirm-new-password-input-box" class=" mdc-text-field__label ">Confirm New Password</label>
                     <div class=" mdc-text-field__bottom-line">
                     </div>
@@ -115,7 +115,7 @@
                     </p>
                   </div>
                 </div>
-                <!-- Floating Actiobn Button to submit request -->
+                <!-- Floating Action Button to submit request -->
                 <button id="update-password-fab" class="mdc-fab material-icons app-fab--absolute mdc-elevation--z13" aria-label="Check" data-mdc-auto-init="MDCRipple">
                   <span class="mdc-fab__icon">
                     check

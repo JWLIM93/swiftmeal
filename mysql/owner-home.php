@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+include 'scripts/owner.php';
+session_start();
+$owner = $_SESSION['Obj'];
+?>
+
 <html class="mdc-typography">
 
 <head>
@@ -29,7 +34,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- AHEAD JAVASCRIPT -->
-
+    <script src="js/owner-display.js"></script>
 </head>
 
 <body>
@@ -74,11 +79,11 @@
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
                                     <h2 id="owner-info-header">Welcome,</h2>
-                                    <h1 id="owner-info-sub-header">Justin Fong</h1>
+                                    <h1 id="owner-info-sub-header"><?php echo $owner->getFullName(); ?></h1>
                                     <h2 id="owner-info-description">Manage all of your restaurants right here.</h2>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
-                                    <h1 id="restaurant-count-header">12</h1>
+                                    <h1 id="restaurant-count-header"></h1>
                                     <h2 id="restaurant-count-sub-header">Restaurants</h2>
                                 </div>
                             </div>
@@ -184,46 +189,6 @@
                                     <h2 id="restaurants-header">View Restaurants</h2>
                                     <!-- <h2 id="restaurants-sub-header">You are currently managing 0 restaurants.</h2> -->
                                     <ul id="restaurants-list" class="mdc-list mdc-list--two-line mdc-list--avatar-list">
-                                        <li id="justin-grill-bar" class="mdc-list-item restaurant-item">
-                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                            <span class="mdc-list-item__text">
-                                                Justin's Grill & Bar
-                                                <span class="mdc-list-item__text__secondary">18 Shenton Way, Singapore 123456</span>
-                                            </span>
-                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
-                                        </li>
-                                        <li id="justin-super-mookata" class="mdc-list-item restaurant-item">
-                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                            <span class="mdc-list-item__text">
-                                                Justin's Super Mookata
-                                                <span class="mdc-list-item__text__secondary">9 Bugis Street, Singapore 123456</span>
-                                            </span>
-                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
-                                        </li>
-                                        <li id="justin-chicken-rice" class="mdc-list-item restaurant-item">
-                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                            <span class="mdc-list-item__text">
-                                                Justin's Chicken Rice
-                                                <span class="mdc-list-item__text__secondary">854 Queens Street, Singapore 99889988</span>
-                                            </span>
-                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
-                                        </li>
-                                        <li id="justin-chicken-rice" class="mdc-list-item restaurant-item">
-                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                            <span class="mdc-list-item__text">
-                                                Justin's Chicken Rice
-                                                <span class="mdc-list-item__text__secondary">854 Queens Street, Singapore 99889988</span>
-                                            </span>
-                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
-                                        </li>
-                                        <li id="justin-chicken-rice" class="mdc-list-item restaurant-item">
-                                            <img class="mdc-list-item__start-detail grey-bg" src="/src/ic_restaurant_white_24px.svg" width="56" height="56" alt="restaurant">
-                                            <span class="mdc-list-item__text">
-                                                Justin's Chicken Rice
-                                                <span class="mdc-list-item__text__secondary">854 Queens Street, Singapore 99889988</span>
-                                            </span>
-                                            <a id="go-to-button" class="material-icons mdc-list-item__end-detail" aria-label="Add Review" title="Add Review">arrow_forward</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>

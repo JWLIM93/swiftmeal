@@ -29,7 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- AHEAD JAVASCRIPT -->
-
+    <script src="js/owner-display.js"></script>
 </head>
 
 <body>
@@ -73,19 +73,19 @@
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
                                     <h2 id="restaurant-info-header">Now Viewing ...</h2>
-                                    <h1 id="restaurant-info-sub-header">Justin's Grill & Bar</h1>
+                                    <h1 id="restaurant-info-sub-header"></h1>
                                     <h2 id="restaurant-info-description">View your reviews and manage your reservation here.</h2>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
-                                    <h1 id="reservations-count-header">28</h1>
+                                    <h1 id="reservations-count-header"></h1>
                                     <h2 id="reservations-count-sub-header">Reservations</h2>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
-                                    <h1 id="likes-count-header">178</h1>
+                                    <h1 id="likes-count-header"></h1>
                                     <h2 id="likes-count-sub-header">Likes</h2>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--align-middle">
-                                    <h1 id="dislikes-count-header">68</h1>
+                                    <h1 id="dislikes-count-header"></h1>
                                     <h2 id="dislikes-count-sub-header">Dislikes</h2>
                                 </div>
                             </div>
@@ -96,76 +96,10 @@
                     <div id="reviews-container" class="mdc-layout-grid__inner mdc-elevation--z10">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10 mdc-layout-grid__cell--align-middle">
-                            <h1 id="reviews-pre-header">47</h1>
+                            <h1 id="reviews-pre-header"></h1>
                             <h1 id="reviews-header">Reviews</h1>
                             <div id="reviews-list-group" class="mdc-list-group">
                                 <ul id="reviews-list" class="mdc-list mdc-list--two-line msgs-list">
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                        </span>
-                                    </li>
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reviews-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Ali Connors
-                                            <span class="mdc-list-item__text__secondary">Lunch this afternoon? I was...</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                        </span>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -177,27 +111,6 @@
                             <h1 id="reservations-header">Reservations</h1>
                             <div id="reservations-list-group" class="mdc-list-group">
                                 <ul id="reservations-list" class="mdc-list mdc-list--two-line msgs-list">
-                                    <li role="separator" class="mdc-list-divider"></li>
-                                    <li id="reservations-list-item" class="mdc-list-item">
-                                        <span class="mdc-list-item__text">
-                                            Justin Fong
-                                            <span class="mdc-list-item__text__secondary">30 Persons</span>
-                                        </span>
-
-                                        <span class="mdc-list-item__end-detail">
-                                            <time datetime="2014-01-28T04:36:00.000Z">10 June 2017, 4:36 pm</time>
-                                            <span id="fulfil-reject-reservation-container">
-                                                <a href="#" id="reject-reservation" class="material-icons" aria-label="Reject Reservation" title="Reject Reservation">
-                                                    block
-                                                </a>
-                                                <span>
-                                                    <a href="#" id="fulfil-reservation" class="material-icons" aria-label="Fulfil Reservation" title="Fulfil Reservation">
-                                                        check
-                                                    </a>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

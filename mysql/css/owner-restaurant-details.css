@@ -331,6 +331,7 @@ time {
 #reject-reservation:focus,
 #reject-reservation:active {
     color: var(--mdc-theme-secondary);
+    cursor: pointer;
 }
 
 #fulfil-reservation:hover,

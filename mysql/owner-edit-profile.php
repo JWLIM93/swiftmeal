@@ -134,6 +134,23 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"></div>
       </div>
     </div>
+    <aside id="update-failure-dialog" class="mdc-dialog" role="alertdialog" aria-labelledby="update-failure-dialog-label" aria-describedby="update-failure-dialog-description">
+        <div class="mdc-dialog__surface">
+          <header class="mdc-dialog__header">
+            <h2 id="update-failure-dialog-label" class="mdc-dialog__header__title">
+              Profile update failed
+            </h2>
+          </header>
+          <section id="update-failure-dialog-description" class="mdc-dialog__body">
+            We are unable to update your profile. Please ensure that your fields are valid and check your internet connection.
+          </section>
+          <footer class="mdc-dialog__footer">
+            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Back to home</button>
+            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action">Try again</button>
+          </footer>
+        </div>
+        <div class="mdc-dialog__backdrop"></div>
+      </aside>
   </main>
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>

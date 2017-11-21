@@ -13,13 +13,28 @@ function connectToSQL() {
 	$dbName = "swiftmeal";
 
 	// Create connection
-	$SQLConn = new mysqli($serverName, $username, $password, $dbName);
+	$sqlConn = new mysqli($serverName, $username, $password, $dbName);
 
 	// Check connection
 	if ($sqlConn->connect_error) {
 		die("Connection failed: " . $sqlConn->connect_error);
 	} 
 	echo "Connected successfully";
+}
+
+function selectAllArea() {
+	global $sqlConn;
+	$sql = "SELECT * FROM area";
+	$result = mysqli_query($sqlConn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "AreaId: " . $row["AreaID"]. "<br>AreaName: " . $row["AreaName"]. "<br>PlaceCount" . $row["PlaceCount"]. "<br>DefaultLat" . $row["defaultLat"] . "<br>DefaultLng" . $row["dafaultLng"];
+		}
+	} else {
+		echo "0 results";
+	}
 }
 
 function connectToMongo() {
@@ -49,6 +64,7 @@ function connectToMongo() {
 }
 
 connectToSQL();
+selectAllArea();
 connectToMongo();
 
 ?>
