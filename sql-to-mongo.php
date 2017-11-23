@@ -19,21 +19,14 @@ function connectToSQL() {
 	if ($sqlConn->connect_error) {
 		die("Connection failed: " . $sqlConn->connect_error);
 	} 
-	echo "Connected successfully";
+	echo "SQL Connected successfully <br>";
 }
 
 function connectToMongo() {
 	global $mongoConn;
 	try {
-		$mongoConn = new MongoDB\Driver\Manager("mongodb://47.88.157.236");
-		echo "success";
-
-		// $stats = new MongoDB\Driver\Command(["dbstats" => 1]);
-		// $res = $mng->executeCommand("testdb", $stats);
-		
-		// $stats = current($res->toArray());
-
-		// print_r($stats);
+		$mongoConn = new MongoDB\Client('mongodb://47.88.157.236');
+		echo "Mongodb Connection Success <br>";
 
 	} catch (MongoDB\Driver\Exception\Exception $e) {
 
@@ -49,342 +42,367 @@ function connectToMongo() {
 }
 
 function AreaSqlToMongo() {
-
-    $bulk = new MongoDB\Driver\BulkWrite;
-
+	// MERGE AREA and PLACEAREA
 	global $sqlConn;
 	global $mongoConn;
 	
-	$sql = "SELECT * FROM area";
-	$result = mysqli_query($sqlConn, $sql);
+	$sqlArea = "SELECT * FROM area";
+	$resultArea = mysqli_query($sqlConn, $sqlArea);
 
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["AreaID"], 'AreaName' => $row["AreaName"], 'PlaceCount' => $row["PlaceCount"], 'DefaultLat' => $row["defaultLat"], 'DefaultLong' => $row["defaultLong"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
+	$sqlPlaceArea = "SELECT * FROM placearea";
+	$resultPlaceArea = mysqli_query($sqlConn, $sqlPlaceArea);
+
+	$collection = $mongoConn->selectCollection('swiftmeal', 'area');
+
+	echo "Converting Area ...<br>";
+
+	if (mysqli_num_rows($resultArea) > 0) {
+		while($row = mysqli_fetch_assoc($resultArea)) {
+			$insertOneResult = $collection->insertOne([
+				'_id' => $row["AreaID"],
+				'AreaName' => $row["AreaName"],
+				'PlaceCount' => (int)$row["PlaceCount"],
+				'DefaultLat' => (double)$row["defaultLat"],
+				'DefaultLong' => (double)$row["defaultLong"],
+				'Places' => []
+			]);
+			printf("Inserted %d document(s)\n<br>", $insertOneResult->getInsertedCount());
 		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.area', $bulk);
-	} else {
-		echo "0 results<br>";
 	}
-}
 
-function CustomerSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
+	echo "Converting Place Area ...<br>";
 
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM customer";
-	$result = mysqli_query($sqlConn, $sql);
+	if (mysqli_num_rows($resultPlaceArea) > 0) {
+		while($row = mysqli_fetch_assoc($resultPlaceArea)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["AreaID"]],
+				['$push' => ['Places' => ['PlaceID' => $row["PlaceID"], 'isValid' => 0]]]
+			);
 
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["CustomerID"], 'UID' => $row["UID"], 'isValid' => $row["isValid"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
 		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.customer', $bulk);
-	} else {
-		echo "0 results<br>";
 	}
-}
 
-function FriendSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
+	echo "Indexing Area Collection ... <br>";
 
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM friendrequest";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => new MongoDB\BSON\ObjectID, 'UID' => $row["UID"], 'RequestTo' => $row["RequestTo"], 'isAccepted' => $row["isAccepted"], 'RequestDate' => $row["RequestDate"], 'RequestTime' => $row["RequestTime"], 'isValid' => $row["isValid"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.friendrequest', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function HawkerCenterSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM hawkercenter";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["HawkerCenterID"], 'PlaceID' => $row["PlaceID"], 'isValid' => $row["isValid"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.hawkercenter', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function OwnerSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM owner";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["OwnerID"], 'UID' => $row["UID"], 'isValid' => $row["isValid"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.owner', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
+	$indexNames = $collection->createIndexes([
+		[ 'key' => [ '_id' => 1, 'Places' => 1] ]
+	]);
 }
 
 function PlaceSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
+	// MERGE PLACE and HAWKERCENTER and RESTAURANT
 	global $sqlConn;
 	global $mongoConn;
 	
-	$sql = "SELECT * FROM place";
-	$result = mysqli_query($sqlConn, $sql);
+	$sqlPlace = "SELECT * FROM place";
+	$resultPlace = mysqli_query($sqlConn, $sqlPlace);
 
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["PlaceID"], 'Block' => $row["Block"], 'Building' => $row["Building"], 'Floor' => $row["Floor"], 'Street' => $row["Street"], 'Unit' => $row["Unit"], 'GeoX' => $row["GeoX"], 'GeoY' => $row["GeoY"], 'GeoLat' => $row["GeoLat"], 'GeoLong' => $row["GeoLong"], 'DateAdded' => $row["DateAdded"], 'TimeAdded' => $row["TimeAdded"], 'PostalCode' => $row["PostalCode"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
+	$sqlHawkerCenter = "SELECT * FROM hawkercenter";
+	$resultHawkerCenter = mysqli_query($sqlConn, $sqlHawkerCenter);
+
+	$sqlRestaurant = "SELECT * FROM restaurant";
+	$resultRestaurant = mysqli_query($sqlConn, $sqlRestaurant);
+
+	$sqlReview = "SELECT * FROM review";
+	$resultReview = mysqli_query($sqlConn, $sqlReview);	
+
+	$collection = $mongoConn->selectCollection('swiftmeal', 'place');
+
+	echo "Converting Place ...<br>";
+
+	if (mysqli_num_rows($resultPlace) > 0) {
+		while($row = mysqli_fetch_assoc($resultPlace)) {
+			$insertOneResult = $collection->insertOne([
+				'_id' => $row["PlaceID"],
+				'Block' => $row["Block"],
+				'Building' => $row["Building"],
+				'Floor' => $row["Floor"],
+				'Street' => $row["Street"],
+				'Unit' => $row["Unit"],
+				'GeoX' => (double)$row["GeoX"],
+				'GeoY' => (double)$row["GeoY"],
+				'GeoLat' => (double)$row["GeoLat"],
+				'GeoLong' => (double)$row["GeoLong"],
+				'DateAdded' => $row["DateAdded"],
+				'TimeAdded' => $row["TimeAdded"],
+				'PostalCode' => $row["PostalCode"],
+				'Type' => "",
+				'Details' => []
+			]);
+			printf("Inserted %d document(s)\n<br>", $insertOneResult->getInsertedCount());
 		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.place', $bulk);
-	} else {
-		echo "0 results<br>";
 	}
-}
 
-function PlaceAreaSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
+	echo "Converting Hawker Center ...<br>";
 
-	global $sqlConn;
-	global $mongoConn;
+	if (mysqli_num_rows($resultHawkerCenter) > 0) {
+		while($row = mysqli_fetch_assoc($resultHawkerCenter)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["PlaceID"]],
+				['$push' =>['Details' => ['HawkerCenterID' => $row["HawkerCenterID"], 'isValid' => (int)$row["isValid"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+
+			$updateResult = $collection->updateOne(
+				['_id' => $row["PlaceID"]],
+				['$set' =>['Type' => "HawkerCenter"]]
+			);
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting Restaurant ...<br>";
+
+	if (mysqli_num_rows($resultRestaurant) > 0) {
+		while($row = mysqli_fetch_assoc($resultRestaurant)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["PlaceID"]],
+				['$push' =>['Details' => ['RestaurantID' => $row["RestaurantID"], 'isValid' => (int)$row["isValid"], 'OwnerID' => $row["OwnerID"], 'RestaurantName' => $row["RestaurantName"], 'CountLikes' => (int)$row["CountLikes"], 'CountDislikes' => (int)$row["CountDislikes"], 'Reviews' => []]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+
+			$updateResult = $collection->updateOne(
+				['_id' => $row["PlaceID"]],
+				['$set' =>['Type' => "Restaurant"]]
+			);
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting Review ...<br>";
+
+	if (mysqli_num_rows($resultReview) > 0) {
+		while($row = mysqli_fetch_assoc($resultReview)) {
+			$updateResult = $collection->updateOne(
+				['Details.RestaurantID' => $row["RestaurantID"]],
+				['$push' =>['Details.$.Reviews' => ['CustomerID' => $row["CustomerID"], 'isValid' => (int)$row["isValid"], 'DateReviewed' => $row["DateReviewed"], 'TimeReviewed' => $row["TimeReviewed"], 'Upvote' => (int)$row["Upvote"], 'Downvote' => (int)$row["Downvote"], 'isSpam' => (int)$row["isSpam"], 'isVisible' => (int)$row["isVisible"], 'Content' => $row["Content"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Indexing Place Collection ... <br>";
+
+	$indexNames = $collection->createIndexes([
+		[ 'key' => [ '_id' => 1, 'Places' => 1] ]
+	]);
 	
-	$sql = "SELECT * FROM placearea";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => new MongoDB\BSON\ObjectID, 'PlaceID' => $row["PlaceID"], 'AreaID' => $row["AreaID"], 'isValid' => $row["isValid"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.placearea', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function RequestSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM request";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => new MongoDB\BSON\ObjectID, 'CustomerID' => $row["CustomerID"], 'RequestTo' => $row["RequestTo"], 'PlaceID' => $row["PlaceID"], 'RequestDate' => $row["RequestDate"], 'RequestTime' => $row["RequestTime"], 'isValid' => $row["isValid"], 'isAccepted' => $row["isAccepted"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.request', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function ReservationSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM reservation";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["BookingID"], 'CustomerID' => $row["CustomerID"], 'RestaurantID' => $row["RestaurantID"], 'Pax' => $row["Pax"], 'DateReserved' => $row["DateReserved"], 'TimeReserved' => $row["TimeReserved"], 'isValid' => $row["isValid"], 'isFulfilled' => $row["isFulfilled"], 'DateCreated' => $row["DateCreated"], 'TimeCreated' => $row["TimeCreated"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.reservation', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function RestaurantSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM restaurant";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["RestaurantID"], 'PlaceID' => $row["PlaceID"], 'OwnerID' => $row["OwnerID"], 'RestaurantName' => $row["RestaurantName"], 'CountLikes' => $row["CountLikes"], 'CountDislikes' => $row["CountDislikes"], 'isValid' => $row["isValid"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.restaurant', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function ReviewSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
-	
-	$sql = "SELECT * FROM review";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["ReviewID"], 'CustomerID' => $row["CustomerID"], 'RestaurantID' => $row["RestaurantID"], 'DateReviewed' => $row["DateReviewed"], 'TimeReviewed' => $row["TimeReviewed"], 'Upvote' => $row["Upvote"], 'Downvote' => $row["Downvote"], 'isValid' => $row["isValid"], 'isSpam' => $row["isSpam"], 'isVisible' => $row["isVisible"], 'content' => $row["content"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.review', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
 }
 
 function UserSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
 	global $sqlConn;
 	global $mongoConn;
 	
-	$sql = "SELECT * FROM user";
-	$result = mysqli_query($sqlConn, $sql);
+	$sqlUser = "SELECT * FROM user";
+	$resultUser = mysqli_query($sqlConn, $sqlUser);
 
-	if (mysqli_num_rows($result) > 0) {
+	$sqlOwner = "SELECT * FROM owner";
+	$resultOwner = mysqli_query($sqlConn, $sqlOwner);
+
+	$sqlCustomer = "SELECT * FROM customer";
+	$resultCustomer = mysqli_query($sqlConn, $sqlCustomer);
+
+	$sqlFriendRequest = "SELECT * FROM friendrequest";
+	$resultFriendRequest = mysqli_query($sqlConn, $sqlFriendRequest);
+
+	$sqlUsersPair = "SELECT * FROM userspair";
+	$resultUsersPair = mysqli_query($sqlConn, $sqlUsersPair);
+
+	$collection = $mongoConn->selectCollection('swiftmeal', 'user');
+
+	echo "Converting User ...<br>";
+
+	if (mysqli_num_rows($resultUser) > 0) {
 		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["UID"], 'UP' => $row["UP"], 'Name' => $row["Name"], 'Email' => $row["Email"], 'MobileNo' => $row["MobileNo"], 'isOnline' => $row["isOnline"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
+		while($row = mysqli_fetch_assoc($resultUser)) {
+			$insertOneResult = $collection->insertOne([
+				'_id' => $row["UID"],
+				'UP' => $row["UP"],
+				'Name' => $row["Name"],
+				'Email' => $row["Email"],
+				'MobileNo' => $row["MobileNo"],
+				'IsOnline' => (int)0,
+				'Type' => "",
+				'Details' => [],
+				'FriendRequest' => [],
+				'UsersPair' => [],
+			]);
+			printf("Inserted %d document(s)\n<br>", $insertOneResult->getInsertedCount());
 		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.user', $bulk);
-	} else {
-		echo "0 results<br>";
 	}
+
+	echo "Converting Owner ...<br>";
+
+	if (mysqli_num_rows($resultOwner) > 0) {
+		while($row = mysqli_fetch_assoc($resultOwner)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["UID"]],
+				['$push' =>['Details' => ['OwnerID' => $row["OwnerID"], 'isValid' => (int)$row["isValid"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+
+			$updateResult = $collection->updateOne(
+				['_id' => $row["UID"]],
+				['$set' =>['Type' => "Owner"]]
+			);
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting Customer ...<br>";
+
+	if (mysqli_num_rows($resultCustomer) > 0) {
+		while($row = mysqli_fetch_assoc($resultCustomer)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["UID"]],
+				['$push' =>['Details' => ['CustomerID' => $row["CustomerID"], 'isValid' => (int)$row["isValid"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+
+			$updateResult = $collection->updateOne(
+				['_id' => $row["UID"]],
+				['$set' =>['Type' => "Customer"]]
+			);
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting FriendRequest ...<br>";
+
+	if (mysqli_num_rows($resultFriendRequest) > 0) {
+		while($row = mysqli_fetch_assoc($resultFriendRequest)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["UID"]],
+				['$push' =>['FriendRequest' => ['RequestTo' => $row["RequestTo"], 'isAccepted' => (int)$row["isAccepted"], 'RequestDate' => $row["RequestDate"], 'RequestTime' => $row["RequestTime"], 'isValid' => (int)$row["isValid"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting UsersPair ...<br>";
+
+	if (mysqli_num_rows($resultUsersPair) > 0) {
+		while($row = mysqli_fetch_assoc($resultUsersPair)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["UID"]],
+				['$push' =>['UsersPair' => ['PUID' => $row["PUID"], 'isValid' => (int)$row["isValid"], 'PairedDate' => $row["PairedDate"], 'PairedTime' => $row["PairedTime"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Indexing UserCollection ... <br>";
+
+	$indexNames = $collection->createIndexes([
+		[ 'key' => [ '_id' => 1, 'Details' => 1] ],
+		[ 'key' => [ '_id' => 1, 'FriendRequest' => 1] ],
+		[ 'key' => [ '_id' => 1, 'UsersPair' => 1] ]
+	]);
+	
 }
 
-function UserRecommendationSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
+function CustomerFeatureSQLToMongo() {
 	global $sqlConn;
 	global $mongoConn;
 	
-	$sql = "SELECT * FROM userrecommendation";
-	$result = mysqli_query($sqlConn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => $row["RecommendationID"], 'CustomerID' => $row["CustomerID"], 'DateRecommended' => $row["DateRecommended"], 'TimeRecommended' => $row["TimeRecommended"], 'RecommendedPlaces' => $row["RecommendedPlaces"], 'AreaID' => $row["AreaID"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
-		}
-
-		$mongoConn->executeBulkWrite('swiftmeal.userrecommendation', $bulk);
-	} else {
-		echo "0 results<br>";
-	}
-}
-
-function UsersPairSQLToMongo() {
-	$bulk = new MongoDB\Driver\BulkWrite;
-
-	global $sqlConn;
-	global $mongoConn;
+	$sqlCustomer = "SELECT * FROM customer";
+	$resultCustomer = mysqli_query($sqlConn, $sqlCustomer);
 	
-	$sql = "SELECT * FROM userspair";
-	$result = mysqli_query($sqlConn, $sql);
+	$sqlReservation = "SELECT * FROM reservation";
+	$resultReservation = mysqli_query($sqlConn, $sqlReservation);	
 
-	if (mysqli_num_rows($result) > 0) {
+	$sqlRequest = "SELECT * FROM request";
+	$resultRequest = mysqli_query($sqlConn, $sqlRequest);	
+
+	$sqlUserRecommendations = "SELECT * FROM userrecommendation";
+	$resultUserRecommendations = mysqli_query($sqlConn, $sqlUserRecommendations);
+
+	$collection = $mongoConn->selectCollection('swiftmeal', 'customer');
+
+	echo "Populating CustomerIDs ...<br>";
+
+	if (mysqli_num_rows($resultCustomer) > 0) {
 		// output data of each row
-		while($row = mysqli_fetch_assoc($result)) {
-			$doc = ['_id' => new MongoDB\BSON\ObjectID, 'UID' => $row["UID"], 'PUID' => $row["PUID"], 'isValid' => $row["isValid"], 'PairedDate' => $row["PairedDate"], 'PairedTime' => $row["PairedTime"]];
-			$bulk->insert($doc);
-			echo "Success!<br>";
+		while($row = mysqli_fetch_assoc($resultCustomer)) {
+			$insertOneResult = $collection->insertOne([
+				'_id' => $row["CustomerID"],
+				'Requests' => [],
+				'Reservations' => [],
+				'UserRecommendations' => []
+			]);
+			printf("Inserted %d document(s)\n<br>", $insertOneResult->getInsertedCount());
 		}
+	}
 
-		$mongoConn->executeBulkWrite('swiftmeal.userspair', $bulk);
-	} else {
-		echo "0 results<br>";
+	echo "Converting Requests ...<br>";
+
+	if (mysqli_num_rows($resultRequest) > 0) {
+		while($row = mysqli_fetch_assoc($resultRequest)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["CustomerID"]],
+				['$push' =>['Requests' => ['RequestTo' => $row["RequestTo"], 'isAccepted' => (int)$row["isAccepted"], 'RequestDate' => $row["RequestDate"], 'RequestTime' => $row["RequestTime"], 'isValid' => (int)$row["isValid"], 'PlaceID' => $row["PlaceID"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting Reservations ...<br>";
+
+	if (mysqli_num_rows($resultReservations) > 0) {
+		while($row = mysqli_fetch_assoc($resultReservations)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["CustomerID"]],
+				['$push' =>['Reservations' => ['RestaurantID' => $row["RestaurantID"], 'Pax' => (int)$row["Pax"], 'DateReserved' => $row["DateReserved"], 'TimeReserved' => $row["TimeReserved"], 'isValid' => (int)$row["isValid"], 'isFulfilled' => (int)$row["isFulfilled"], 'DateCreated' => $row["DateCreated"], 'TimeCreated' => $row["TimeCreated"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
+	}
+
+	echo "Converting User Recommendations ...<br>";
+
+	if (mysqli_num_rows($resultUserRecommendations) > 0) {
+		while($row = mysqli_fetch_assoc($resultUserRecommendations)) {
+			$updateResult = $collection->updateOne(
+				['_id' => $row["CustomerID"]],
+				['$push' =>['UserRecommendations' => ['RecommendationID' => $row["RecommendationID"], 'Pax' => (int)$row["Pax"], 'DateRecommended' => $row["DateRecommended"], 'TimeRecommended' => $row["TimeRecommended"], 'RecommendedPlaces' => $row["RecommendedPlaces"], 'AreaID' => $row["AreaID"]]]]
+			);
+
+			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+			printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+		}
 	}
 }
+
+//////////////////////////////////////
 
 connectToSQL();
 connectToMongo();
 AreaSqlToMongo();
-CustomerSQLToMongo();
-FriendSQLToMongo();
-HawkerCenterSQLToMongo();
-OwnerSQLToMongo();
 PlaceSQLToMongo();
-PlaceAreaSQLToMongo();
-RequestSQLToMongo();
-ReservationSQLToMongo();
-RestaurantSQLToMongo();
-ReviewSQLToMongo();
 UserSQLToMongo();
-UsersPairSQLToMongo();
-UserRecommendationSQLToMongo();
+CustomerFeatureSQLToMongo();
 ?>
