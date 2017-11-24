@@ -1,0 +1,278 @@
+.mdc-toolbar {
+    background-color: rgba(33, 33, 33, 0.7);
+}
+
+.app-fab--absolute {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .app-fab--absolute {
+        bottom: 2rem;
+        right: 2rem;
+    }
+}
+
+.mdc-fab {
+    background-color: var(--mdc-theme-primary);
+}
+
+.mdc-simple-menu {
+    overflow: hidden !important;
+}
+
+.mdc-form-field > label {
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+
+.mdc-snackbar {
+    background-color: var(--mdc-theme-primary);
+    font-family: "Quicksand", sans-serif;
+}
+
+.icon-text {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Quicksand", sans-serif;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+.for-directions-icon {
+    color: white;
+}
+
+.for-directions-address {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    vertical-align: top !important;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+    background-image: -moz-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+    background-image: -ms-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+    background-image: -o-linear-gradient(left, #f0f0f0, rgb(21, 50, 133));
+}
+
+#name-validation-msg,
+#email-address-validation-msg,
+#mobile-validation-msg {
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+#foreground-content {
+    position: absolute;
+    width: 100%;
+    height: 93%;
+}
+
+#product-name {
+    font-family: "Quicksand", sans-serif;
+    letter-spacing: 0.4em;
+    font-weight: bold;
+}
+
+#customer-profile {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#customer-profile-menu > ul > li {
+    font-family: "Quicksand", sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+#friends-list-nav {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#notifications-nav {
+    font-family: "Quicksand", sans-serif;
+    text-transform: uppercase;
+    margin-right: 20px;
+    font-size: 15px;
+    letter-spacing: 0em;
+    font-weight: normal;
+    color: white;
+}
+
+#friends-list-nav:hover,
+#notifications-nav:hover,
+#customer-profile:hover {
+    font-weight: bold;
+    color: var(--mdc-theme-secondary);
+}
+
+#page-name {
+    margin-top: 17px;
+    margin-left: 10px;
+    border-left: 1px solid white;
+    padding-left: 17px;
+    text-transform: uppercase;
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+}
+
+#reservation-id-header {
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#reservation-id {
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#reservation-date-created {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#place-direction-container {
+    margin-bottom: 40px;
+}
+
+#reservation-info {
+    background-color: rgb(21, 50, 133);
+}
+
+#driving-direction-container,
+#transit-direction-container {
+    background-color: #37474f;
+    display: none;
+    margin-bottom: 30px;
+}
+
+#restaurant-name {
+    color: white;
+    margin-bottom: 0;
+    font-family: "Quicksand", sans-serif;
+    padding-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#pax {
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#datetime {
+    padding-top: 0;
+    margin-top: 0;
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#direction-type {
+    text-transform: uppercase;
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    letter-spacing: 0.2em;
+    padding-top: 20px;
+}
+
+#navigation-drive-choice,
+#navigation-transit-choice {
+    margin: 0 auto;
+    color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+#car-icon {
+    padding-left: 25%;
+}
+
+#transit-icon {
+    padding-left: 30%;
+}
+
+#reservation-info-inner {
+    padding-bottom: 30px;
+}
+
+#from-address {
+    margin-bottom: 10px;
+}
+
+#to-address {
+    margin-top: 10px;
+}
+
+#direction-container {
+    padding-bottom: 30px;
+}
+
+#google-map-driving {
+    height: 100vh;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 16px;
+}
+
+#google-map-transit {
+    height: 100vh;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 16px;
+}
+
+#loading-progress {
+    display: none;
+}

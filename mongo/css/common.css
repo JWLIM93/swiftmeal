@@ -1,19 +1,29 @@
-body, html {
+body,
+html {
     margin: 0px;
     background: #212121;
 }
 
 :root {
-    --mdc-theme-primary: #E91E63;
-    --mdc-theme-secondary: #2962FF;
+    --mdc-theme-primary: #2962ff;
+    --mdc-theme-secondary: #e91e63;
+}
+
+.mdc-theme--light {
+    --mdc-theme-primary: #e91e63;
+    --mdc-theme-secondary: #2962ff;
 }
 
 .mdc-theme--dark {
-    --mdc-theme-primary: #2962FF;
-    --mdc-theme-secondary: #E91E63;
+    --mdc-theme-primary: #2962ff;
+    --mdc-theme-secondary: #e91e63;
 }
 
 .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::before,
 .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::after {
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#product-name {
+    cursor: pointer;
 }

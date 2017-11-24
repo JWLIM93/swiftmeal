@@ -399,10 +399,29 @@ function CustomerFeatureSQLToMongo() {
 
 //////////////////////////////////////
 
+function test() {
+	echo "TEST RUNNING";
+
+	global $sqlConn;
+	global $mongoConn;
+
+	$collection = $mongoConn->selectCollection('swiftmeal', 'user');
+
+	$updateResult = $collection->updateOne(
+		['_id' => 'UCUST3133ALE8201', 'UsersPair.PUID' => "CUST4945JERE8546"],
+		['$set' => ['UsersPair.$.isValid' => 0]]
+	);
+
+	printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+	printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+}
+
 connectToSQL();
 connectToMongo();
-AreaSqlToMongo();
-PlaceSQLToMongo();
-UserSQLToMongo();
-CustomerFeatureSQLToMongo();
+//AreaSqlToMongo();
+//PlaceSQLToMongo();
+//UserSQLToMongo();
+//CustomerFeatureSQLToMongo();
+
+test();
 ?>

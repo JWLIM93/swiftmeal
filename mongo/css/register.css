@@ -25,6 +25,7 @@
     max-width: 277px;
     margin-top: 20px;
     font-family: "Quicksand", sans-serif;
+    background-color: transparent;
 }
 
 #map {
@@ -43,7 +44,7 @@
 }
 
 #title-description {
-    margin-left: 20em;
+    margin-left: 20%;
 }
 
 h1 {
