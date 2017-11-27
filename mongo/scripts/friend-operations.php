@@ -41,12 +41,12 @@ function friendRequest($Requester, $Requestee) {
     );
 
     foreach ($RequesteeUID as $rid) {
-        $requesteeId = $rid;
+        $requesteeId = $rid["_id"];
     }
 
     $updateResult = $con->updateOne(
         ['_id' => $Requester],
-        ['$push' => ['FriendRequest' => ['RequestTo' => $rid, 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1]]]);
+        ['$push' => ['FriendRequest' => ['RequestTo' => $requesteeId, 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1]]]);
 
     if ($updateResult->getModifiedCount() == 0) {
         echo "failed";
@@ -67,24 +67,26 @@ function deleteFriend($Deleter,$Deletee) {
 function confirmRequest($Requester,$Requestee) {
     global $con;
 
-    $con->updateOne(
-        ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee],
+    $updateResult = $con->updateOne(
+        ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee, 'FriendRequest.isValid' => 1, 'FriendRequest.isAccepted' => 0],
         ['$set' => ['FriendRequest.$.isAccepted' => 1, 'FriendRequest.$.isValid' => 0]]);
-    
-    $con->updateOne(
-        ['_id' => $Requester],
-        ['$push' =>['UsersPair' => ['PUID' => $Requestee, 'isValid' => 1, 'PairedDate' => date("Y-m-d"), 'PairedTime' => date("h:i:s")]]]);
 
-    $con->updateOne(
-        ['_id' => $Requestee],
-        ['$push' =>['UsersPair' => ['PUID' => $Requester, 'isValid' => 1, 'PairedDate' => date("Y-m-d"), 'PairedTime' => date("h:i:s")]]]);
+    if ($updateResult->getModifiedCount() == 1) {
+        $con->updateOne(
+            ['_id' => $Requester],
+            ['$push' =>['UsersPair' => ['PUID' => $Requestee, 'isValid' => 1, 'PairedDate' => date("Y-m-d"), 'PairedTime' => date("h:i:s")]]]);
+
+        $con->updateOne(
+            ['_id' => $Requestee],
+            ['$push' =>['UsersPair' => ['PUID' => $Requester, 'isValid' => 1, 'PairedDate' => date("Y-m-d"), 'PairedTime' => date("h:i:s")]]]);
+    }
 }
 
 function denyRequest($Requester, $Requestee) {
     global $con;
 
     $con->updateOne(
-        ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee],
+        ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee, 'FriendRequest.isValid' => 1],
         ['$set' => ['FriendRequest.$.isAccepted' => 0, 'FriendRequest.$.isValid' => 0]]);
 }
 
@@ -108,10 +110,11 @@ function sendMealRequest($Requester,$Requestee,$RestID) {
         ]
     );
     
+    session_start();
+    $customer = $_SESSION['Obj'];
+    $customer->setPlaceID($id["_id"]);
+
     foreach ($PlaceID as $id) {
-        session_start();
-        $customer = $_SESSION['Obj'];
-        $customer->setPlaceID($id["_id"]);
         $pID = $id["_id"];
     }
     
