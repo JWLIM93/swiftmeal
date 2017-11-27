@@ -5,81 +5,62 @@ include "hawker.php";
 include "customer.php";
 session_start();
 
-if(isset($_POST['areaID']) && !empty($_POST['areaID'])){
-    $areaID = $_POST['areaID'];
-    $customer = $_SESSION['Obj'];
-    $custID = $customer->getCustID();
-    //$areaID = "NS10";
-    $recommendationArray = array();
-    $placeArray = array();
-    $randomRecommendation = "SELECT PlaceID FROM placearea pa WHERE AreaID = '".$areaID."' ORDER BY RAND () LIMIT 5";
-    $resultRecommendation = connect_db()->query($randomRecommendation) or die(mysqli_error());
-    if(mysqli_num_rows($resultRecommendation) > 0){
-        while($row = mysqli_fetch_array($resultRecommendation)){
-            $placeID = $row['PlaceID'];
-            array_push($placeArray,$placeID);
-           //echo  $row['PlaceID']."<br/>";
-           
-
-        }
-    }
-    
-    for($i = 0 ; $i <count($placeArray); $i++){
-     $randomRestaurantSQL = "SELECT * FROM place p, placearea pa,restaurant r
-     WHERE p.PlaceID = pa.PlaceID 
-     AND r.PlaceID = p.PlaceID
-     AND r.PlaceID = '".$placeArray[$i]."'";
-     $randomRestaurantResult = connect_db()->query($randomRestaurantSQL) or die(mysqli_error());
-     if(mysqli_num_rows($randomRestaurantResult)>0){
-         while($row = mysqli_fetch_array($randomRestaurantResult)){
-            $restaurant = new Restaurant($row['PlaceID'],$row['Block'],$row['Building'],$row['Floor'],$row['Street'],
-            $row['Unit'],$row['GeoX'],$row['GeoY'],$row['GeoLat'],$row['GeoLong'],$row['DateAdded'],$row['TimeAdded'],$row['RestaurantID'],$row['RestaurantName'],
-          $row['CountLikes'],$row['CountDislikes'],$row['isValid']);
-          array_push($recommendationArray,$restaurant);
-    
-         }
-
-        }
-  
-   }
-   
-   for($i = 0 ; $i <count($placeArray); $i++){
-    $randomHawkerSQL = "SELECT * FROM place p, placearea pa,hawkercenter h
-    WHERE p.PlaceID = pa.PlaceID 
-    AND h.PlaceID = p.PlaceID
-    AND h.PlaceID = '".$placeArray[$i]."'";
-    $randomHawkerResult = connect_db()->query($randomHawkerSQL) or die(mysqli_error());
-    if(mysqli_num_rows($randomHawkerResult)>0){
-        while($row = mysqli_fetch_array($randomHawkerResult)){
-           $hawker = new hawker($row['PlaceID'],$row['Block'],$row['Building'],$row['Floor'],$row['Street'],
-           $row['Unit'],$row['GeoX'],$row['GeoY'],$row['GeoLat'],$row['GeoLong'],$row['DateAdded'],$row['TimeAdded'],$row['HawkerCenterID'],"Hawker Center@".$row['Building'],
-         $row['isValid']);
-         array_push($recommendationArray,$hawker);
-   
-        }
-
-       }
- 
+if(isset($_POST['areaID']) && !empty($_POST['areaID'])) {
+  global $mongoConnection;
+  $counter = 0;
+  $filter = array();
+  $areaID = $_POST['areaID'];
+  $customer = $_SESSION['Obj'];
+  $custID = $customer->getCustID();
+  $recommendationArray = array();
+  $idquery = ['_id'=>$areaID];
+  $collection = $mongoConnection->selectCollection('swiftmeal', 'area');
+  $document = $collection->find($idquery,['Places'=>1]);
+  foreach($document as $row1){
+      foreach($row1['Places'] as $row2){
+          array_push($filter, ['_id'=>$row2['PlaceID']]);
+      }
   }
-if(count($recommendationArray) != 0){
-       $date = date("Y-m-d");
-       $time = date("h:i:s");
-       $recommendationID = generateRandomID();
-       $fiveRecommendationID ="";
-       for($i=0;$i<count($recommendationArray);$i++){
-         
-           if($recommendationArray[$i] instanceof Restaurant){
-           $fiveRecommendationID.=$recommendationArray[$i]->getRestaurantID().",";
-           }else if ($recommendationArray[$i] instanceof hawker){
-                $fiveRecommendationID.=$recommendationArray[$i]->getHawkerID().",";
-           }
-         
-           //echo($addRecommendation);
-       }
-       $addRecommendation =  "INSERT INTO userrecommendation (RecommendationID,CustomerID,DateRecommended,TimeRecommended,RecommendedPlaces,AreaID) VALUES('".$recommendationID."','".$custID."','".$date."','".$time."','".$fiveRecommendationID."','".$areaID."')";
-           //echo $addRecommendation ."<br/>";
-       $addRecommendationResult = connect_db()->query($addRecommendation) or die(mysqli_error());
-}
+  $collection2 = $mongoConnection->selectCollection('swiftmeal', 'place');
+  $document2 = $collection2->find(['$or'=>$filter], ['skip' => rand(0,sizeof($filter))]); 
+  foreach($document2 as $row){
+      if($counter<5){
+          if($row['Type'=='Restaurant']){
+              $restaurant = new Restaurant($row['_id'],$row['Block'],$row['Building'],$row['Floor'],$row['Street'],
+              $row['Unit'],$row['GeoX'],$row['GeoY'],$row['GeoLat'],$row['GeoLong'],$row['DateAdded'],$row['TimeAdded'],$row['Details'][0]['RestaurantID'],$row['Details'][0]['RestaurantName'],
+              $row['Details'][0]['CountLikes'],$row['Details'][0]['CountDislikes'],$row['Details'][0]['isValid']);
+              array_push($recommendationArray,$restaurant);
+              $counter++;
+          }
+          else{
+              $hawker = new hawker($row['PlaceID'],$row['Block'],$row['Building'],$row['Floor'],$row['Street'],
+              $row['Unit'],$row['GeoX'],$row['GeoY'],$row['GeoLat'],$row['GeoLong'],$row['DateAdded'],$row['TimeAdded'],$row['Details'][0]['HawkerCenterID'],"Hawker Center".$row['Building'],
+              $row['Details'][0]['isValid']);
+              array_push($recommendationArray,$hawker);
+              $counter++;
+          }
+      }
+  }
+  if(count($recommendationArray) != 0){
+      $date = date("Y-m-d");
+      $time = date("h:i:s");
+      $recommendationID = generateRandomID();
+      $fiveRecommendationID ="";
+        for($i=0;$i<count($recommendationArray);$i++){
+          if($recommendationArray[$i] instanceof Restaurant){
+              $fiveRecommendationID.=$recommendationArray[$i]->getRestaurantID().",";
+          }
+          else if ($recommendationArray[$i] instanceof hawker){
+              $fiveRecommendationID.=$recommendationArray[$i]->getHawkerID().",";
+          }
+      }
+      $collection3 = $mongoConnection->selectCollection('swiftmeal', 'customer');
+      $collection3->updateOne(
+              ['_id' => $custID],
+              ['$push' =>['UserRecommendations' => ['RecommendationID' => $recommendationID,'DateRecommended' => $date, 'TimeRecommended' => $time, 'RecommendedPlaces' => $fiveRecommendationID, 'AreaID' => $areaID]]]
+      );
+  }
+
   if(count($recommendationArray)!= 0){
   for($j = 0 ;$j < count($recommendationArray);$j++){
       if($recommendationArray[$j] instanceof Restaurant){

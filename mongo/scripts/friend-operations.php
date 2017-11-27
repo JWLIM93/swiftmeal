@@ -3,93 +3,143 @@ include 'db-functions.php';
 include 'customer.php';
 session_start();
 $customer = $_SESSION['Obj'];
-$conn = connect_db();
 $UID = $customer->getUser_id(); //input session UID here
 $CustID = $customer->getCustID();
 $Rest=$customer->getRestID();
+$con = $mongoConnection->selectCollection('swiftmeal', 'user');
+$placeCon = $mongoConnection->selectCollection('swiftmeal', 'place');
+$customerCon = $mongoConnection->selectCollection('swiftmeal', 'customer');
 
 if(isset($_POST['action']) && !empty($_POST['action'])){
     $action=$_POST['action'];
     switch($action){
-        case 'confirmRequest': confirmRequest($_GET['Requester'],$UID,$conn);break;
-        case 'denyRequest': denyRequest($_GET['Deletee'],$UID,$conn);break;
-        case 'friendRequest' :friendRequest($UID, $_GET['RequestEmail'], $conn);break;
-        case 'SendMealRequest' :sendMealRequest($CustID,$_GET['Requester'],$Rest,$conn);break;
-        case 'ReservePlace' :MakeReservation($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$conn);break;
-        case 'AcceptMealRequest' :ConfirmMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID'],$conn);break;
-        case 'DenyMealRequest' :DenyMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID'],$conn);break;
-        case 'ReservePlace2' :MakeReservation2($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$conn,$_GET['placeid'],$_GET['restid']);break;
+        case 'confirmRequest': confirmRequest($_GET['Requester'],$UID);break;
+        case 'denyRequest': denyRequest($_GET['Deletee'],$UID);break;
+        case 'friendRequest' :friendRequest($UID, $_GET['RequestEmail']);break;
+        case 'SendMealRequest' :sendMealRequest($CustID,$_GET['Requester'],$Rest);break;
+        case 'ReservePlace' :MakeReservation($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date']);break;
+        case 'AcceptMealRequest' :ConfirmMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID']);break;
+        case 'DenyMealRequest' :DenyMealRequest($CustID,$_GET['Requester'],$_GET['PlaceID']);break;
+        case 'ReservePlace2' :MakeReservation2($CustID,$_GET['Pax'],$_GET['Time'],$_GET['Date'],$_GET['placeid'],$_GET['restid']);break;
         default: break;
     }
 }
-function friendRequest($Requester, $Requestee,$con){
-    $getUID2 = "SELECT UID FROM user WHERE Email='" . $Requestee . "'";
-    $query_run2 = mysqli_query($con, $getUID2);
-    $Requestee = mysqli_fetch_array($query_run2);
-    $Request = "INSERT INTO friendrequest(UID,RequestTo,isAccepted,RequestDate,RequestTime,isValid) VALUES ('" . $Requester . "','" . $Requestee[0] . "',0,'" . date("Y-m-d") . "','" . date("h:i:s") . "',1) ";
-    if(mysqli_query($con, $Request)){
+function friendRequest($Requester, $Requestee) {
+    $RequesteeUID = $con->find(
+        [
+            'Email' => $Requestee,
+        ],
+        [
+			'projection' => [
+				'_id' => 1
+			]
+        ]
+    );
+
+    $updateResult = $con->updateOne(
+        ['_id' => $Requester],
+        ['$push' =>['FriendRequest' => ['RequestTo' => $RequesteeUID["_id"], 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1]]]);
+
+    if ($updateResult->getModifiedCount() == 0) {
+        echo "failed";
+    } else {
         echo "success";
     }
-    else{
-        echo "failed";
+}
+
+function deleteFriend($Deleter,$Deletee) {
+    $updateResult = $con->updateOne(
+        [$OR => [['_id' => $Deleter, 'PUID' => $Deletee],['_id' => $Deletee, 'PUID' => $Deleter]]],
+        ['$set' =>['Type.$.isValid' => 0]]
+    );
+}
+
+function confirmRequest($Requester,$Requestee) {
+    $con->updateOne(
+        ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee],
+        ['$set' => ['FriendRequest.$.isAccepted' => 1, 'FriendRequest.$.isValid' => 0]]);
+    
+    $con->updateOne(
+        ['_id' => $Requester],
+        ['$push' =>['UsersPair' => ['PUID' => $Requestee, 'isValid' => 1, 'PairedDate' => date("Y-m-d"), 'PairedTime' => date("h:i:s")]]]);
+
+    $con->updateOne(
+        ['_id' => $Requestee],
+        ['$push' =>['UsersPair' => ['PUID' => $Requester, 'isValid' => 1, 'PairedDate' => date("Y-m-d"), 'PairedTime' => date("h:i:s")]]]);
+}
+
+function denyRequest($Requester, $Requestee) {
+    $con->updateOne(
+        ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee],
+        ['$set' => ['FriendRequest.$.isAccepted' => 0, 'FriendRequest.$.isValid' => 0]]);
+}
+
+function sendMealRequest($Requester,$Requestee,$RestID) {
+    $pID;
+    $cID;
+
+    $PlaceID = $placeCon->find(
+        [
+            'Details.RestaurantID' => $RestID,
+        ],
+        [
+            'limit' => 1,
+			'projection' => [
+                '_id' => 1
+			]
+        ]
+    );
+    
+    foreach ($PlaceID as $id) {
+        session_start();
+        $customer = $_SESSION['Obj'];
+        $customer->setPlaceID($id["_id"]);
+        $pID = $id["_id"];
     }
-}
+    
+    $CustomerID = $con->find(
+        [
+            '_id' => $Requestee,
+        ],
+        [
+            'limit' => 1,
+        ]
+    );
 
-function deleteFriend($Deleter,$Deletee,$con){
-    $delete="UPDATE userspair SET isValid=0 WHERE UID='" . $Deleter . "' AND PUID='" . $Deletee . "' OR UID='" . $Deletee . "' AND PUID='" . $Deleter . "'";
-    mysqli_query($con, $delete);
-}
-
-function confirmRequest($Requester,$Requestee,$con){
-    $cfmRequest = "UPDATE friendrequest SET isAccepted=1, isValid=0 WHERE UID='" . $Requester . "' AND RequestTo='" . $Requestee . "'";
-    mysqli_query($con, $cfmRequest);
-    $createFriendPair = "INSERT INTO userspair(UID,PUID,isValid,PairedDate,PairedTime) VALUES('" . $Requester . "','" . $Requestee . "',1,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
-    mysqli_query($con, $createFriendPair);
-    $createFriendPair2 = "INSERT INTO userspair(UID,PUID,isValid,PairedDate,PairedTime) VALUES('" . $Requestee . "','" . $Requester . "',1,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
-    mysqli_query($con, $createFriendPair2);
-}
-
-function denyRequest($Requester, $Requestee,$con){
-    $cfmRequest = "UPDATE friendrequest SET isAccepted=0, isValid=0 WHERE UID='" . $Requester . "' AND RequestTo='" . $Requestee . "'";
-    mysqli_query($con, $cfmRequest);
-}
-
-function showFriends($User, $con){
-    $showFriends = "SELECT us.Name FROM userspair AS u, user AS us WHERE u.UID = '" . $User . "' AND u.PUID=us.UID AND u.isValid=1";
-    $query_run = mysqli_query($con, $showFriends);
-    while($row = mysqli_fetch_array($query_run)){
-        echo $row[0];
+    foreach ($CustomerID as $cid) {
+        $cID = $cid["Details"][0]["CustomerID"];
     }
-}
 
-function sendMealRequest($Requester,$Requestee,$RestID,$con){
-    $getPlaceID = "SELECT PlaceID FROM restaurant WHERE RestaurantID='".$RestID."'";
-    $placerun = mysqli_query($con, $getPlaceID);
-    $PlaceID = mysqli_fetch_array($placerun);
-    session_start();
-    $customer = $_SESSION['Obj'];
-    $customer->setPlaceID($PlaceID[0]);
-    $getRequesteeCustID="SELECT CustomerID FROM customer WHERE UID='".$Requestee."'";
-    $query_run = mysqli_query($con, $getRequesteeCustID);
-    $RequesteeCID = mysqli_fetch_array($query_run);
-    $MealRequest = "INSERT INTO request(CustomerID,RequestTo,PlaceID,RequestDate,RequestTime,isValid,isAccepted) VALUES('" . $Requester . "','" . $RequesteeCID[0] . "','" . $PlaceID[0] . "','" . date("Y-m-d") . "','" . date("h:i:s") . "',1,0)";
-    if(mysqli_query($con, $MealRequest)){
+    $updateResult = $customerCon->updateOne(
+        ['_id' => $cID],
+        ['$push' =>['Requests' => ['RequestTo' => $Requester, 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1, 'PlaceID' => $pID]]]
+    );
+
+    if ($updateResult->getModifiedCount() != 0) {
         echo "succeed";
     }
-    else{
+    else {
         echo "fail";
     }
 }
 
-function MakeReservation($CustID,$Pax,$time,$date,$con){
+function MakeReservation($CustID,$Pax,$time,$date){
     $customer = $_SESSION['Obj'];
     $PlaceID=$customer->getPlaceID();
     $RestID=$customer->getRestID();
-    $UpdateRequestStatus="UPDATE request SET isAccepted=0 WHERE CustomerID='".$CustID."' AND PlaceID ='" .$PlaceID."'";
-    mysqli_query($con, $UpdateRequestStatus);
+    
+    $customerCon->updateOne(
+        ['_id' => $CustID, 'PlaceID' => $PlaceID],
+        ['$set' => ['Requests.$.isAccepted' => 0]]);
+
     $BookingID = BookingIDGenerator($CustID);
-    $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . $date . "','".$time."',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
-    if(mysqli_query($con, $Reserve)){
+
+    $updateResult = $customerCon->updateOne(
+        ['_id' => $CustID],
+        ['$push' =>['Reservations' => ['BookingID' => $BookingID, 'RestaurantID' => $RestID, 'Pax' => $Pax, 'DateReserved' => $date, 'TimeReserved' => $time, 'isValid' => 1, 'isFulfilled' => 0, 'DateCreated' => date("Y-m-d"), 'TimeCreated' => date("h:i:s")]]]
+    );
+
+    if($updateResult->getModifiedCount() != 0) {
         $customer->setBookingNum($BookingID);
         $customer->setBookingDate(date("Y-m-d"));
         $customer->setBookingTime(date("h:i:s"));
@@ -103,14 +153,16 @@ function MakeReservation($CustID,$Pax,$time,$date,$con){
     }
 }
 
-function ConfirmMealRequest($CustID,$Requester,$PlaceID,$con){
-    $updatemeal="UPDATE request SET isAccepted=1, isValid=0 WHERE CustomerID='".$Requester."' AND RequestTo='".$CustID."' AND PlaceID='".$PlaceID."'";
-    mysqli_query($con, $updatemeal);
+function ConfirmMealRequest($CustID,$Requester,$PlaceID) {
+    $customerCon->updateOne(
+        ['_id' => $Requester, 'RequestTo' => $CustID,'PlaceID' => $PlaceID],
+        ['$set' => ['Requests.$.isAccepted' => 1, 'Requests.$.isValid' => 0]]);
 }
 
-function DenyMealRequest($CustID,$Requester,$PlaceID,$con){
-    $updatemeal="UPDATE request SET isAccepted=0, isValid=0 WHERE CustomerID='".$Requester."' AND RequestTo='".$CustID."' AND PlaceID='".$PlaceID."'";
-    mysqli_query($con, $updatemeal);
+function DenyMealRequest($CustID,$Requester,$PlaceID) {
+    $customerCon->updateOne(
+        ['_id' => $Requester, 'RequestTo' => $CustID,'PlaceID' => $PlaceID],
+        ['$set' => ['Requests.$.isAccepted' => 0, 'Requests.$.isValid' => 0]]);
 }
 
 function BookingIDGenerator($CustID){
@@ -123,11 +175,19 @@ function BookingIDGenerator($CustID){
 
 function MakeReservation2($CustID,$Pax,$time,$date,$con,$PlaceID,$RestID){
     $customer = $_SESSION['Obj'];
-    $UpdateRequestStatus="UPDATE request SET isAccepted=0 WHERE CustomerID='".$CustID."' AND PlaceID ='" .$PlaceID."'";
-    mysqli_query($con, $UpdateRequestStatus);
+
+    $customerCon->updateOne(
+        ['_id' => $CustID, 'PlaceID' => $PlaceID],
+        ['$set' => ['Requests.$.isAccepted' => 0]]);
+    
     $BookingID = BookingIDGenerator($CustID);
-    $Reserve = "INSERT INTO reservation(`BookingID`, `CustomerID`, `RestaurantID`, `Pax`, `DateReserved`, `TimeReserved`, `isValid`, `isFulfilled`, `DateCreated`, `TimeCreated`) VALUES ('".$BookingID."','".$CustID."','".$RestID."',$Pax,'" . $date . "','".$time."',1,0,'" . date("Y-m-d") . "','" . date("h:i:s") . "')";
-    if(mysqli_query($con, $Reserve)){
+
+    $updateResult = $customerCon->updateOne(
+        ['_id' => $row["CustomerID"]],
+        ['$push' =>['Reservations' => ['BookingID' => $BookingID, 'RestaurantID' => $RestID, 'Pax' => $Pax, 'DateReserved' => $date, 'TimeReserved' => $time, 'isValid' => 1, 'isFulfilled' => 0, 'DateCreated' => date("Y-m-d"), 'TimeCreated' => date("h:i:s")]]]
+    );
+
+    if($updateResult->getModifiedCount() != 0) {
         $customer->setBookingNum($BookingID);
         $customer->setBookingDate(date("Y-m-d"));
         $customer->setBookingTime(date("h:i:s"));
@@ -136,7 +196,7 @@ function MakeReservation2($CustID,$Pax,$time,$date,$con,$PlaceID,$RestID){
         $customer->setPax($Pax);
         echo "succeed";
     }
-    else{
+    else {
         echo "fail";
     }
 }

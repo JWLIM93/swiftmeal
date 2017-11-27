@@ -374,7 +374,7 @@ function CustomerFeatureSQLToMongo() {
 		while($row = mysqli_fetch_assoc($resultReservations)) {
 			$updateResult = $collection->updateOne(
 				['_id' => $row["CustomerID"]],
-				['$push' =>['Reservations' => ['RestaurantID' => $row["RestaurantID"], 'Pax' => (int)$row["Pax"], 'DateReserved' => $row["DateReserved"], 'TimeReserved' => $row["TimeReserved"], 'isValid' => (int)$row["isValid"], 'isFulfilled' => (int)$row["isFulfilled"], 'DateCreated' => $row["DateCreated"], 'TimeCreated' => $row["TimeCreated"]]]]
+				['$push' =>['Reservations' => ['BookingID' => $row["BookingID"], 'RestaurantID' => $row["RestaurantID"], 'Pax' => (int)$row["Pax"], 'DateReserved' => $row["DateReserved"], 'TimeReserved' => $row["TimeReserved"], 'isValid' => (int)$row["isValid"], 'isFulfilled' => (int)$row["isFulfilled"], 'DateCreated' => $row["DateCreated"], 'TimeCreated' => $row["TimeCreated"]]]]
 			);
 
 			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
@@ -388,7 +388,7 @@ function CustomerFeatureSQLToMongo() {
 		while($row = mysqli_fetch_assoc($resultUserRecommendations)) {
 			$updateResult = $collection->updateOne(
 				['_id' => $row["CustomerID"]],
-				['$push' =>['UserRecommendations' => ['RecommendationID' => $row["RecommendationID"], 'Pax' => (int)$row["Pax"], 'DateRecommended' => $row["DateRecommended"], 'TimeRecommended' => $row["TimeRecommended"], 'RecommendedPlaces' => $row["RecommendedPlaces"], 'AreaID' => $row["AreaID"]]]]
+				['$push' =>['UserRecommendations' => ['RecommendationID' => $row["RecommendationID"], 'DateRecommended' => $row["DateRecommended"], 'TimeRecommended' => $row["TimeRecommended"], 'RecommendedPlaces' => $row["RecommendedPlaces"], 'AreaID' => $row["AreaID"]]]]
 			);
 
 			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
@@ -416,12 +416,82 @@ function test() {
 	printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
 }
 
-connectToSQL();
+function test2() {
+	$collection = connect_db()->selectCollection('swiftmeal', 'user');
+
+    $cursor = $collection->find(
+        [
+            'Email' => $email,
+            'UP' => $password,
+        ],
+        [
+            'limit' => 1,
+        ]
+    );
+
+    foreach ($cursor as $user) {
+        echo "TEST";
+        if ($user["Type"] == "Customer") {
+            if ($user["Type.0.isValid"] == 1) {
+                session_start();
+                $name = $user["Name"];
+                $contact_no = $user["MobileNo"];
+                $cust_id = $user['Details.0.CustomerID'];
+                $custSession = new customer($user_ID,$name,$email,$password,$contact_no,'login',$cust_id,1);
+                $collection->updateOne(['_id' => $row["_id"]],
+				['$set' => ['IsOnline' => 1]]);
+                $_SESSION['Obj'] = $custSession;
+            } else {
+                echo "Account doesn't exist";
+            }
+        } else if ($user["Type"] == "Owner") {
+            if ($user["Type.0.isValid"] == 1) {
+                session_start();
+                $name = $user['Name'];
+                $contact_no = $user['MobileNo'];
+                $owner_id = $user['Details.0.OwnerID'];
+                echo $owner_id;
+                $ownerSession = new owner($user_ID,$name,$email,$password,$contact_no,'login',$owner_id,1);
+                $collection->updateOne(['_id' => $row["_id"]],
+				['$set' => ['IsOnline' => 1]]);
+                $_SESSION['Obj'] = $ownerSession;
+            } else {
+                echo "Account doesn't exist";
+            }
+        } else {
+            echo "Login Failed.";
+            session_destroy();
+        }
+        
+    }
+}
+
+function test3() {
+	global $mongoConn;
+	$collection = $mongoConn->selectCollection('swiftmeal', 'user');
+	
+	$CustomerID = $collection->find(
+        [
+            '_id' => 'UCUST4023JER8201',
+        ],
+        [
+			'limit' => 1,
+        ]
+    );
+
+	foreach ($CustomerID as $cid) {
+		echo $cid["Details"][0]["CustomerID"];
+    }
+	
+	//echo '<pre>' . var_export($CustomerID, true) . '</pre>';
+}
+
+//connectToSQL();
 connectToMongo();
 //AreaSqlToMongo();
 //PlaceSQLToMongo();
 //UserSQLToMongo();
 //CustomerFeatureSQLToMongo();
 
-test();
+test3();
 ?>

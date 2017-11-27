@@ -4,20 +4,19 @@ var updateFailureDialog = new mdc.dialog.MDCDialog(
 );
 
 updateFailureDialog.listen('MDCDialog:accept', function() {
-    window.location = 'customer-home.php';
-});
-
-updateFailureDialog.listen('MDCDialog:cancel', function() {
     window.location = 'customer-change-password.php';
 });
 
+updateFailureDialog.listen('MDCDialog:cancel', function() {
+    window.location = 'customer-home.php';
+});
+
 document.getElementById('update-password-fab').addEventListener('click', () => {
-    let currentPassword = document.forms['ChangePassword']['currentPW'].value;
-    let newPassword = document.forms['ChangePassword']['newPW'].value;
-    let confirmNewPassword =
+    var currentPassword = document.forms['ChangePassword']['currentPW'].value;
+    var newPassword = document.forms['ChangePassword']['newPW'].value;
+    var confirmNewPassword =
         document.forms['ChangePassword']['confirmNewPW'].value;
-    if (currentPassword.length > 8 && currentPassword != '') {
-        //alert('Hello');
+    if (currentPassword.length >= 8 && currentPassword != '') {
         if (checkCurrentPassword(currentPassword)) {
             alert('test1');
             if (
@@ -30,7 +29,7 @@ document.getElementById('update-password-fab').addEventListener('click', () => {
             ) {
                 //updateFailureDialog.show();
                 updatePassword(newPassword);
-                window.location = 'customer-home.php';
+                //window.location = 'customer-home.php';
             } else {
                 updateFailureDialog.show();
             }
@@ -57,22 +56,19 @@ function updatePassword(newPW) {
 }
 
 function checkCurrentPassword(currentPW) {
-    console.log('test');
     let bool = false;
     $.ajax({
         type: 'POST',
         url: 'scripts/checkCurrentPassword.php',
-        async: false,
+        async: true,
         data: 'currentPW=' + currentPW,
-        dataType: 'json'
-    }).done(function(data) {
-        if (data == true) {
-            bool = true;
+        success: function(output) {
+            if (output == 'success') {
+                bool = true;
+            } else {
+                bool = false;
+            }
         }
     });
-    return trueOrFalse(bool);
-}
-
-function trueOrFalse(bool) {
     return bool;
 }

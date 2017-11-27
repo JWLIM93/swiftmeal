@@ -4,11 +4,11 @@ var updateFailureDialog = new mdc.dialog.MDCDialog(
 );
 
 updateFailureDialog.listen('MDCDialog:accept', function() {
-    window.location = 'customer-home.php';
+    window.location = 'customer-change-password.php';
 });
 
 updateFailureDialog.listen('MDCDialog:cancel', function() {
-    window.location = 'customer-change-password.php';
+    window.location = 'customer-home.php';
 });
 
 document.getElementById('update-password-fab').addEventListener('click', () => {

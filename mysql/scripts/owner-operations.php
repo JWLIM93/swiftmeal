@@ -18,6 +18,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
         case 'accept' : AcceptReservation($_GET['BID'], $conn);break;
         case 'deny' : DenyReservation($_GET['BID'], $conn);break;
         case 'deleteRestaurant' : DeleteRestaurant($_GET['restid'], $conn);break;
+        case 'addRestaurant' : AddRestaurant($OwnerID, $_GET['block'],$_GET['building'],$_GET['floor'],$_GET['street'],$_GET['unit'],$_GET['lat'],$_GET['long'],$_GET['postal'],$_GET['restname'],$_GET['area'],$conn);break;
         default: break;
     }
 }
@@ -64,7 +65,7 @@ function GetReservations($restid, $con){
 }
 
 function AcceptReservation($BID, $con){
-    $Accept = "UPDATE reservation SET isValid=1 WHERE BookingID='".$BID."'";
+    $Accept = "UPDATE reservation SET isFulfilled=1 WHERE BookingID='".$BID."'";
     mysqli_query($con, $Accept);
 }
 
@@ -78,20 +79,41 @@ function DeleteRestaurant($restid, $con){
     mysqli_query($con, $Delete);
 }
 
+function AddRestaurant($ownid, $Block,$Building,$Floor,$Street,$Unit,$lat,$long,$postal,$restname,$area,$con){
+    $PlaceID = PlaceIDGenerator();
+    $RestID = RestIDGenerator();
+    $InsertPlace = "INSERT INTO `place`(`PlaceID`, `Block`, `Building`, `Floor`, `Street`, `Unit`,`GeoLat`, `GeoLong`, `DateAdded`, `TimeAdded`,`PostalCode`) VALUES ('".$PlaceID."','".$Block."','".$Building."','".$Floor."','".$Street."','".$Unit."','".$lat."','".$long."','" . date("Y-m-d") . "','" . date("h:i:s") . "','".$postal."')";
+    mysqli_query($con, $InsertPlace);
+    $InsertRest = "INSERT INTO `restaurant`(`PlaceID`, `RestaurantID`, `OwnerID`, `RestaurantName`, `CountLikes`, `CountDislikes`, `isValid`) VALUES ('".$PlaceID."','".$RestID."','".$ownid."','".$restname."',0,0,1)";
+    mysqli_query($con, $InsertRest);
+    $GetAreaID = "SELECT AreaID FROM area WHERE AreaName='".$area."'";
+    $queryrun = mysqli_query($con, $GetAreaID);
+    $row = mysqli_fetch_array($queryrun);
+    $InsertPlaceArea = "INSERT INTO `placearea`(`PlaceID`, `AreaID`, `isValid`) VALUES ('".$PlaceID."','".$row[0]."',1)";
+    mysqli_query($con, $InsertPlaceArea);
+    $IncrementArea = "UPDATE area SET PlaceCount=PlaceCount+1 WHERE AreaID='".$row[0]."'";
+    mysqli_query($con, $IncrementArea);
+}
 
 
+function PlaceIDGenerator(){
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $string = '';
+    $max = strlen($characters) - 1;
+    for ($i = 0; $i < 19; $i++) {
+         $string .= $characters[mt_rand(0, $max)];
+    }
+    return $string;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+function RestIDGenerator(){
+    $characters = '0123456789';
+    $string = '';
+    $max = strlen($characters) - 1;
+    for ($i = 0; $i < 9; $i++) {
+         $string .= $characters[mt_rand(0, $max)];
+    }
+    return $string;
+}
 
 ?>

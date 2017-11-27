@@ -120,16 +120,16 @@ function GetRestaurants() {
 }
 
 //---------------------Accept or Cancel Reservations---------------------------
-// function AcceptReservations(bid){
-//     $.ajax({
-//         url: 'scripts/owner-operations.php?BID='+bid,
-//         data: { action: 'accept' },
-//         type: 'post',
-//         success: function(output) {
-//             console.log(output);
-//         }
-//     })
-// }
+function AcceptReservations(bid) {
+    $.ajax({
+        url: 'scripts/owner-operations.php?BID=' + bid,
+        data: { action: 'accept' },
+        type: 'post',
+        success: function(output) {
+            console.log(output);
+        }
+    });
+}
 
 function CencelReservations(bid) {
     $.ajax({
@@ -259,8 +259,17 @@ function DisplayReservations(name, pax, date, time, bid) {
     anode.addEventListener('click', function() {
         CencelReservations(bid);
     });
+    var anode2 = document.createElement('a');
+    anode2.className = 'material-icons';
+    anode2.id = 'accept-reservation';
+    anode2.title = 'Accept Reservation';
+    anode2.innerHTML = 'check';
+    anode2.addEventListener('click', function() {
+        AcceptReservations(bid);
+    });
     var spannode5 = document.createElement('span');
     spannode4.appendChild(anode);
+    spannode4.appendChild(anode2);
     spannode4.appendChild(spannode5);
     spannode3.appendChild(timenode);
     spannode3.appendChild(spannode4);

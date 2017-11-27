@@ -55,7 +55,7 @@ function populateMarkers() {
                 viewAllReviews();
                 var nameadd = document.getElementById('restaurant').name;
                 var nameadd2 = nameadd.split(',');
-                if (nameadd2[0] != 'Hawker Center@') {
+                if (nameadd2[0].indexOf('Hawker Center@') === -1) {
                     document.getElementById(
                         'reviews-dialog-header'
                     ).childNodes[0].nodeValue =

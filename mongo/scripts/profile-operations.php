@@ -4,8 +4,8 @@ include 'owner.php';
 include 'customer.php';
 session_start();
 $owner = $_SESSION['Obj'];
-$conn = connect_db();
-$UID = $owner->getUser_id(); 
+$UID = $owner->getUser_id();
+$UserCollection = $mongoConnection->selectCollection('swiftmeal', 'user'); 
 
 if(isset($_POST['action']) && !empty($_POST['action'])){
     $action=$_POST['action'];
@@ -19,39 +19,83 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
 
 function ChangePassword($oldpassword,$uid,$password,$object,$con){
 	global $owner;
+	global $mongoConnection;
+	global $UserCollection;
+
     $oldpw = sha1($oldpassword);
-    $pw = sha1($password);
-    $checkoldpw = "SELECT UP FROM user WHERE UID='".$uid."'";
-    $check = mysqli_query($con, $checkoldpw);
-    $row = mysqli_fetch_array($check);
-    if($row[0]!=$oldpw){
-        echo "fail";
-    }
-    else{
-        $object->setPassword($password);
-        $editSql = "UPDATE user SET UP='".$pw."' WHERE UID='".$uid."'";
-        mysqli_query($con, $editSql);
+	$pw = sha1($password);
+
+	$password = $UserCollection->find(
+        [
+            '_id' => $uid,
+        ],
+        [
+			'projection' => [
+				'UP' => 1
+			]
+        ]
+    );
+    if ($password["UP"] != $oldpw) {
+		echo "FAIL";
+	} else {
+		$object->setPassword($password);
+		$UserCollection->updateOne(['_id' => $uid],
+		['$set' => ['UP' => $pw]]);
 		$owner->setPassword($pw);
 		$_SESSION['Obj'] = $owner;
-        echo "succeed";
-    }
+	}
 }
 
-function editProfile($name,$email,$mobileNo,$uid,$con){
+function editProfile($name,$email,$mobileNo,$uid,$con) {
+	global $mongoConnection;
+	global $UserCollection;
+
+	if($name != "" || $email != "" || $mobileNo != "") {
+		global $owner;
+		if($name != "") {		
+			$UserCollection->updateOne(['_id' => $uid],
+			['$set' => ['Name' => $name]]);	
+			$owner->setFullName($name); 
+		}
+		if($email != "") {
+			$UserCollection->updateOne(['_id' => $uid],
+			['$set' => ['Email' => $email]]);
+			$owner->setEmail($email); 
+		}
+		if($mobileNo != "") {
+			$UserCollection->updateOne(['_id' => $uid],
+			['$set' => ['MobileNo' => $mobileNo]]);
+			$owner->setPhone_number($mobileNo); 
+		}
+		$_SESSION['Obj'] = $owner;
+		echo "succeed";
+	} else {
+		echo "fail";
+	}
+}
+
+
+function editProfileCUST($name,$email,$mobileNo,$uid,$con) {
+	global $mongoConnection;
+	global $UserCollection;
+
 	if($name != "" || $email != "" || $mobileNo != ""){
 		global $owner;
-		if($name != ""){			
-			$updateNameSQL = "UPDATE user SET Name='".$name."' WHERE UID='".$uid."'";
+		if($name != "") {		
+			$UserCollection->updateOne(['_id' => $uid],
+			['$set' => ['Name' => $name]]);		
 			$owner->setFullName($name); 
 			mysqli_query($con, $updateNameSQL);
 		}
-		if($email != ""){
-			$updateEmailSQL = "UPDATE user SET Email='".$email."' WHERE UID='".$uid."'";
+		if($email != "") {
+			$UserCollection->updateOne(['_id' => $uid],
+			['$set' => ['Email' => $email]]);
 			$owner->setEmail($email); 
 			mysqli_query($con, $updateEmailSQL);
 		}
-		if($mobileNo != ""){
-			$mobileNoSQL = "UPDATE user SET MobileNo='".$mobileNo."' WHERE UID='".$uid."'";
+		if($mobileNo != "") {
+			$UserCollection->updateOne(['_id' => $uid],
+			['$set' => ['MobileNo' => $mobileNo]]);
 			$owner->setPhone_number($mobileNo); 
 			mysqli_query($con, $mobileNoSQL);
 		}
@@ -59,34 +103,6 @@ function editProfile($name,$email,$mobileNo,$uid,$con){
 		echo "succeed";
 	}else{
 		echo "fail";
-	}
-}
-
-
-function editProfileCUST($name,$email,$mobileNo,$uid,$con){
-	if($name != "" || $email != "" || $mobileNo != ""){
-		global $owner;
-		if($name != ""){			
-			$updateNameSQL = "UPDATE user SET Name='".$name."' WHERE UID='".$uid."'";
-			$owner->setFullName($name); 
-			mysqli_query($con, $updateNameSQL);
-		}
-		if($email != ""){
-			$updateEmailSQL = "UPDATE user SET Email='".$email."' WHERE UID='".$uid."'";
-			$owner->setEmail($email); 
-			mysqli_query($con, $updateEmailSQL);
-		}
-		if($mobileNo != ""){
-			$mobileNoSQL = "UPDATE user SET MobileNo='".$mobileNo."' WHERE UID='".$uid."'";
-			$owner->setPhone_number($mobileNo); 
-			mysqli_query($con, $mobileNoSQL);
-		}
-		$_SESSION['Obj'] = $owner;
-		echo "succeed";
-	}else{
-		echo "fail";
-	}
-	
-  
+	}	
 }
 ?>

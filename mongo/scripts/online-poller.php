@@ -15,56 +15,113 @@ $FriendRequests = array();
 $Friends = array();
 $AcceptedMeals = array();
 $RestHistory= array();
-//Poll for Online Friends
-$findfrens = "SELECT PUID FROM userspair WHERE UID = '" . $UID . "' AND isValid=1";
-$countResult = mysqli_query($conn, $findfrens);
-while ($row = mysqli_fetch_array($countResult)) {
-    $findonline = "SELECT Name AS name FROM user WHERE UID = '" . $row[0] . "' AND isOnline=1";
-    $OnlineResult = mysqli_query($conn, $findonline);
-    $OnlineData = mysqli_fetch_array($OnlineResult);
-    if($OnlineData['name']!=null){
-        $OnlineFriendsTemp=(array('Name'=>$OnlineData['name'],'UID'=>$row[0]));
-        array_push($OnlineFriends, $OnlineFriendsTemp);
+
+$usercollection = $mongoConnection->selectCollection('swiftmeal', 'user');
+$custcollection = $mongoConnection->selectCollection('swiftmeal', 'customer');
+$placecollection = $mongoConnection->selectCollection('swiftmeal', 'place');
+
+//Poll for Online Friends and All Friends
+$uidmatch = ['_id'=>$UID];
+$onlinefilter = array();
+$pairdates = array();
+$document = $usercollection->find($uidmatch);
+foreach ($document as $row){
+    foreach($row['UsersPair'] as $friends){
+        if($friends['isValid']==1){
+            array_push($onlinefilter,['_id'=>$friends['PUID']]);
+            $pairdates[$friends['PUID']]=$friends['PairedDate'];
+        }
     }
 }
-//Poll for Meal Requests
-$findrequests = "SELECT u.Name AS name, r.CustomerID AS uid ,r.RequestDate AS date, r.RequestTime AS time, rest.RestaurantName AS restname , rest.PlaceID AS placeid, p.GeoLat AS lat, p.GeoLong AS lng, p.Street AS street, rest.RestaurantID AS id FROM place AS p, restaurant AS rest, request AS r, customer AS c, user AS u WHERE r.isValid=1 AND r.RequestTo = '" . $CustID . "' AND r.CustomerID=c.CustomerID AND c.UID=u.UID AND rest.PlaceID=r.PlaceID AND r.PlaceID=p.PlaceID";
-$MealResult = mysqli_query($conn, $findrequests);
-while ($row2 = mysqli_fetch_array($MealResult)) {
-    $tempMeal = (array('Name'=>$row2['name'],'UID'=>$row2['uid'],'Date'=>$row2['date'],'Time'=>$row2['time'],'Restname'=>$row2['restname'],'PlaceID'=>$row2['placeid'],'Lat'=>$row2['lat'],'Long'=>$row2['lng'],'Street'=>$row2['street'],'RestID'=>$row2['id']));
-    array_push($MealRequests,$tempMeal);
-}
-//Poll for Friend Requests
-$friendRequest = "SELECT u.Name AS name, u.UID AS uid, RequestDate AS date FROM friendrequest AS f, user AS u WHERE f.RequestTo = '" . $UID . "' AND f.UID=u.UID AND f.isValid=1";
-$RequestResult = mysqli_query($conn, $friendRequest);
-while ($row3 = mysqli_fetch_array($RequestResult)) {
-    $Requests=(array('Name'=>$row3['name'],'UID'=>$row3['uid'],'Date'=>$row3['date']));
-    array_push($FriendRequests,$Requests);
-}
 
-// All Friends
-$showFriends = "SELECT us.Name AS name, u.PairedDate AS date, us.UID AS uid FROM userspair AS u, user AS us WHERE u.UID = '" . $UID . "' AND u.PUID=us.UID AND u.isValid=1";
-$query_run = mysqli_query($conn, $showFriends);
-while($row4 = mysqli_fetch_array($query_run)){
-    $FriendsTemp=(array('Name'=>$row4['name'],'Date'=>$row4['date'],'UID'=>$row4['uid']));
-    array_push($Friends, $FriendsTemp);
-}
-//Poll for Accepted Meal Requests
-$AcceptedMealRequests = "SELECT u.Name AS name, u.UID AS uid FROM request AS r, user AS u, customer AS c WHERE r.PlaceID='".$Place."'AND r.CustomerID='" . $CustID . "' AND r.isValid=0 AND r.isAccepted=1 AND c.CustomerID=r.RequestTo AND c.UID=u.UID";
-$AcceptedRun = mysqli_query($conn, $AcceptedMealRequests);
-while($row5=mysqli_fetch_array($AcceptedRun)){
-    $AcceptMealsTemp = (array('Name'=>$row5['name'],'UID'=>$row5['uid']));
-    array_push($AcceptedMeals, $AcceptMealsTemp);
-}
+$document2 = $usercollection->find(['$or'=>$onlinefilter]);
+// foreach($document2 as $row2){
+//     if($row2['IsOnline']==1){
+//         $OnlineFriendsTemp=(array('Name'=>$row2['Name'],'UID'=>$row2['_id']));
+//         array_push($OnlineFriends, $OnlineFriendsTemp);
+//     }
+//     $FriendsTemp=(array('Name'=>$row2['Name'],'Date'=>$pairdates[$row2['_id']],'UID'=>$row2['_id']));
+//     array_push($Friends, $FriendsTemp);
+// }
 
-//Poll for restaurants history
-$history = "SELECT r.RestaurantID AS restid, p.Street AS street, r.RestaurantName AS name, res.DateReserved AS date, res.TimeReserved AS time FROM restaurant AS r, reservation AS res, place AS p WHERE res.CustomerID='" . $CustID . "' AND res.RestaurantID=r.RestaurantID AND res.isFulfilled=1 AND p.PlaceID=r.PlaceID";
-$historyrun=mysqli_query($conn, $history);
-while($row6=mysqli_fetch_array($historyrun)){
-    $historytemp=(array('Restname'=>$row6['name'],'Date'=>$row6['date'],'Time'=>$row6['time'],'Street'=>$row6['street'],'RestID'=>$row6['restid']));
-    array_push($RestHistory, $historytemp);
-}
+// //Poll for Meal Requests
+// $requestinfo = array();
+// $placeinfo = array();
+// $restaurantinfo = array();
+// $requesterinfo = array();
+// $document3 = $custcollection->find();
+// foreach($document3 as $row3){
+//     foreach($row3['Requests'] as $requests){
+//         if($requests['RequestTo']==$CustID && $requests['isValid']==1){
+//             $temprequest = ['placeid'=>$requests['PlaceID'],'uid'=>$row3['_id'],'date'=>$requests['RequestDate'],'time'=>$requests['RequestTime']];
+//             array_push($requestinfo, $temprequest);
+//             array_push($placeinfo, ['_id'=>$requests['PlaceID']]);
+//             array_push($requesterinfo,['Details.CustomerID'=>$row3['_id']]);
+//         }
+//     }
+// }
 
-mysqli_close($conn);
+// $document4 = $placecollection->find(['$or'=>$placeinfo]);
+// foreach($document4 as $row4){
+//     $restaurantinfo[$row4['_id']]=['restname'=>$row4['Details'][0]['RestaurantName'], 'id'=>$row4['Details'][0]['RestaurantID'],'lat'=>$row4['GeoLat'],'lng'=>$row4['GeoLong'],'street'=>$row4['Street']];
+// }
+
+// $document5 = $usercollection->find(['$or'=>$requesterinfo]);
+// foreach($document5 as $row5){
+//     foreach($requestinfo as $meal){
+//         if($meal['uid']==$row5['Details'][0]['CustomerID']){
+//             $tempMeal = (array('Name'=>$row5['Name'],'UID'=>$meal['uid'],'Date'=>$meal['date'],'Time'=>$meal['time'],'Restname'=>$restaurantinfo[$meal['placeid']]['restname'],'PlaceID'=>$meal['placeid'],'Lat'=>$restaurantinfo[$meal['placeid']]['lat'],'Long'=>$restaurantinfo[$meal['placeid']]['lng'],'Street'=>$restaurantinfo[$meal['placeid']]['street'],'RestID'=>$restaurantinfo[$meal['placeid']]['id']));
+//             array_push($MealRequests,$tempMeal);
+//         }
+//     }
+// }
+// ////Poll for Friend Requests
+// $document6= $usercollection->find();
+// foreach($document6 as $row6){
+//     foreach($row6['FriendRequest'] as $frequest){
+//         if($frequest['RequestTo']==$UID && $frequest['isValid']==1){
+//             $Requests=(array('Name'=>$row6['Name'],'UID'=>$row6['_id'],'Date'=>$frequest['RequestDate']));
+//             array_push($FriendRequests,$Requests);
+//         }
+//     }
+// }
+
+// //Poll for Accepted Meal Requests
+// $mealaccept = array();
+// $cuidmatch = ['_id'=>$CustID];
+// $document7= $custcollection->find($cuidmatch);
+// foreach($document7 as $row7){
+//     foreach($row7['Requests'] as $accept){
+//         if($accept['isAccepted']==1 && $accept['isValid']==0 && $accept['PlaceID']==$Place){
+//             array_push($mealaccept,['Details.CustomerID'=>$accept['RequestTo']]);
+//         }
+//     }
+// }
+
+// $document8=$usercollection->find(['$or'=>$mealaccept]);
+// foreach ($document8 as $row8){
+//     $AcceptMealsTemp = (array('Name'=>$row8['Name'],'UID'=>$row8['_id']));
+//     array_push($AcceptedMeals, $AcceptMealsTemp);
+// }
+
+// //Poll for restaurants history
+// $places = array();
+// $historyrest = array();
+// $document9= $custcollection->find($cuidmatch);
+// foreach($document9 as $row9){
+//     foreach($row9['Reservations'] as $reserve){
+//         if($reserve['isFulfilled']==1){
+//             $places[$reserve['RestaurantID']]=['date'=>$reserve['DateReserved'],'time'=>$reserve['TimeReserved']];
+//             array_push($historyrest,['Details.RestaurantID'=>$reserve['RestaurantID']]);
+//         }
+//     }
+// }
+
+// $document10 = $placecollection->find(['$or'=>$historyrest]);
+// foreach($document10 as $row10){
+//     $historytemp=(array('Restname'=>$row10['Details'][0]['RestaurantName'],'Date'=>$places[$row10['Details'][0]['RestaurantID']]['date'],'Time'=>$places[$row10['Details'][0]['RestaurantID']]['time'],'Street'=>$row10['Street'],'RestID'=>$row10['Details'][0]['RestaurantID']));
+//     array_push($RestHistory, $historytemp);
+// }
+
 echo json_encode(array('OnlineFriends'=>$OnlineFriends,'MealRequests'=>$MealRequests,'FriendRequests'=>$FriendRequests,'Friends'=>$Friends,'AcceptedMealRequests'=>$AcceptedMeals,'History'=>$RestHistory));
 ?>

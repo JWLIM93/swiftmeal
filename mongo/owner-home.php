@@ -149,6 +149,13 @@ $owner = $_SESSION['Obj'];
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
                                             <div class="mdc-text-field mdc-text-field--box">
+                                                <input required type="text" id="postal-code" class="mdc-text-field__input" oninput="showConfirmDialog(this)">
+                                                <label for="postal-code" class="mdc-text-field__label">Postal Code</label>
+                                                <div class="mdc-text-field__bottom-line"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
+                                            <div class="mdc-text-field mdc-text-field--box">
                                                 <input required type="text" id="restaurant-lat" class="mdc-text-field__input" oninput="showConfirmDialog(this)">
                                                 <label for="restaurant-lat" class="mdc-text-field__label">Geographical Latitude</label>
                                                 <div class="mdc-text-field__bottom-line"></div>

@@ -35,7 +35,7 @@ $customer = $_SESSION['Obj'];
 
     <!-- AHEAD JAVASCRIPT -->
     <script src="js/friends-display.js"></script>
-    <script src="js/customer-review.js"></script>
+    <!-- <script src="js/customer-review.js"></script> -->
 
   </head>
 
