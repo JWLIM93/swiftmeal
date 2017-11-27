@@ -51,7 +51,7 @@ function loginUser($email,$password){
     );
     foreach ($cursor as $user) {
         if ($user["Type"] == "Customer") {
-            if ($user["Details"][0]["isValid"] == 1) {
+            if ($user["Details"]["isValid"] == 1) {
                 session_start();
                 $name = $user["Name"];
                 $contact_no = $user["MobileNo"];
@@ -65,7 +65,7 @@ function loginUser($email,$password){
                 echo "Account doesn't exist";
             }
         } else if ($user["Type"] == "Owner") {
-            if ($user["Details"][0]["isValid"] == 1) {
+            if ($user["Details"]["isValid"] == 1) {
                 session_start();
                 $name = $user['Name'];
                 $contact_no = $user['MobileNo'];

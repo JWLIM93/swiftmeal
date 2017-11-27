@@ -25,20 +25,28 @@ if(isset($_POST['action']) && !empty($_POST['action'])){
     }
 }
 function friendRequest($Requester, $Requestee) {
+    global $con;
+    $requesteeId;
+
     $RequesteeUID = $con->find(
         [
             'Email' => $Requestee,
         ],
         [
+            'limit' => 1,
 			'projection' => [
 				'_id' => 1
 			]
         ]
     );
 
+    foreach ($RequesteeUID as $rid) {
+        $requesteeId = $rid;
+    }
+
     $updateResult = $con->updateOne(
         ['_id' => $Requester],
-        ['$push' =>['FriendRequest' => ['RequestTo' => $RequesteeUID["_id"], 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1]]]);
+        ['$push' => ['FriendRequest' => ['RequestTo' => $rid, 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1]]]);
 
     if ($updateResult->getModifiedCount() == 0) {
         echo "failed";
@@ -48,6 +56,8 @@ function friendRequest($Requester, $Requestee) {
 }
 
 function deleteFriend($Deleter,$Deletee) {
+    global $con;
+
     $updateResult = $con->updateOne(
         [$OR => [['_id' => $Deleter, 'PUID' => $Deletee],['_id' => $Deletee, 'PUID' => $Deleter]]],
         ['$set' =>['Type.$.isValid' => 0]]
@@ -55,6 +65,8 @@ function deleteFriend($Deleter,$Deletee) {
 }
 
 function confirmRequest($Requester,$Requestee) {
+    global $con;
+
     $con->updateOne(
         ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee],
         ['$set' => ['FriendRequest.$.isAccepted' => 1, 'FriendRequest.$.isValid' => 0]]);
@@ -69,12 +81,18 @@ function confirmRequest($Requester,$Requestee) {
 }
 
 function denyRequest($Requester, $Requestee) {
+    global $con;
+
     $con->updateOne(
         ['_id' => $Requester, 'FriendRequest.RequestTo' => $Requestee],
         ['$set' => ['FriendRequest.$.isAccepted' => 0, 'FriendRequest.$.isValid' => 0]]);
 }
 
 function sendMealRequest($Requester,$Requestee,$RestID) {
+    global $placeCon;
+    global $con;
+    global $customerCon;
+
     $pID;
     $cID;
 
@@ -124,6 +142,8 @@ function sendMealRequest($Requester,$Requestee,$RestID) {
 }
 
 function MakeReservation($CustID,$Pax,$time,$date){
+    global $customerCon;
+
     $customer = $_SESSION['Obj'];
     $PlaceID=$customer->getPlaceID();
     $RestID=$customer->getRestID();
@@ -154,12 +174,16 @@ function MakeReservation($CustID,$Pax,$time,$date){
 }
 
 function ConfirmMealRequest($CustID,$Requester,$PlaceID) {
+    global $customerCon;
+
     $customerCon->updateOne(
         ['_id' => $Requester, 'RequestTo' => $CustID,'PlaceID' => $PlaceID],
         ['$set' => ['Requests.$.isAccepted' => 1, 'Requests.$.isValid' => 0]]);
 }
 
 function DenyMealRequest($CustID,$Requester,$PlaceID) {
+    global $customerCon;
+
     $customerCon->updateOne(
         ['_id' => $Requester, 'RequestTo' => $CustID,'PlaceID' => $PlaceID],
         ['$set' => ['Requests.$.isAccepted' => 0, 'Requests.$.isValid' => 0]]);
@@ -174,6 +198,8 @@ function BookingIDGenerator($CustID){
 }
 
 function MakeReservation2($CustID,$Pax,$time,$date,$con,$PlaceID,$RestID){
+    global $customerCon;
+
     $customer = $_SESSION['Obj'];
 
     $customerCon->updateOne(
