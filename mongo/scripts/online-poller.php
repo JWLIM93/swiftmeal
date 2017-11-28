@@ -70,11 +70,11 @@ if (!empty($placeinfo)) {
     }
 }
 
-if (!empty($requestornfo)) {
+if (!empty($requestinfo)) {
     $document5 = $usercollection->find(['$or'=>$requesterinfo]);
     foreach($document5 as $row5){
         foreach($requestinfo as $meal){
-            if($meal['uid']==$row5['Details'][0]['CustomerID']){
+            if($meal['uid']==$row5['Details']['CustomerID']){
                 $tempMeal = (array('Name'=>$row5['Name'],'UID'=>$meal['uid'],'Date'=>$meal['date'],'Time'=>$meal['time'],'Restname'=>$restaurantinfo[$meal['placeid']]['restname'],'PlaceID'=>$meal['placeid'],'Lat'=>$restaurantinfo[$meal['placeid']]['lat'],'Long'=>$restaurantinfo[$meal['placeid']]['lng'],'Street'=>$restaurantinfo[$meal['placeid']]['street'],'RestID'=>$restaurantinfo[$meal['placeid']]['id']));
                 array_push($MealRequests,$tempMeal);
             }
@@ -99,7 +99,7 @@ $cuidmatch = ['_id'=>$CustID];
 $document7= $custcollection->find($cuidmatch);
 foreach($document7 as $row7){
     foreach($row7['Requests'] as $accept){
-        if($accept['isAccepted']==1 && $accept['isValid']==0 && $accept['PlaceID']==$Place){
+        if($accept['isAccepted']==1 && $accept['isValid']==1 && $accept['PlaceID']==$Place){
             array_push($mealaccept,['Details.CustomerID'=>$accept['RequestTo']]);
         }
     }

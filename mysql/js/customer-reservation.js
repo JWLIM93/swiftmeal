@@ -124,7 +124,7 @@ confirmDialog.listen('MDCDialog:accept', function() {
             '&Date=' +
             dateSelected,
         data: {
-            action: 'ReservePlace'
+            action: 'ReservePlace2'
         },
         type: 'post',
         success: function(output) {

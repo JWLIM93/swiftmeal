@@ -4,6 +4,9 @@ include 'customer.php';
 session_start();
 $customer = $_SESSION['Obj'];
 $CustID = $customer->getCustID();
+$con = $mongoConnection->selectCollection('swiftmeal', 'user');
+$placeCon = $mongoConnection->selectCollection('swiftmeal', 'place');
+$customerCon = $mongoConnection->selectCollection('swiftmeal', 'customer');
 
 //List of variables i going to use
 $reviewList = array();
@@ -31,25 +34,39 @@ isValid isSpam isVisible
 //Query All Review
 function queryAllReview($resturantID){
 	global $reviewList;
-        $queryAllReviewSQL = "SELECT user.Name,review.ReviewID ,review.content,review.DateReviewed,review.TimeReviewed,review.Upvote,review.Downvote,review.isValid,review.isSpam,review.isVisible FROM review INNER JOIN customer ON review.CustomerID = customer.CustomerID JOIN user ON user.UID = customer.UID where review.RestaurantID = $resturantID AND review.isVisible = 1;";
-            //echo $queryAllReviewSQL;
-            //$queryAllReviewSQL = "SELECT * FROM review INNER JOIN customer ON  customer.CustomerID = review.CustomerID JOIN user ON customer.UID == user.UID WHERE review.RestaurantID = '$resturantID';";
-        $checkResult = connect_db()->query($queryAllReviewSQL) or die("Fail to query db");
-	if(mysqli_num_rows($checkResult) > 0){
-		while ($row = mysqli_fetch_assoc($checkResult)) {
-			
-			$reviewTemp=(array('Name'=>$row['Name'],'ReviewID'=>$row['ReviewID'],'content'=>$row['content'],'DateReviewed'=>$row['DateReviewed'],'TimeReviewed'=>$row['TimeReviewed'],'Upvote'=>$row['Upvote'],'Downvote'=>$row['Downvote'],'isValid'=>$row['isValid'],'isSpam'=>$row['isSpam'],'isVisible'=>$row['isVisible']));
-			array_push($reviewList, $reviewTemp);
-		}
-		
-	}else{
-		echo "";
+	global $placeCon;
+	global $con;
+	$templikearray;
+
+	$Place = $placeCon->find(
+        [
+			'Details.RestaurantID' => $resturantID
+        ],
+        []
+	);
+
+	foreach ($Place as $p) {
+		$templikearray = (array('Likes'=>$p["Details"][0]["CountLikes"],'Dislikes'=>$p["Details"][0]["CountDislikes"]));
+
+		foreach ($p["Details"][0]["Reviews"] as $reviews) {
+			if ($reviews["isVisible"] == 1) {
+				$Customer = $con->find([
+					'_id' => $reviews["CustomerID"]
+				], [
+					'limit' => 1
+				]);
+
+				foreach ($Customer as $c) {
+					$reviewTemp=(array('Name'=>$c["Name"],'ReviewID'=>$reviews['ReviewID'],'content'=>$reviews['Content'],'DateReviewed'=>$reviews['DateReviewed'],'TimeReviewed'=>$reviews['TimeReviewed'],'Upvote'=>(int)$reviews['Upvote'],'Downvote'=>(int)$reviews['Downvote'],'isValid'=>(int)$reviews['isValid'],'isSpam'=>(int)$reviews['isSpam'],'isVisible'=>(int)$reviews['isVisible']));
+					array_push($reviewList, $reviewTemp);
+				}
+			} else {
+				echo "";
+			}
+		}	
 	}
-	$getlikes="SELECT CountLikes, CountDislikes FROM restaurant WHERE RestaurantID=$resturantID";
-                $getlikes2 = connect_db()->query($getlikes) or die("Fail to query db");
-                $likedislikes = mysqli_fetch_array($getlikes2);
-                $templikearray = (array('Likes'=>$likedislikes['CountLikes'],'Dislikes'=>$likedislikes['CountDislikes']));
-		echo json_encode(array('Reviews'=>$reviewList,'Likes'=>$templikearray));
+
+	echo json_encode(array('Reviews'=>$reviewList,'Likes'=>$templikearray));
 }
 
 //Writing of Review
@@ -67,36 +84,45 @@ function queryAllReview($resturantID){
 */
 //insertCustomerReview(1,'018960754',"hello HOLA");
 function insertCustomerReview($custID,$restID,$content){
+	global $placeCon;
 	//Date , Time  , Generate ID
 	$date = date("Y-m-d");
 	$time = date("h:i:s");
 	$uniqueId= ReviewIDGenerator($custID);
 
-	$insertCustomerReviewSQL = "INSERT INTO `review` (`ReviewID`, `content`, `CustomerID`, `RestaurantID`, `DateReviewed`, `TimeReviewed`, `Upvote`, `Downvote`, `isValid`, `isSpam`, `isVisible`) ".
-	"VALUES ('".$uniqueId."', '".$content."', '".$custID."', '".$restID."', '".$date."', '".$time."', 0, 0, 1, 0, 1)";
-    
-	if (connect_db()->query($insertCustomerReviewSQL) == TRUE) {
+	$updateResult = $placeCon->updateOne(
+		['Details.RestaurantID' => $restID],
+		['$push' =>['Details.0.Reviews' => ['ReviewID' => $uniqueId,'CustomerID' => $custID, 'isValid' => 1, 'DateReviewed' => $date, 'TimeReviewed' => $time, 'Upvote' => 0, 'Downvote' => 0, 'isSpam' => 0, 'isVisible' => 1, 'Content' => $content]]]
+	);
+
+	if ($updateResult->getModifiedCount() != 0) {
 		echo "Record Inserted successfully";
 	} else {
-		echo "Error updating record: " . connect_db()->error;
+		echo "Error updating record: ";
 	}
 }
 
 //Update UPVote
 function voteStatus($reviewID , $voteStatus){
     //Downvote
-	echo '<script>console.log("votStatus")</script>';
-	if($voteStatus == 1){
+	if ($voteStatus == 1){
 		upVote($reviewID);
 	//UpVote
-	}else if($voteStatus == 0){
+	} else if($voteStatus == 0){
 		downVote($reviewID);
 	}
 	
 }
 
 //Update UPVote
-function upVote($reviewID){
+function upVote($reviewID) {
+	global $placeCon;
+
+	$updateResult = $placeCon->updateOne(
+		['Details.Reviews.ReviewID' => $reviewID],
+		['$set' =>['Details.0.Reviews' => ['ReviewID' => $uniqueId,'CustomerID' => $custID, 'isValid' => 1, 'DateReviewed' => $date, 'TimeReviewed' => $time, 'Upvote' => 0, 'Downvote' => 0, 'isSpam' => 0, 'isVisible' => 1, 'Content' => $content]]]
+	);
+
     $upVoteSQL = "UPDATE review SET Upvote = 1,Downvote = 0 WHERE ReviewID= '$reviewID';";
 	//echo '<script>console.log("upVote")</script>';
 	echo $upVoteSQL;

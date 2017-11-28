@@ -106,11 +106,7 @@ $owner = $_SESSION['Obj'];
                                             </div>
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
-                                            <div class="mdc-text-field mdc-text-field--box">
-                                                <input required type="text" id="restaurant-area" class="mdc-text-field__input" oninput="showConfirmDialog(this)">
-                                                <label for="restaurant-area" class="mdc-text-field__label">Area</label>
-                                                <div class="mdc-text-field__bottom-line"></div>
-                                            </div>
+                                            <?php require_once 'scripts/area-generator.php';?>
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
                                             <div class="mdc-text-field mdc-text-field--box">

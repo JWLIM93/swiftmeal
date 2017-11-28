@@ -22,8 +22,8 @@ document.getElementById('update-password-fab').addEventListener('click', () => {
             if (
                 newPassword != currentPassword &&
                 newPassword == confirmNewPassword &&
-                newPassword.length > 8 &&
-                confirmNewPassword.length > 8 &&
+                newPassword.length >= 8 &&
+                confirmNewPassword.length >= 8 &&
                 newPassword != '' &&
                 confirmNewPassword != ''
             ) {
@@ -60,15 +60,17 @@ function checkCurrentPassword(currentPW) {
     $.ajax({
         type: 'POST',
         url: 'scripts/checkCurrentPassword.php',
-        async: true,
+        async: false,
         data: 'currentPW=' + currentPW,
-        success: function(output) {
-            if (output == 'success') {
-                bool = true;
-            } else {
-                bool = false;
-            }
+        dataType: 'json'
+    }).done(function(data) {
+        if (data == true) {
+            bool = true;
         }
     });
+    return trueOrFalse(bool);
+}
+
+function trueOrFalse(bool) {
     return bool;
 }

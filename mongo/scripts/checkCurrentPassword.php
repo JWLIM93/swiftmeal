@@ -7,6 +7,7 @@ session_start();
 $userObj = $_SESSION['Obj'];
 
 function status() {
+    $result = false;
     global $userObj;
     global $mongoConnection;
     $UserCollection = $mongoConnection->selectCollection('swiftmeal', 'user');
@@ -23,13 +24,13 @@ function status() {
             ]
         );
         if ($count == 1) {
-            echo "success";
+            $result = true;
         }
         else {
-            echo "fail";
+            $result = false;
         }
     }
 }
-status();
+echo json_encode(status());
 ?>
 

@@ -8,7 +8,7 @@ var loadingBar = document.getElementById('loading-progress');
 // viewAllReviews(1);
 // Take in restuarant ID and give you a list of reviews
 function viewAllReviews() {
-    loadingBar.style.display = 'block';
+    //loadingBar.style.display = 'block';
     let restID;
     if (document.getElementById('restaurant') !== null) {
         restID = document.getElementById('restaurant').value;
@@ -21,7 +21,7 @@ function viewAllReviews() {
         data: { action: 'reviewRequest' },
         type: 'post',
         success: function(data) {
-            loadingBar.style.display = 'none';
+            //loadingBar.style.display = 'none';
             if (data === 'Fail to query db' || data === '') {
                 document.getElementById('likes-dislikes-container').innerHTML =
                     'THERE ARE CURRENTLY NO REVIEWS FOR THIS RESTAURANT';

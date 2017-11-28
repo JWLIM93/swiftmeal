@@ -32,6 +32,7 @@ function checkOnline() {
         success: function(data) {
             // document.getElementById("ShowOnline").innerHTML = data;
             let json = JSON.parse(data);
+            console.log(data);
             if (OnlineFriendsAmount !== json.OnlineFriends.length) {
                 OnlineFriendsAmount = json.OnlineFriends.length;
             }
@@ -126,6 +127,16 @@ function checkOnline() {
                     ).style.display =
                         'none';
                 }
+            } else {
+                if (
+                    document.getElementById('pending-request-container') !==
+                    null
+                ) {
+                    document.getElementById(
+                        'pending-request-container'
+                    ).style.display =
+                        'grid';
+                }
             }
             if (FriendsChecker.length === 0) {
                 if (
@@ -136,6 +147,16 @@ function checkOnline() {
                 ) {
                     document.getElementById('friends-list-header').innerHTML =
                         'No Friends Available';
+                }
+            } else {
+                if (
+                    document.getElementById('friends-list-container') !==
+                        null &&
+                    document.getElementById('friends-list-container')
+                        .className !== 'mdc-layout-grid__inner'
+                ) {
+                    document.getElementById('friends-list-header').innerHTML =
+                        FriendsChecker.length + ' Friends Available';
                 }
             }
             CheckboxCount = 0;

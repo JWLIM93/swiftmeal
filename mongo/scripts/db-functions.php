@@ -55,7 +55,7 @@ function loginUser($email,$password){
                 session_start();
                 $name = $user["Name"];
                 $contact_no = $user["MobileNo"];
-                $cust_id = $user["Details"][0]["CustomerID"];
+                $cust_id = $user["Details"]["CustomerID"];
                 $custSession = new customer($user["_id"],$name,$email,$password,$contact_no,'login',$cust_id,1);
                 $collection->updateOne(['_id' => $user["_id"]],
                 ['$set' => ['IsOnline' => 1]]);
@@ -69,7 +69,7 @@ function loginUser($email,$password){
                 session_start();
                 $name = $user['Name'];
                 $contact_no = $user['MobileNo'];
-                $owner_id = $user["Details"][0]["OwnerID"];
+                $owner_id = $user["Details"]["OwnerID"];
                 $ownerSession = new owner($user["_id"],$name,$email,$password,$contact_no,'login',$owner_id,1);
                 $collection->updateOne(['_id' => $user["_id"]],
 				['$set' => ['IsOnline' => 1]]);

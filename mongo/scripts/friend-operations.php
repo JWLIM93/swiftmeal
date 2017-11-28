@@ -109,12 +109,11 @@ function sendMealRequest($Requester,$Requestee,$RestID) {
 			]
         ]
     );
-    
-    session_start();
-    $customer = $_SESSION['Obj'];
-    $customer->setPlaceID($id["_id"]);
 
     foreach ($PlaceID as $id) {
+        session_start();
+        $customer = $_SESSION['Obj'];
+        $customer->setPlaceID($id["_id"]);
         $pID = $id["_id"];
     }
     
@@ -128,12 +127,12 @@ function sendMealRequest($Requester,$Requestee,$RestID) {
     );
 
     foreach ($CustomerID as $cid) {
-        $cID = $cid["Details"][0]["CustomerID"];
+        $cID = $cid["Details"]["CustomerID"];
     }
 
     $updateResult = $customerCon->updateOne(
-        ['_id' => $cID],
-        ['$push' =>['Requests' => ['RequestTo' => $Requester, 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1, 'PlaceID' => $pID]]]
+        ['_id' => $Requester],
+        ['$push' =>['Requests' => ['RequestTo' => $cID, 'isAccepted' => 0, 'RequestDate' => date("Y-m-d"), 'RequestTime' => date("h:i:s"), 'isValid' => 1, 'PlaceID' => $pID]]]
     );
 
     if ($updateResult->getModifiedCount() != 0) {
@@ -146,7 +145,7 @@ function sendMealRequest($Requester,$Requestee,$RestID) {
 
 function MakeReservation($CustID,$Pax,$time,$date){
     global $customerCon;
-
+    session_start();
     $customer = $_SESSION['Obj'];
     $PlaceID=$customer->getPlaceID();
     $RestID=$customer->getRestID();
@@ -159,7 +158,7 @@ function MakeReservation($CustID,$Pax,$time,$date){
 
     $updateResult = $customerCon->updateOne(
         ['_id' => $CustID],
-        ['$push' =>['Reservations' => ['BookingID' => $BookingID, 'RestaurantID' => $RestID, 'Pax' => $Pax, 'DateReserved' => $date, 'TimeReserved' => $time, 'isValid' => 1, 'isFulfilled' => 0, 'DateCreated' => date("Y-m-d"), 'TimeCreated' => date("h:i:s")]]]
+        ['$push' =>['Reservations' => ['BookingID' => $BookingID, 'RestaurantID' => $RestID, 'Pax' => (int)$Pax, 'DateReserved' => $date, 'TimeReserved' => $time, 'isValid' => 1, 'isFulfilled' => 0, 'DateCreated' => date("Y-m-d"), 'TimeCreated' => date("h:i:s")]]]
     );
 
     if($updateResult->getModifiedCount() != 0) {
@@ -200,19 +199,15 @@ function BookingIDGenerator($CustID){
     return $ID;
 }
 
-function MakeReservation2($CustID,$Pax,$time,$date,$con,$PlaceID,$RestID){
+function MakeReservation2($CustID,$Pax,$time,$date,$PlaceID,$RestID){
     global $customerCon;
 
     $customer = $_SESSION['Obj'];
-
-    $customerCon->updateOne(
-        ['_id' => $CustID, 'PlaceID' => $PlaceID],
-        ['$set' => ['Requests.$.isAccepted' => 0]]);
     
     $BookingID = BookingIDGenerator($CustID);
 
     $updateResult = $customerCon->updateOne(
-        ['_id' => $row["CustomerID"]],
+        ['_id' => $CustID],
         ['$push' =>['Reservations' => ['BookingID' => $BookingID, 'RestaurantID' => $RestID, 'Pax' => $Pax, 'DateReserved' => $date, 'TimeReserved' => $time, 'isValid' => 1, 'isFulfilled' => 0, 'DateCreated' => date("Y-m-d"), 'TimeCreated' => date("h:i:s")]]]
     );
 

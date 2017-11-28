@@ -183,7 +183,7 @@ function PlaceSQLToMongo() {
 		while($row = mysqli_fetch_assoc($resultReview)) {
 			$updateResult = $collection->updateOne(
 				['Details.RestaurantID' => $row["RestaurantID"]],
-				['$push' =>['Details.$.Reviews' => ['CustomerID' => $row["CustomerID"], 'isValid' => (int)$row["isValid"], 'DateReviewed' => $row["DateReviewed"], 'TimeReviewed' => $row["TimeReviewed"], 'Upvote' => (int)$row["Upvote"], 'Downvote' => (int)$row["Downvote"], 'isSpam' => (int)$row["isSpam"], 'isVisible' => (int)$row["isVisible"], 'Content' => $row["Content"]]]]
+				['$push' =>['Details.$.Reviews' => ['ReviewID' => $row["ReviewID"], 'CustomerID' => $row["CustomerID"], 'isValid' => (int)$row["isValid"], 'DateReviewed' => $row["DateReviewed"], 'TimeReviewed' => $row["TimeReviewed"], 'Upvote' => (int)$row["Upvote"], 'Downvote' => (int)$row["Downvote"], 'isSpam' => (int)$row["isSpam"], 'isVisible' => (int)$row["isVisible"], 'Content' => $row["Content"]]]]
 			);
 
 			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
@@ -468,22 +468,40 @@ function test2() {
 
 function test3() {
 	global $mongoConn;
-	$collection = $mongoConn->selectCollection('swiftmeal', 'user');
+	$collection = $mongoConn->selectCollection('swiftmeal', 'place');
 	
-	$CustomerID = $collection->find(
-        [
-            '_id' => 'UCUST4023JER8201',
-        ],
-        [
-			'limit' => 1,
-        ]
-    );
+	// $updateResult = $collection->updateOne(
+	// 	['_id' => "24799C8597943B47C32"],
+	// 	['$push' =>['Details.0.Reviews' => ['ReviewID' => 'REVW3351CUST8469','CustomerID' => "CUST4602JUST1234", 'isValid' => 1, 'DateReviewed' => date("Y-m-d"), 'TimeReviewed' => date("h:i:s"), 'Upvote' => 1, 'Downvote' => 0, 'isSpam' => 0, 'isVisible' => 1, 'Content' => "This restaurant is great!"]]]
+	// );
 
-	foreach ($CustomerID as $cid) {
-		echo $cid["Details"][0]["CustomerID"];
-    }
+	// printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+	// printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+
+	// $updateResult = $collection->updateOne(
+	// 	['_id' => "24799C8597943B47C32"],
+	// 	['$push' =>['Details.0.Reviews' => ['ReviewID' => 'REVW3351CUST8469', 'CustomerID' => "CUST4602JUST1234", 'isValid' => 1, 'DateReviewed' => date("Y-m-d"), 'TimeReviewed' => date("h:i:s"), 'Upvote' => 1, 'Downvote' => 0, 'isSpam' => 0, 'isVisible' => 1, 'Content' => "Wonderful food over there!!"]]]
+	// );
+
+	// printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
+	// printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
+
+	$Place = $collection->find(
+        [
+            'Details.Reviews.ReviewID' => "REVW3351CUST8469",
+        ],
+        []
+	);
+
+	foreach ($Place as $p) {
+		echo '<pre>' . var_export($p, true) . '</pre>';
+		// foreach ($p["Details"][0]["Reviews"] as $reviews) {
+		// 	echo '<pre>' . var_export($reviews, true) . '</pre>';
+		// }	
+	}
 	
-	//echo '<pre>' . var_export($CustomerID, true) . '</pre>';
+	//var_dump($Place["GeoLat"]);
+	//echo '<pre>' . var_export($PlaceID["Details"][0]["Reviews"][0]["Content"], true) . '</pre>';
 }
 
 //connectToSQL();
