@@ -2,7 +2,7 @@ var inputFields = document.querySelectorAll('.mdc-text-field');
 var confirmDialog = document.querySelector('#confirm-add-container');
 let listOfRestaurants = document.getElementsByClassName('restaurant-item');
 var addRestaurant = document.querySelector('#add-restaurant-container');
-let areaName = '';
+var areaName = '';
 
 for (let i = 0; i < inputFields.length; i++) {
     mdc.textField.MDCTextField.attachTo(inputFields[i]);
@@ -17,10 +17,20 @@ document.querySelector('#new-restaurant-fab').addEventListener('click', () => {
     }
 });
 
+$(document).ready(function() {
+    $('#area').on('change', function() {
+        var string = $(this).val();
+        var arr = string.split(',');
+        areaID = arr[3];
+    });
+});
+
 document.getElementById('area').addEventListener('change', () => {
     var string = $('#area :selected').val();
     var arr = string.split(',');
     areaName = arr[3];
+    console.log(areaName);
+    console.log(arr);
 });
 
 document.querySelector('#confirm-add-button').addEventListener('click', () => {

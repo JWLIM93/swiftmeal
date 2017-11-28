@@ -47,7 +47,7 @@ $customer = $_SESSION['Obj'];
           <span id="page-name">Home</span>
         </section>
         <section class="mdc-toolbar__section">
-          <div id="search-field-container" class="mdc-text-field">
+          <!-- <div id="search-field-container" class="mdc-text-field">
             <input type="text" id="search-field" class="mdc-text-field__input" placeholder="Search" oninput="showSearchDropdown(this)">
             <div class="mdc-text-field__bottom-line"></div>
             <ul id="search-dropdown" class="mdc-list">
@@ -82,7 +82,7 @@ $customer = $_SESSION['Obj'];
                 </span>
               </li>
             </ul>
-          </div>
+          </div> -->
         </section>
         <!-- Navigation toolbar -->
         <section class="mdc-toolbar__section mdc-toolbar__section--align-end">

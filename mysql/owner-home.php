@@ -106,7 +106,7 @@ $owner = $_SESSION['Obj'];
                                             </div>
                                         </div>
                                         <div id="restaurant-area-generator" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
-                                            <?php require_once 'scripts/area-generator.php';?>
+                                            <?php require_once 'scripts/area-generator-owner.php';?>
                                         </div>
                                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
                                             <div class="mdc-text-field mdc-text-field--box">
