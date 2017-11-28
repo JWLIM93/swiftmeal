@@ -151,7 +151,7 @@ function MakeReservation($CustID,$Pax,$time,$date){
     $RestID=$customer->getRestID();
     
     $customerCon->updateOne(
-        ['_id' => $CustID, 'PlaceID' => $PlaceID],
+        ['_id' => $CustID, 'Requests.PlaceID' => $PlaceID],
         ['$set' => ['Requests.$.isAccepted' => 0]]);
 
     $BookingID = BookingIDGenerator($CustID);
@@ -179,7 +179,7 @@ function ConfirmMealRequest($CustID,$Requester,$PlaceID) {
     global $customerCon;
 
     $customerCon->updateOne(
-        ['_id' => $Requester, 'RequestTo' => $CustID,'PlaceID' => $PlaceID],
+        ['_id' => $Requester, 'Requests.RequestTo' => $CustID,'Requests.PlaceID' => $PlaceID],
         ['$set' => ['Requests.$.isAccepted' => 1, 'Requests.$.isValid' => 0]]);
 }
 
@@ -187,7 +187,7 @@ function DenyMealRequest($CustID,$Requester,$PlaceID) {
     global $customerCon;
 
     $customerCon->updateOne(
-        ['_id' => $Requester, 'RequestTo' => $CustID,'PlaceID' => $PlaceID],
+        ['_id' => $Requester, 'Requests.RequestTo' => $CustID,'Requests.PlaceID' => $PlaceID],
         ['$set' => ['Requests.$.isAccepted' => 0, 'Requests.$.isValid' => 0]]);
 }
 
@@ -201,8 +201,12 @@ function BookingIDGenerator($CustID){
 
 function MakeReservation2($CustID,$Pax,$time,$date,$PlaceID,$RestID){
     global $customerCon;
-
+    session_start();
     $customer = $_SESSION['Obj'];
+
+    $customerCon->updateOne(
+        ['_id' => $CustID, 'PlaceID' => $PlaceID],
+        ['$set' => ['Requests.$.isAccepted' => 0]]);
     
     $BookingID = BookingIDGenerator($CustID);
 

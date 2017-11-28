@@ -151,88 +151,14 @@ function downVote($reviewID){
 	
 }
 
-//Set Review Valid
-function validReview($reviewID){
-    $validReviewSQL = "UPDATE review SET isValid = 1 WHERE ReviewID= '$reviewID';";
-    echo $validReviewSQL ;
-	if (connect_db()->query($validReviewSQL) == TRUE) {
-		echo "Record updated successfully";
-		//Redirect to normal resturant
-	} else {
-		echo "Error updating record: " . connect_db()->error;
-	}
-	
-}
-
-//Set Review Not Valid
-function notValidReview($reviewID){
-    $notValidReviewSQL = "UPDATE review SET isValid = 0 WHERE ReviewID= '$reviewID';";
-    echo $notValidReviewSQL ;
-	if (connect_db()->query($notValidReviewSQL) == TRUE) {
-		echo "Record updated successfully";
-		//Redirect to normal resturant
-	} else {
-		echo "Error updating record: " . connect_db()->error;
-	}
-	
-}
-
-//Set Review Spam
-function isSpamReview($reviewID){
-    $isSpamReviewSQL = "UPDATE review SET isSpam = 1 WHERE ReviewID= '$reviewID';";
-    echo $isSpamReviewSQL ;
-	if (connect_db()->query($isSpamReviewSQL) == TRUE) {
-		echo "Record updated successfully";
-		//Redirect to normal resturant
-	} else {
-		echo "Error updating record: " . connect_db()->error;
-	}
-	
-}
-
-//Set Review Not Spam
-function isNotSpamReview($reviewID){
-    $isNotSpamReviewSQL = "UPDATE review SET isSpam = 0 WHERE ReviewID= '$reviewID';";
-    echo $isNotSpamReviewSQL ;
-	if (connect_db()->query($isNotSpamReviewSQL) == TRUE) {
-		echo "Record updated successfully";
-		//Redirect to normal resturant
-	} else {
-		echo "Error updating record: " . connect_db()->error;
-	}
-	
-}
-
-//Set Review Visible
-function isVisibleReview($reviewID){
-    $isVisibleReviewSQL = "UPDATE review SET isVisible = 1 WHERE ReviewID= '$reviewID';";
-    echo $isVisibleReviewSQL ;
-	if (connect_db()->query($isVisibleReviewSQL) == TRUE) {
-		echo "Record updated successfully";
-		//Redirect to normal resturant
-	} else {
-		echo "Error updating record: " . connect_db()->error;
-	}
-	
-}
-//Set Review Not Visible
-function isNotVisibleReview($reviewID){
-    $isNotVisibleReviewSQL = "UPDATE review SET isVisible = 0 WHERE ReviewID= '$reviewID';";
-    echo $isNotVisibleReviewSQL ;
-	if (connect_db()->query($isNotVisibleReviewSQL) == TRUE) {
-		echo "Record updated successfully";
-		//Redirect to normal resturant
-	} else {
-		echo "Error updating record: " . connect_db()->error;
-	}
-	
-}
-
 function LikeDisLike($flag,$restid,$currentcount){
     $updatecount=$currentcount+1;
     if($flag==0){
-        $dislikequery="UPDATE restaurant SET CountDislikes = '$updatecount' WHERE RestaurantID='".$restid."'";
-        if(connect_db()->query($dislikequery)){
+		$updateResult = $placeCon->updateOne(
+			['Details.RestaurantID' => $restid],
+			['$set' =>['Details.0.CountDislikes' => $updatecount]]
+		);
+        if($updateResult->getModifiedCount() != 0) {
             echo "succeed";
         }
         else{
@@ -240,8 +166,12 @@ function LikeDisLike($flag,$restid,$currentcount){
         }
     }
     else if($flag==1){
+		$updateResult = $placeCon->updateOne(
+			['Details.RestaurantID' => $restid],
+			['$set' =>['Details.0.CountLikes' => $updatecount]]
+		);
         $likequery="UPDATE restaurant SET CountLikes = '$updatecount' WHERE RestaurantID='".$restid."'";
-        if(connect_db()->query($likequery)){
+        if($updateResult->getModifiedCount() != 0){
             echo "succeed";
         }
         else{

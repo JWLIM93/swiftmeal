@@ -468,7 +468,7 @@ function test2() {
 
 function test3() {
 	global $mongoConn;
-	$collection = $mongoConn->selectCollection('swiftmeal', 'place');
+	$collection = $mongoConn->selectCollection('swiftmeal', 'customer');
 	
 	// $updateResult = $collection->updateOne(
 	// 	['_id' => "24799C8597943B47C32"],
@@ -486,9 +486,15 @@ function test3() {
 	// printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
 	// printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
 
+	$customerCon->updateOne(
+        ['_id' => $CustID, 'Requests.PlaceID' => $PlaceID],
+        ['$set' => ['Requests.$.isAccepted' => 0]]);
+
+
 	$Place = $collection->find(
         [
-            'Details.Reviews.ReviewID' => "REVW3351CUST8469",
+			'_id' => "CUST4602JUST1234",
+			'PlaceID' => 
         ],
         []
 	);
