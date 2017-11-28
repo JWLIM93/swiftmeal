@@ -99,7 +99,7 @@ $cuidmatch = ['_id'=>$CustID];
 $document7= $custcollection->find($cuidmatch);
 foreach($document7 as $row7){
     foreach($row7['Requests'] as $accept){
-        if($accept['isAccepted']==1 && $accept['isValid']==1 && $accept['PlaceID']==$Place){
+        if($accept['isAccepted']==1 && $accept['isValid']==0 && $accept['PlaceID']==$Place){
             array_push($mealaccept,['Details.CustomerID'=>$accept['RequestTo']]);
         }
     }

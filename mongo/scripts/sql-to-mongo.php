@@ -247,7 +247,7 @@ function UserSQLToMongo() {
 		while($row = mysqli_fetch_assoc($resultOwner)) {
 			$updateResult = $collection->updateOne(
 				['_id' => $row["UID"]],
-				['$push' =>['Details' => ['OwnerID' => $row["OwnerID"], 'isValid' => (int)$row["isValid"]]]]
+				['$set' =>['Details' => ['OwnerID' => $row["OwnerID"], 'isValid' => (int)$row["isValid"]]]]
 			);
 
 			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
@@ -268,7 +268,7 @@ function UserSQLToMongo() {
 		while($row = mysqli_fetch_assoc($resultCustomer)) {
 			$updateResult = $collection->updateOne(
 				['_id' => $row["UID"]],
-				['$push' =>['Details' => ['CustomerID' => $row["CustomerID"], 'isValid' => (int)$row["isValid"]]]]
+				['$set' =>['Details' => ['CustomerID' => $row["CustomerID"], 'isValid' => (int)$row["isValid"]]]]
 			);
 
 			printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
@@ -486,36 +486,36 @@ function test3() {
 	// printf("Matched %d document(s)\n<br>", $updateResult->getMatchedCount());
 	// printf("Modified %d document(s)\n<br>", $updateResult->getModifiedCount());
 
-	$customerCon->updateOne(
-        ['_id' => $CustID, 'Requests.PlaceID' => $PlaceID],
-        ['$set' => ['Requests.$.isAccepted' => 0]]);
+	// $customerCon->updateOne(
+    //     ['_id' => $CustID, 'Requests.PlaceID' => $PlaceID],
+    //     ['$set' => ['Requests.$.isAccepted' => 0]]);
 
 
-	$Place = $collection->find(
-        [
-			'_id' => "CUST4602JUST1234",
-			'PlaceID' => 
-        ],
-        []
-	);
+	// $Place = $collection->find(
+    //     [
+	// 		'_id' => "CUST4602JUST1234",
+	// 		'PlaceID' => 
+    //     ],
+    //     []
+	// );
 
-	foreach ($Place as $p) {
-		echo '<pre>' . var_export($p, true) . '</pre>';
+	// foreach ($Place as $p) {
+	// 	echo '<pre>' . var_export($p, true) . '</pre>';
 		// foreach ($p["Details"][0]["Reviews"] as $reviews) {
 		// 	echo '<pre>' . var_export($reviews, true) . '</pre>';
 		// }	
-	}
+	// }
 	
 	//var_dump($Place["GeoLat"]);
 	//echo '<pre>' . var_export($PlaceID["Details"][0]["Reviews"][0]["Content"], true) . '</pre>';
 }
 
-//connectToSQL();
+connectToSQL();
 connectToMongo();
-//AreaSqlToMongo();
-//PlaceSQLToMongo();
-//UserSQLToMongo();
-//CustomerFeatureSQLToMongo();
+AreaSqlToMongo();
+PlaceSQLToMongo();
+UserSQLToMongo();
+CustomerFeatureSQLToMongo();
 
-test3();
+//test3();
 ?>
