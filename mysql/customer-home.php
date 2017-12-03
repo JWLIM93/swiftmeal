@@ -117,7 +117,7 @@ $customer = $_SESSION['Obj'];
           <div id="recommendations-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
             <div id="recommendations-header" class="mdc-elevation--z10">
               <h3 id="welcome">Welcome,
-                <?php echo $customer->getFullName()?>!</h3>
+                <?php echo $customer->getFullName()?>! hahaha</h3>
               <h3 id="welcome-sub-heading">Start your food exploration here ...</h3>
             </div>
             <div id="recommendations" class="mdc-layout-grid__inner">
